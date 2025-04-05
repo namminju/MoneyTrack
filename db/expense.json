@@ -1,0 +1,205 @@
+{
+    "maxExpenseCountPerDay": 3,
+    "happyDate": 5,
+    "expenseType": [
+        {
+            "type_id": 1,
+            "name": "카드"
+        },
+        {
+            "type_id": 2,
+            "name": "현금"
+        }
+    ],
+    "expenseDate": {
+        "start_date": "2024-04-03",
+        "end_date" : "2025-04-30"
+    },
+    "expenseAmount": {
+        "start_amount": 10000,
+        "end_amount": 100000
+    },
+    "expenseIncome": {
+        "income": 2000000
+    },
+    "expenseCategory": [
+        {
+            "cate_id": 1,
+            "name": "식비"
+        },
+        {
+            "cate_id": 2,
+            "name": "교통비"
+        },
+        {
+            "cate_id": 3,
+            "name": "문화/여가"
+        },
+        {
+            "cate_id": 4,
+            "name": "쇼핑"
+        },
+        {
+            "cate_id": 5,
+            "name": "집"
+        },
+        {
+            "cate_id": 6,
+            "name": "건강"
+        },
+        {
+            "cate_id": 7,
+            "name": "교육"
+        },
+        {
+            "cate_id": 8,
+            "name": "반려동물"
+        },
+        {
+            "cate_id": 9,
+            "name": "금융"
+        },
+        {
+            "cate_id": 10,
+            "name": "수입"
+        },
+        {
+            "cate_id": 11,
+            "name": "뷰티"
+        },
+        {
+            "cate_id": 12,
+            "name": "기타"
+        },
+        {
+            "cate_id": 99,
+            "name": "수입"
+        }
+    ],
+
+    "expenseNamePrefix": {
+        "name": [
+            "행복",
+            "좋은",
+            "기쁨",
+            "사랑",
+            "희망",
+            "평화",
+            "성공",
+            "건강",
+            "행운",
+            "감사",
+            "축복",
+            "용기",
+            "자유",
+            "열정",
+            "지혜",
+            "친절",
+            "정직",
+            "신뢰",
+            "긍정",
+            "성장"
+        ]
+    },
+    "expenseNameSuffix": [
+        {
+            "name": "미용실",
+            "cate_id": 11
+        },
+        {
+            "name": "카페",
+            "cate_id": 3
+        },
+        {
+            "name": "식당",
+            "cate_id": 1
+        },
+        {
+            "name": "서점",
+            "cate_id": 4
+        },
+        {
+            "name": "마트",
+            "cate_id": 4
+        },
+        {
+            "name": "병원",
+            "cate_id": 6
+        },
+        {
+            "name": "약국",
+            "cate_id": 6
+        },
+        {
+            "name": "호텔",
+            "cate_id": 3
+        },
+        {
+            "name": "백화점",
+            "cate_id": 4
+        },
+        {
+            "name": "영화관",
+            "cate_id": 3
+        },
+        {
+            "name": "은행",
+            "cate_id": 9
+        },
+        {
+            "name": "우체국",
+            "cate_id": 12
+        },
+        {
+            "name": "주유소",
+            "cate_id": 12
+        },
+        {
+            "name": "세탁소",
+            "cate_id": 12
+        },
+        {
+            "name": "편의점",
+            "cate_id": 4
+        },
+        {
+            "name": "꽃집",
+            "cate_id": 4
+        },
+        {
+            "name": "헬스장",
+            "cate_id": 6
+        },
+        {
+            "name": "레스토랑",
+            "cate_id": 1
+        },
+        {
+            "name": "베이커리",
+            "cate_id": 1
+        },
+        {
+            "name": "학원",
+            "cate_id": 7
+        },
+        {
+            "name": "펫샵",
+            "cate_id": 8
+        },
+        {
+            "name": "인테리어",
+            "cate_id": 5
+        },
+        {
+            "name": "택시",
+            "cate_id": 2
+        },
+        {
+            "name": "배달",
+            "cate_id": 1
+        }
+        
+    ]
+
+
+}
