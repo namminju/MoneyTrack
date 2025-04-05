@@ -33,12 +33,12 @@ json-server db/db.json.js
 
 ## Default Rules
 
-아래 내용들은 모두 앞에 '가급적', '최대한' 등의 단어가 생략되어있다고 생각하면 좋습니다.
+아래 내용들은 모두 앞에 '가급적', '최대한' 등의 단어가 생략되어있다고 생각하면 좋습니다.  
 ex) css를 지정할땐 class를 사용한다. -> 가급적 css를 지정할땐 class를 사용한다.
 
 즉 정해진건 없고, 본인이 생각하기에 이렇게 하면 다같이 편할 수 있겠다 싶은 사항이 있으면 언제든지 공유하시면 좋을 것 같습니다.
 
-**1. CSS**
+**1. CSS**  
 - css를 지정할땐 class 사용 & 케밥 스타일
 ```html
 <div class="cate-box"></div>
@@ -51,28 +51,28 @@ ex) css를 지정할땐 class를 사용한다. -> 가급적 css를 지정할땐 
 </div>
 ```
 
-- #id or <style scoped> 는 다른걸 덮어 씌울때 사용
+- #id or <style scoped> 는 다른걸 덮어 씌울때 사용  
 재사용이 어렵기 때문에 사용 빈도가 많으면 안됨
 
-- px 대신 rem 사용. rem이 반응형에 더 좋기 때문
+- px 대신 rem 사용. rem이 반응형에 더 좋기 때문  
 다만 img 등 최소 고정값이 존재하고, felx-wrap 등이 적용되어야한다면 px 사용
 ```css
   .cate-box {
     font-size: 1.8rem;
   }
 ```
-우리 프로젝트에서는 html 이 10px 고정, body 가 1.6rem 으로 디폴트값으로 세팅되므로 고려해서 만들면 됨
+우리 프로젝트에서는 html 이 10px 고정, body 가 1.6rem 으로 디폴트값으로 세팅되므로 고려해서 만들면 됨  
 ex) 1.4rem == 14px
 
-**2. ID**
-- css는 class 사용 추천 & input 은 v-model 사용 추천
+**2. ID**  
+- css는 class 사용 추천 & input 은 v-model 사용 추천  
 bootstrap 이나 label 등에서 id가 필연적으로 쓰이는 곳이 있음. 이런 경우 사용함
 ```html
   <label for="cate-option">선택하기</label>
   <input type="checkbox" id="cate-option"/>
 ```
 
-**3. DB**
+**3. DB**  
 -DB의 컬럼값은 스네이크 형식
 ```javascript
   const data = {
@@ -109,7 +109,7 @@ bootstrap 이나 label 등에서 id가 필연적으로 쓰이는 곳이 있음. 
   }
 ```
 
-**5. 선언**
+**5. 선언**  
 이 항목은 프로젝트 진행도에 따라 계속 추가되거나 변경될 수 있음.
 
 - 상수 = 대분자로 한다. 안써도 무관 우리 프로젝트에선 쓸일도 별로 없을듯
@@ -123,36 +123,48 @@ bootstrap 이나 label 등에서 id가 필연적으로 쓰이는 곳이 있음. 
 ```
 
 **6. GIT**
-이건 GPT가 알려준건데 괜찮은 것들 있으면 추후 수정 or 추가 요청
+- merge 방식은 항상 유동적으로 해야합니다.  
+1. 가장 기본적인 공통파일들은 팀장인 관리  
+ex) images/common, css/common, utils/common 등 재사용 빈도수가 높은 파일들
 
-----------------------------------------------------
-feat: 새로운 기능 추가
-예: feat: add user authentication
+2. 본인이 만든 파일들은 직접 merge 하시면 됩니다.  
+ex) css/login 등 특정 페이지만을 위한 css
 
-fix: 버그 수정
-예: fix: resolve login issue
+3. 본인이 만들었어도, 여러곳에서 쓰이는 재사용이 자주 일어나는 파일들은 팀장이 merge 합니다.  
+ex) pagination, button, input 등 기본적인 테마 관련  
 
-docs: 문서 관련 변경
-예: docs: update README with setup instructions
+- branch 든 fork 든 본인 편한 방법대로 하시면 됩니다. 큰 차이 없음. 이럴 때 이것도 해보고 저것도 해봐야지  
 
-style: 코드 스타일 변경 (포맷, 세미콜론 추가 등)
-예: style: format code with prettier
+- commit 메모 작성방법  
+이건 GPT가 알려준건데 괜찮은 것들 있으면 추후 수정 or 추가 요청  
+----------------------------------------------------  
+feat: 새로운 기능 추가  
+예: feat: add user authentication  
 
-refactor: 코드 리팩토링 (기능 변경 없이 코드 구조 개선)
-예: refactor: simplify user service logic
+fix: 버그 수정  
+예: fix: resolve login issue  
 
-perf: 성능 개선
-예: perf: improve query performance
+docs: 문서 관련 변경  
+예: docs: update README with setup instructions  
 
-test: 테스트 코드 추가 또는 수정
-예: test: add unit tests for user service
+style: 코드 스타일 변경 (포맷, 세미콜론 추가 등)  
+예: style: format code with prettier  
 
-chore: 기타 변경사항 (빌드 프로세스, 패키지 매니저 설정 등)
-예: chore: update npm dependencies
+refactor: 코드 리팩토링 (기능 변경 없이 코드 구조 개선)  
+예: refactor: simplify user service logic  
 
-build: 빌드 관련 변경
-예: build: update webpack configuration
+perf: 성능 개선  
+예: perf: improve query performance  
 
-ci: CI 설정 변경
-예: ci: update GitHub Actions workflow
-----------------------------------------------------
+test: 테스트 코드 추가 또는 수정  
+예: test: add unit tests for user service  
+
+chore: 기타 변경사항 (빌드 프로세스, 패키지 매니저 설정 등)  
+예: chore: update npm dependencies  
+
+build: 빌드 관련 변경  
+예: build: update webpack configuration  
+
+ci: CI 설정 변경  
+예: ci: update GitHub Actions workflow  
+----------------------------------------------------  
