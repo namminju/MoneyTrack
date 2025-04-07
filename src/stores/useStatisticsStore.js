@@ -37,7 +37,7 @@ export const useStatisticsStore = defineStore('statistics', () => {
   });
 
   const categoryRatios = computed(() => {
-    return Object.values(categoryTotals.value)
+    return Object.entries(categoryTotals.value)
       .map(([name, amount]) => ({
         category: name,
         amount,
