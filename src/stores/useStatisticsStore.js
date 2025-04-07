@@ -41,7 +41,7 @@ export const useStatisticsStore = defineStore('statistics', () => {
       .map(([name, amount]) => ({
         category: name,
         amount,
-        ratio: Math.round((amount / totalAmount / value) * 100),
+        ratio: Math.round((amount / totalAmount.value) * 100),
       }))
       .sort((a, b) => b.ratio - a.ratio);
   });
