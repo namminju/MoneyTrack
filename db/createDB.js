@@ -228,7 +228,7 @@ newUsers.forEach((user, index) => {
     }
 
     //평소
-    maxCount = getRandom(0,maxExpenseCountPerDay);  //하루 데이터 발급량
+    maxCount = getRandom(0, maxExpenseCountPerDay);  //하루 데이터 발급량
     for (i = 0; i < maxCount; i++) {
       data = createData(id, user.id, currentDate);
       id++;
@@ -258,11 +258,11 @@ async function exportFile() {
     // console.log(dbJson);
 
     //파일 생성
-    await writeFile('db.json', JSON.stringify(dbJson, null, 2), 'utf-8');
+    await writeFile('db/db.json', JSON.stringify(dbJson, null, 2), 'utf-8');
     console.log('파일 생성 완료');
 
     const endTime = new Date();
-    const diff = (endTime - startTime)/1000;
+    const diff = (endTime - startTime) / 1000;
     console.log(`${diff} 초의 시간이 걸렸음`);
     //만약 오래걸렸다면 똥컴이니 바꾸십쇼
     process.exit(0);
