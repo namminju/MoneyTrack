@@ -1,4 +1,4 @@
-## Default Settings
+## Default Setting
 
 2024-04-05
 - reset.css (index.html)
@@ -166,5 +166,6 @@ build: 빌드 관련 변경
 예: build: update webpack configuration  
 
 ci: CI 설정 변경  
-예: ci: update GitHub Actions workflow  
+예: ci: update GitHub Actions workflow   
+
 ----------------------------------------------------  
