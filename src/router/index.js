@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 
 import Header from '../components/Header/Header.vue';
 
@@ -8,7 +8,6 @@ import Home from '../components/Home/Home.vue';
 import Expense from '@/components/Expense/Expense.vue';
 import ExpenseDetail from '@/components/ExpenseDetail/ExpenseDetail.vue';
 import Statistics from '@/components/Statistics/Statistics.vue';
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,20 +19,19 @@ const router = createRouter({
       components: {
         header: Header,
         default: Home,
-      }
+      },
     },
-    { 
+    {
       //로그인
-      path: '/login', 
+      path: '/login',
       name: 'login',
-      component: Login
-      
+      component: Login,
     },
-    { 
+    {
       //회원가입
-      path: '/join', 
-      name: 'join', 
-      component: Join 
+      path: '/join',
+      name: 'join',
+      component: Join,
     },
     {
       //지출&기록 페이지
@@ -42,16 +40,16 @@ const router = createRouter({
       components: {
         header: Header,
         default: Expense,
-      }
+      },
     },
     {
       //지출 자세히
-      path: '/expenseDetail',
+      path: '/expenseDetail/:id',
       name: 'expenseDetail',
       components: {
         header: Header,
         default: ExpenseDetail,
-      }
+      },
     },
     {
       //통계
@@ -60,9 +58,9 @@ const router = createRouter({
       components: {
         header: Header,
         default: Statistics,
-      }
-    }
+      },
+    },
   ],
-})
+});
 
-export default router
+export default router;
