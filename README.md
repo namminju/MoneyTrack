@@ -6,6 +6,7 @@
 - additionClasses.css (index.html)
 - fontawesome (index.html)
 
+
 ## Design
 - [Figma](https://www.figma.com/design/7F2LSx8KUJSE2viQ1X8A8m/MoneyTrack?node-id=0-1&p=f&t=s2Iu4bcDRGA3LiyN-0)
 
@@ -167,6 +168,5 @@ build: 빌드 관련 변경
 
 ci: CI 설정 변경  
 예: ci: update GitHub Actions workflow   
-
 
 ----------------------------------------------------  
