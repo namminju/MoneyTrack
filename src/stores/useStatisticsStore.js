@@ -3,12 +3,12 @@ import { ref, computed } from 'vue';
 import axios from 'axios';
 
 export const useStatisticsStore = defineStore('statistics', () => {
-  const rawdata = ref([]);
+  const rawData = ref([]);
 
   const fetchData = async () => {
     try {
       const res = await axios.get('http://localhost:3000/Expense');
-      rawdata.value = res.data;
+      rawData.value = res.data;
     } catch (err) {
       console.error('데이터 가져오기 실패: ', err);
     }
@@ -17,7 +17,7 @@ export const useStatisticsStore = defineStore('statistics', () => {
   const selectedPeriod = ref('월간');
 
   const filteredData = computed(() => {
-    return rawdata.value.filter((item) => {
+    return rawData.value.filter((item) => {
       if (selectedType.value === '전체') return true;
       if (selectedType.value === '수입') return item.type === 1;
       if (selectedType.value === '지출') return item.type === 2;
