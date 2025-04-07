@@ -118,7 +118,6 @@ function nextMonth() {
 function selectDate(date) {
   if (date) {
     selectedDate.value = date;
-    console.log('📅 선택된 날짜:', date);
     emit('update:selectedDate', date);
   }
 }
