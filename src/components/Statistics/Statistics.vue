@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="statistics-page">
     <Header />
     <StatisticsFilterBox @updateFilter="onFilterUpdate" />
@@ -28,4 +28,29 @@ const onFilterUpdate = ({ type, period }) => {
   selectedType.value = type;
   selectedPeriod.value = period;
 };
+</script> -->
+
+<script setup>
+import { onMounted } from 'vue';
+import { useStatisticsStore } from '@/stores/useStatisticsStore';
+
+const statStore = useStatisticsStore();
+
+onMounted(() => {
+  statStore.fetchData();
+});
 </script>
+
+<template>
+  <div class="test-statistics">
+    <h2>📊 테스트용 통계 페이지</h2>
+
+    <p>🔹 전체 지출 합계: {{ statStore.totalAmount }} 원</p>
+
+    <ul>
+      <li v-for="item in statStore.categoryRatios" :key="item.category">
+        {{ item.category }}: {{ item.amount }}원 ({{ item.ratio }}%)
+      </li>
+    </ul>
+  </div>
+</template>
