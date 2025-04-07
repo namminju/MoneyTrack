@@ -9,8 +9,8 @@
               <div class="fw-600 trk-text-6">Email</div>
               <input type="text" class="form-control fs-20" v-model="email">
           </div>
-          <div class="text-start">
-            <span class="fs-15 text-danger">아이디가 일치하지 않습니다.</span>
+          <div class="text-start" v-show="emailShow">
+            <span class="fs-15 text-danger">{{ emailText }}</span>
           </div>
 
           <div class="clear-10"></div>
@@ -19,8 +19,8 @@
               <div class="fw-600 trk-text-6">Password</div>
               <input type="password" class="form-control fs-20" v-model="pwd">
           </div>
-          <div class="text-start">
-            <span class="fs-15 text-danger">비밀번호가 일치하지 않습니다.</span>
+          <div class="text-start" v-show="pwdShow">
+            <span class="fs-15 text-danger">{{ pwdText }}</span>
           </div>
 
           <div></div>
@@ -32,6 +32,8 @@
       <div class="clear-10"></div>
 
       <button @click="postLogin">로그인</button>
+
+      <div class="clear-10"></div>
 
       <div class="d-flex justify-content-around fs-15 text-primary">
         <div>
@@ -45,6 +47,7 @@
         </div>
       </div>
 
+      <div class="clear-10"></div>
 
     </div>
   </div>
@@ -53,80 +56,65 @@
 <script setup>
   import '@/css/user/user.css';
   import { ref } from 'vue';
+  import hash from '@/utils/hash.js';
+  import session from '@/utils/session.js';
+  import userService from '@/utils/userService.js';
+  import loginService from '@/utils/loginService.js';
+  
 
+  //임시
+  sessionStorage.removeItem('user');
+
+  //기본값
   const email = ref('');
   const pwd = ref('');
 
-  const sha256 = async (password) => {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password);
-    const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-  };
+  //이메일 경고문구
+  const emailShow = ref(false);
+  const emailText = ref('');
 
-  //이메일 형식인지 확인
-  const isValidEmail = (email) => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  }
-
-  //성공실패 값 처리 json
-  const returnVal = (code = '000', success = false, message) => {
-    const data = {
-      code: code,
-      success: success,
-      message: message
-    }
-    
-    return data;
-  }
-
-  //이메일 체크하기
-  const checkEmail = (email) => {
-    // console.log(!isValidEmail(email));
-    if(!isValidEmail(email)) {
-      return returnVal('101','' ,'이메일 형식이 올바르지 않습니다.');
-    }
-    
-    return returnVal('', true, '');
-  }
-
-  //비밀번호 확인하기
-  const checkPwd = (pwd) => {
-    if(pwd.length < 8) {
-      return returnVal('102', '', '비밀번호는 8자리 이상이어야합니다.'); 
-    }
-
-    //특수문자확인
-    
-    //영어 소문자 확인
-
-    return returnVal('', true, '');
-  }
-
-
+  //비번 경고문구
+  const pwdShow = ref(false);
+  const pwdText = ref('');
 
   //로그인 함수
   const postLogin = async () => {
-    const emailReturn = checkEmail(email.value);
-    console.log(emailReturn);
-    
-    const hashPwd = await sha256(pwd.value);
-    // trkLogin(email.value, hashPwd);
-  }
+    const emailReturn = loginService.checkEmail(email.value);
+    const pwdReturn = loginService.checkPwd(pwd.value);
 
-
-  //로그인
-  const trkLogin = (email, pwd) => {
-    const data = {
-      email: email,
-      password: pwd,
+    //이메일 조건 만족 실패
+    if(!emailReturn.result) {
+      emailShow.value = true;
+      emailText.value = emailReturn.msg;
+      return;
     }
-    console.log(data);
-  }
+    else {
+      emailShow.value = false;
+    }
 
-  
+    //비밀번호 조건 만족 실패
+    if(!pwdReturn.result)  {
+      pwdShow.value = true;
+      pwdText.value = pwdReturn.msg;
+      return;
+    }
+    else {
+      pwdShow.value = false;
+    }
+
+    //비번 암호화
+    const hashPwd = await hash.sha256(pwd.value);
+
+    //회원정보데이터요청
+    const response = await userService.getList('',email.value, hashPwd);
+    if(response[0]) {
+      session.create(response[0]);
+    }
+    else {
+      //미정
+      alert(response.msg);
+    }
+  }  
   
   
 </script>

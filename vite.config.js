@@ -10,12 +10,14 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
-  proxy: {
-    "/api": {
-      target: "https://localhost,3000",
-      changeOrigin: true,
-      rewrite: (path) => path.replace(/^\/api/, ''),
-    }
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      }
+    },
   },
   resolve: {
     alias: {
