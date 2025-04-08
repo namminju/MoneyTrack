@@ -34,6 +34,8 @@ const loginService = {
     if (name.length < 2) {
       return resJson('103', '', '이름은 한글자 이상이어야합니다.');
     }
+
+    return resJson('000', true, '');
   }
 
 }

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { resJson } from '@/utils/common.js';
+import hash from '@/utils/hash.js';
+import dateUtil from '@/utils/date.js';
 
 const userService = {
   //회원 정보 가져오기
@@ -25,7 +27,7 @@ const userService = {
       }
     }
     catch (error) {
-      return resJson('601', '', '잘못된 요청입니다.');
+      return resJson('601', '', '잘못된 요청입니다.' + error);
     }
   },
 
@@ -34,14 +36,52 @@ const userService = {
     try {
       const response = await axios.get('/api/user');
 
-      const maxId = response.data.reduce((max, user) => {
-        return user.id > max.id ? user : max;
+      let maxId = '';
+      response.data.forEach(item => {
+        if (item.id > maxId) maxId = item.id;
       });
 
-      return response.data;
+      return maxId;
     }
     catch (error) {
       return resJson('601', '', '잘못된 요청입니다.');
+    }
+  },
+
+  //신규 회원 정보 만들기
+  async createPostUserData(name = '', email = '', pwd = '', join = '', is_data = false) {
+    try {
+
+      const lastId = await this.getLastId();
+      const nextId = parseInt(lastId) + 1;
+
+      const hashPwd = await hash.sha256(pwd);
+
+      const data = {
+        id: nextId,
+        name: name,
+        email: email,
+        password: hashPwd,
+        is_data: false,
+      }
+
+      if (!join) data.join = dateUtil.formatDate(new Date, 'yyyy-MM-dd');
+      return data;
+    }
+    catch (error) {
+      console.log(error);
+    }
+
+  },
+
+  //회원 만들기
+  async postUser(data) {
+    try {
+      axios.post('/api/user', data);
+      return resJson('000', true, '회원 생성 완료');
+    }
+    catch (error) {
+      return resJson('602', '', '잘못된 요청입니다.' + error);
     }
   }
 }

@@ -120,6 +120,7 @@
 </script>
 
 <style>
+/* 임시 스타일 */
 .login-form-width {
   width: 100%;
   max-width: 400px;

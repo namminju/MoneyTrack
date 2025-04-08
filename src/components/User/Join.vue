@@ -50,11 +50,11 @@
               Gender: 
             </div>
             <div class=" trk-input-group col-sm-9">
-              <label class="d-flex trk-btn p-2" @click="clickGender">
-                <input type="radio" class="d-none"  id="male" v-model="state.gender" value="male" checked>
+              <label class="d-flex trk-btn p-2">
+                <input type="radio" class="d-none"  id="male" v-model="state.gender" value="male">
                 <div>Male</div>
               </label>
-              <label class="d-flex trk-btn p-2" @click="clickGender">
+              <label class="d-flex trk-btn p-2">
                 <input type="radio" class="d-none" id="female" v-model="state.gender" value="female">
                 <div>Female</div>
               </label>
@@ -81,22 +81,10 @@
 
 <script setup>
   import '@/css/user/user.css';
-  import { ref, reactive } from 'vue';
-  import hash from '@/utils/hash.js';
-  import session from '@/utils/session.js';
+  import { reactive } from 'vue';
   import userService from '@/utils/userService.js';
   import loginService from '@/utils/loginService.js';
 
-const clickGender = () => {
-  const selectedGender = document.querySelector('input[name="gender"]:checked');
-  console.log(selectedGender);
-  if (selectedGender) {
-    console.log(selectedGender.id); // 선택된 라디오 버튼의 id
-    console.log(selectedGender.value); // 선택된 라디오 버튼의 value
-  } else {
-    console.log('선택된 성별이 없습니다.');
-  }
-}
   //모든 값들 reactive 생성
   const valuesArr = [ 'name', 'email', 'pwd', 'pwd2', 'gender']
   const state = reactive({});
@@ -115,8 +103,6 @@ const clickGender = () => {
       //초기화
       state[`${val}Text`] = '';
       state[`${val}Show`] = false;
-      let isError = false;
-      let comment = '';
       
       switch(val) {
         case 'name':
@@ -134,15 +120,15 @@ const clickGender = () => {
           if(!emailCheck.result) {
             state.emailText = emailCheck.msg;
             state.emailShow = true;
-            // isPass = false;
+            isPass = false;
           }
 
           //같은 아이디의 회원이 존재하는지 확인
           const userCheck = await userService.getList('',state.email);
-          if(!userCheck[0]) {
+          if(userCheck[0]) {
             state.emailText = userCheck.msg;
             state.emailShow = true;
-            // isPass = false;
+            isPass = false;
           }
           break;
 
@@ -152,7 +138,7 @@ const clickGender = () => {
           if(!pwdCheck.result) {
             state.pwdText = pwdCheck.msg;
             state.pwdShow = true;
-            // isPass = false;
+            isPass = false;
           }
           break;
         
@@ -161,14 +147,15 @@ const clickGender = () => {
           if(state.pwd !== state.pwd2) {
             state.pwd2Text = '비밀번호가 일치하지 않습니다';
             state.pwd2Show = true;
-            // isPass = false;
+            isPass = false;
           }
         
         case 'gender':
+          console.log(state.gender);
           if(!state.gender) {
             state.genderText = '성별을 선택해주세요';
             state.genderShow = true;
-            // isPass = false;
+            isPass = false;
           }
           
           break;
@@ -179,22 +166,19 @@ const clickGender = () => {
     })
     // foreach end
   
-
+    //회원 정보 입력 시작
     if(isPass) {
-      try {
-        const lastId = await userService.getLastId();
-        console.log(lastId);
-      }
-      catch(error) {
-
-      }
+      const userData = await userService.createPostUserData(state.name, state.email, state.pwd,);
+      await userService.postUser(userData);
     }
   }
+
 
   
 </script>
 
 <style>
+/* 임시 스타일 */
 .login-form-width {
   width: 100%;
   max-width: 400px;
@@ -204,9 +188,6 @@ const clickGender = () => {
   /* border-radius: 1rem; */
   border: 1px solid;
   cursor: pointer;
-}
-.trk-btn:hover {
-
 }
 
 .trk-input-group {
