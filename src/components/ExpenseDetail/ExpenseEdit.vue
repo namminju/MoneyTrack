@@ -131,7 +131,7 @@ const fetchExpense = async () => {
     Item.cate_name = data.cate_name;
     Item.date = data.date;
     Item.memo = data.memo;
-    Item.is_salary = data.is_salary;
+    Item.is_salary = !!data.is_salary;
   } catch (err) {
     console.error("데이터 조회 실패", err);
     router.push("/expense");

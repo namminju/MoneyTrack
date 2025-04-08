@@ -32,10 +32,12 @@
           </div>
         </div>
         <div class="detail-box__item__button">
-
-          <button class="detail-box__item__button__item" @click="gotoEdit">수정</button>
-          <button class="detail-box__item__button__item" @click="deleteExpense">삭제</button>
-
+          <button class="detail-box__item__button__item" @click="gotoEdit">
+            수정
+          </button>
+          <button class="detail-box__item__button__item" @click="deleteExpense">
+            삭제
+          </button>
         </div>
       </div>
     </div>
@@ -71,7 +73,7 @@ const fetchExpense = async () => {
       카테고리: states.expense.cate_name,
       날짜: states.expense.date,
       메모: states.expense.memo || "메모 없음",
-      "고정비 여부": states.expense.is_salary ? "O" : "X",
+      "고정비 여부": !!states.expense.is_salary ? "O" : "X",
     };
   } catch (err) {
     console.log("데이터 조회 실패");
