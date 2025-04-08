@@ -1,6 +1,9 @@
 <template>
-  <div class="flex">
-    <ExpenseCalendar v-model:selectedDate="selectedDate" />
+  <div class="expense-full-container">
+    <ExpenseCalendar
+      :recordData="recordData"
+      v-model:selectedDate="selectedDate"
+    />
     <ExpenseFilterContainer
       :transactions="recordData"
       :selectedDate="selectedDate"
