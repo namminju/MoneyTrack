@@ -2,7 +2,10 @@
   <div class="content-box">
     <div class="detail-box">
       <div class="detail-box__header">
-        <span class="detail-box__header__button">
+        <span
+          @click="$router.push('/expense')"
+          class="detail-box__header__button"
+        >
           <i class="fa-solid fa-chevron-left"></i>
         </span>
         <span class="detail-box__header__title">세부 지출 내역</span>
@@ -29,8 +32,8 @@
           </div>
         </div>
         <div class="detail-box__item__button">
-          <button>수정</button>
-          <button>삭제</button>
+          <button @click="gotoEdit">수정</button>
+          <button @click="deleteExpense">삭제</button>
         </div>
       </div>
     </div>
@@ -74,4 +77,23 @@ const fetchExpense = async () => {
   }
 };
 onMounted(fetchExpense);
+
+const gotoEdit = () => {
+  const id = parseInt(route.params.id);
+  router.push(`/expenseEdit/${id}`);
+};
+
+const deleteExpense = async () => {
+  const id = parseInt(route.params.id);
+
+  try {
+    await axios.patch(`http://localhost:3000/Expense/${id}`, {
+      is_delete: 1,
+    });
+    alert("삭제 완료");
+    router.push("/expense");
+  } catch (err) {
+    alert("삭제에 실패했습니다.");
+  }
+};
 </script>

@@ -5,7 +5,7 @@
         <span class="edit-box__header__button">
           <i class="fa-solid fa-chevron-left"></i>
         </span>
-        <span class="edit-box__header__title">세부 지출 내역</span>
+        <span class="edit-box__header__title">지출 내역 수정</span>
       </div>
       <form class="edit-box__item">
         <div class="edit-box__item__text">
