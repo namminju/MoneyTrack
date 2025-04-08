@@ -37,6 +37,7 @@ html {
   background-color: #edf1d6;
 }
 .calendar__header {
+  height: 5rem;
   background-color: #609966;
   display: flex;
   border-radius: 2.4rem 2.4rem 0 0;
@@ -48,8 +49,27 @@ html {
   font-size: 2rem;
   padding: clamp(4px, 1.6rem, 8px);
 }
+.calendar__header select,
+.calendar__header__selects__confirm-button {
+  background-color: white;
+  font-size: 1.6rem;
+  padding: 0.2rem 0.4rem;
+
+  border-radius: 0.4rem;
+  margin: 0 0 0 0.8rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.calendar__header__button {
+  color: white;
+  border: none;
+  background-color: transparent;
+}
 .calendar__weekdays,
 .calendar__grid {
+  font-weight: bold;
+  font-size: 1.6rem;
   padding: 0 1rem;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -84,6 +104,7 @@ html {
 
 .date-number {
   font-weight: bold;
+  font-size: 1.6rem;
 }
 
 .summary {
@@ -138,41 +159,61 @@ html {
   width: 28%;
   padding: 2% 2%;
   background-color: #edf1d6;
-  border-radius: 2.4rem 0 0 2.4rem;
+  border-radius: 2.4rem;
 }
 .filter-container__header {
+  font-size: 2rem;
   display: flex;
   font-weight: bold;
   justify-content: space-between;
 }
-.filter-container__box {
-  border: 0.4rem solid #edf1d6;
+.summary-box {
+  display: flex;
+  font-size: 1.6rem;
   font-weight: bold;
-  padding: 1rem;
+  padding-top: 1rem;
+  justify-content: space-between;
+}
+
+.summary-box :nth-child(1) {
+  color: rgba(0, 0, 0, 0.3);
+}
+.filter-container__box {
+  font-weight: bold;
+  padding: 1rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 1rem auto;
   width: 100%;
-  background-color: #fff;
+  background-color: transparent;
   border-radius: 1.2rem;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
 }
 .filter-container__box__left i {
-  border: 0.2rem solid #ffc26f;
-  padding: 1rem;
-  border-radius: 1rem;
+  text-align: center;
+  align-content: center;
+  height: 4rem;
+  aspect-ratio: 1 / 1;
+  font-size: 2rem;
+  border-radius: 50%;
+}
+.filter-container__box__item :nth-child(1) {
+  font-size: 1.4rem;
+}
+.filter-container__box__item :nth-child(2) {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
 }
 .filter-container__box__left {
   text-align: left;
   display: flex;
   gap: 1rem;
   align-items: center;
-  font-size: 1.2rem;
 }
 .filter-panel {
   font-weight: bold;
-  background-color: #9dc08b;
+  background-color: #f9e0bb;
   position: absolute;
   width: 90%;
   border-radius: 2rem;
@@ -180,6 +221,7 @@ html {
   z-index: 999;
   padding: 1rem;
   margin: 1rem 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .filter-panel select {
@@ -203,11 +245,29 @@ html {
   background-color: #609966;
 }
 .plus_button * {
+  color: #ffc26f;
   margin: auto;
-  font-size: clamp(8px, 6.4rem, 56px);
+  font-size: clamp(5px, 4rem, 35px);
+}
+
+.expense-full-container {
+  display: flex;
+  background-color: #f9e0bb;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  margin: 2rem;
 }
 
 @media (max-width: 1024px) {
+  .expense-full-container {
+    display: block;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+  }
+  .hidden {
+    display: none;
+  }
   .flex {
     display: block;
   }
@@ -231,8 +291,52 @@ html {
   .plus_button {
     position: fixed;
   }
+  .filter-container__box {
+    height: 6rem;
+    background-color: #edf1d6;
+    padding: 2% 4%;
+    font-size: 2rem;
+  }
 }
 
 .pointer {
   cursor: pointer;
+}
+
+/* 체크 박스 선택(버튼형) */
+.hidden-checkbox {
+  display: none;
+}
+.chcekbox-button,
+.radio-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+.radio-button {
+  border-radius: 2rem;
+}
+.chcekbox-button.selected {
+  background-color: #000000;
+  color: white;
+}
+select {
+  appearance: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background-color: white;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
 }
