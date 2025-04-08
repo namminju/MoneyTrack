@@ -21,7 +21,9 @@
     <div class="summary-box">
       <div>총 {{ filteredTransactions.length }}건</div>
       <div>
-        {{ totalIncome - totalExpense && '+' }}{{ totalIncome - totalExpense }}
+        {{
+          (totalIncome > totalExpense ? '+' : '') + (totalIncome - totalExpense)
+        }}
       </div>
     </div>
     <hr class="hidden" />
