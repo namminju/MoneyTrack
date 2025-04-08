@@ -3,11 +3,11 @@
     <div class="type__buttons">
       <button
         v-for="type in typeOptions"
-        :key="type"
+        :key="type.id"
         @click="selectedType = type"
         :class="{ active: selectedType.value === type }"
       >
-        {{ type }}
+        {{ type.name }}
       </button>
     </div>
     <div class="period_buttons">
@@ -17,7 +17,7 @@
         @click="selectedPeriod = period"
         :class="{ active: selectedPeriod.value === period }"
       >
-        {{ period }}
+        {{ period.name }}
       </button>
     </div>
 
@@ -55,13 +55,12 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import { typeOptions, periodOptions } from '@/stores/useStatisticsStore.js';
 
 const emit = defineEmits(['updateFilter']);
-const typeOptions = ['전체', '수입', '지츨'];
-const periodOptions = ['월간', '연간'];
 
-const selectedType = ref('전체');
-const selectedPeriod = ref('월간');
+const selectedType = ref(typeOptions[0]);
+const selectedPeriod = ref(periodOptions[0]);
 const currentDate = ref(new Date());
 const selectedYear = ref(currentDate.value.getFullYear());
 const showDateSelector = ref(false);
@@ -69,12 +68,12 @@ const showDateSelector = ref(false);
 const formattedDate = computed(() => {
   const y = currentDate.value.getFullYear();
   const m = currentDate.value.getMonth() + 1;
-  return selectedPeriod.value === '월간' ? `${y}년 ${m}월` : `${y}년`;
+  return selectedPeriod.value.id === 1 ? `${y}년 ${m}월` : `${y}년`;
 });
 
 const goToPrev = () => {
   const d = new Date(currentDate.value);
-  selectedPeriod.value === '월간'
+  selectedPeriod.value.id === 1
     ? d.setMonth(d.getMonth() - 1)
     : d.setFullYear(d.getFullYear() - 1);
   currentDate.value = d;
@@ -82,7 +81,7 @@ const goToPrev = () => {
 
 const goToNext = () => {
   const d = new Date(currentDate.value);
-  selectedPeriod.value === '월간'
+  selectedPeriod.value.id === 1
     ? d.setMonth(d.getMonth() + 1)
     : d.setFullYear(d.getFullYear() + 1);
   currentDate.value = d;
@@ -90,7 +89,7 @@ const goToNext = () => {
 
 const selectMonth = (month) => {
   const newDate = new Date(selectedYear.value, month - 1);
-  currentDate.value = newDate();
+  currentDate.value = newDate;
   showDateSelector.value = false;
 };
 
