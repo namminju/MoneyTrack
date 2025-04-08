@@ -8,7 +8,7 @@
             'chcekbox-button',
             { selected: localSelectedCategories.includes(category.name) },
           ]"
-          class="w-100 d-block"
+          class="button-text"
         >
           <input
             type="checkbox"
@@ -25,9 +25,9 @@
 
     <label class="filter-panel___label">Type</label>
     <select :value="selectedType" @change="onTypeChange">
-      <option>전체</option>
-      <option>수입</option>
-      <option>지출</option>
+      <option :value="0">전체</option>
+      <option :value="2">수입</option>
+      <option :value="1">지출</option>
     </select>
   </div>
 </template>
@@ -37,7 +37,7 @@ import CategoryIcon from '../Category/CategoryIcon.vue';
 const props = defineProps({
   allCategories: Array,
   selectedCategories: Array,
-  selectedType: String,
+  selectedType: Number,
 });
 const emit = defineEmits(['update:selectedCategories', 'update:selectedType']);
 
@@ -62,10 +62,15 @@ function onTypeChange(event) {
 <style scoped>
 .category-button-group {
   display: flex;
-  gap: 12px;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 .filter-panel___label {
   padding: 1rem 0;
 }
+ 
+.button-text {
+  font-size: 1.3rem;
+}
+ 
 </style>

@@ -62,6 +62,7 @@ html {
 }
 
 .calendar__header__button {
+  margin: 0 4%;
   color: white;
   border: none;
   background-color: transparent;
@@ -282,7 +283,7 @@ html {
   }
   .filter-panel {
     padding: 2%;
-    width: 52%;
+    width: 58%;
     right: 2%;
   }
   .calendar__grid__cell {
@@ -309,6 +310,7 @@ html {
 }
 .chcekbox-button,
 .radio-button {
+  background-color: white;
   display: flex;
   align-items: center;
   gap: 6px;

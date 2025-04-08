@@ -79,11 +79,11 @@
       >
         <div v-if="date" class="date-number">{{ date.getDate() }}</div>
         <div v-show="hasData(date)" class="summary">
-          <div class="summary__income" v-if="getAmount(date, '수입')">
-            +{{ getAmount(date, '수입') }}
+          <div class="summary__income" v-if="getAmount(date, 1)">
+            +{{ getAmount(date, 1) }}
           </div>
-          <div class="summary__expense" v-if="getAmount(date, '지출')">
-            -{{ getAmount(date, '지출') }}
+          <div class="summary__expense" v-if="getAmount(date, 2)">
+            -{{ getAmount(date, 2) }}
           </div>
         </div>
       </div>
@@ -106,6 +106,8 @@ const props = defineProps({
   },
 });
 const recordData = computed(() => props.recordData);
+
+console.log(props.recordData);
 const emit = defineEmits(['update:selectedDate']);
 
 const today = new Date();
