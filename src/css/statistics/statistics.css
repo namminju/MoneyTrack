@@ -1,0 +1,44 @@
+/* .statistics-page {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, minmax(280px, 1fr));
+} */
+* {
+  margin: 0;
+  padding: 0;
+}
+.filter-box {
+  font-size: 1.2rem;
+}
+.type__buttons {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+.type__buttons button {
+  border: 1px solid black;
+  border-radius: 30%;
+  margin: 1rem;
+}
+
+.period_buttons button {
+  border-radius: 30%;
+}
+
+.date_navigation button {
+  border: none;
+}
+.statistic-graph {
+  display: flex;
+
+  gap: 2rem; /* 차트 사이 간격 */
+
+  margin-top: 2rem;
+}
+
+.Pie_chart {
+  width: 100px;
+  height: 100px;
+}
+/* .chart {
+  width: 10rem;
+  height: 10rem;
+} */

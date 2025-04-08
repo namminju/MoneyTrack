@@ -1,11 +1,15 @@
 <template>
-  <div class="statistic-graph" style="display: flex">
-    <PieChart :categoryRatios="categoryRatios" />
-    <BarChart
-      :monthlyTotal="monthlyTotal"
-      :dailyTotal="dailyTotal"
-      :selectedPeriod="selectedPeriod"
-    />
+  <div class="statistic-graph">
+    <div class="Pie_chart">
+      <PieChart :categoryRatios="categoryRatios" />
+    </div>
+    <div class="Bar_chart">
+      <BarChart
+        :monthlyTotal="monthlyTotal"
+        :dailyTotal="dailyTotal"
+        :selectedPeriod="selectedPeriod"
+      />
+    </div>
   </div>
 </template>
 

@@ -8,12 +8,6 @@
       :monthlyTotal="monthlyTotal"
       :dailyTotal="dailyTotal"
     />
-    <!-- <StatisticsGraph
-      :filteredType="store.selectedType"
-      :filteredPeriod="store.selectedPeriod"
-      :year="store.selectedYear"
-      :month="store.selectedMonth"
-    /> -->
 
     <!--<CategoryList :filteredType="selectedType" /> -->
     <p>🔹 전체 지출 합계: {{ store.totalAmount }} 원</p>
