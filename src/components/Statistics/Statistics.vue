@@ -30,13 +30,14 @@ import StatisticsFilterBox from './StatisticsFilterBox.vue';
 // import StatisticsGraph from './StatisticsGraph.vue';
 // import CategoryList from './CategoryList.vue';
 import { useStatisticsStore } from '@/stores/useStatisticsStore';
+import { onMounted } from 'vue';
 
 const store = useStatisticsStore();
 const selectedType = ref('전체');
 const selectedPeriod = ref('월간');
 
 onMounted(() => {
-  storeToRefs.fetchData();
+  store.fetchData();
 });
 
 const onFilterUpdate = ({ type, period }) => {
