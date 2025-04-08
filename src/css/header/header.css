@@ -39,3 +39,23 @@
 	right: 3rem;
 	padding: 1rem 2rem;
 }
+
+.header__mobile-nav {
+	position: fixed;
+	bottom: 10rem;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	z-index: 999;
+}
+
+.header__nav-container {
+	background-color: #fde4b0;
+	display: flex;
+	gap: 2rem;
+}
+
+.header__mobile-btn-menu {
+	width: 6rem;
+}
