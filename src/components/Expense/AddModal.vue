@@ -69,7 +69,6 @@
 
 <script setup>
 import '@/css/expense/expense.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import { ref } from 'vue';
 
 const transactionType = ref('수입'); // 기본 선택값 (optional)
