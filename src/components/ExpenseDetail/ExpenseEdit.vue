@@ -15,7 +15,7 @@
               <input
                 type="text"
                 class="edit-box__form__input"
-                v-model="Item.amount"
+                v-model.number="Item.amount"
               />
             </div>
             <div class="info-row">
@@ -74,11 +74,7 @@
           </div>
         </div>
         <div class="edit-box__item__button">
-          <button
-            type="submit"
-            class="edit-box__item__button__item"
-            @click="updateExpense"
-          >
+          <button type="submit" class="edit-box__item__button__item">
             저장
           </button>
           <button
@@ -96,13 +92,17 @@
 <script setup>
 import "@/css/expenseDetail/expenseEdit.css";
 import { reactive, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import axios from "axios";
 import expenseData from "../../../db/expense.json";
+import useRouterUtil from "@/utils/routers";
 
 const route = useRoute();
-const router = useRouter();
+
+const { gotoExpense, gotoExpenseDetail, gotoExpenseEdit } = useRouterUtil();
+
 const id = parseInt(route.params.id);
+
 const expenseTypes = expenseData.expenseType;
 const expenseCategories = expenseData.expenseCategory;
 
@@ -134,7 +134,7 @@ const fetchExpense = async () => {
     Item.is_salary = !!data.is_salary;
   } catch (err) {
     console.error("데이터 조회 실패", err);
-    router.push("/expense");
+    gotoExpense();
   }
 };
 
@@ -163,13 +163,13 @@ const updateExpense = async () => {
     });
 
     console.log("수정 완료");
-    router.push(`/expenseDetail/${id}`);
+    gotoExpenseDetail(id);
   } catch (err) {
     console.log("저장 실패");
   }
 };
 
 const gotoDetail = () => {
-  router.push(`/expenseDetail/${id}`);
+  gotoExpenseDetail(id);
 };
 </script>

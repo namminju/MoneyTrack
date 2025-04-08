@@ -2,10 +2,7 @@
   <div class="content-box">
     <div class="detail-box">
       <div class="detail-box__header">
-        <span
-          @click="$router.push('/expense')"
-          class="detail-box__header__button"
-        >
+        <span @click="gotoExpense()" class="detail-box__header__button">
           <i class="fa-solid fa-chevron-left"></i>
         </span>
         <span class="detail-box__header__title">세부 지출 내역</span>
@@ -47,11 +44,13 @@
 <script setup>
 import "@/css/expenseDetail/expenseDetail.css";
 import { reactive, onMounted, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import axios from "axios";
+import useRouterUtil from "@/utils/routers";
+
+const { gotoExpense, gotoExpenseDetail, gotoExpenseEdit } = useRouterUtil();
 
 const route = useRoute();
-const router = useRouter();
 
 const states = reactive({ expense: {} });
 const infoFields = ref({});
@@ -82,7 +81,7 @@ const fetchExpense = async () => {
 onMounted(fetchExpense);
 
 const gotoEdit = () => {
-  router.push(`/expenseEdit/${id}`);
+  gotoExpenseEdit(id);
 };
 
 const deleteExpense = async () => {
@@ -91,7 +90,7 @@ const deleteExpense = async () => {
       is_delete: 1,
     });
     console.log("삭제 완료");
-    router.push("/expense");
+    gotoExpense();
   } catch (err) {
     console.log("삭제 실패");
   }
