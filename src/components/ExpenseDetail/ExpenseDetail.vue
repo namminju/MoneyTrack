@@ -32,8 +32,8 @@
           </div>
         </div>
         <div class="detail-box__item__button">
-          <button @click="gotoEdit">수정</button>
-          <button @click="deleteExpense">삭제</button>
+          <button class="detail-box__item__button__item">수정</button>
+          <button class="detail-box__item__button__item">삭제</button>
         </div>
       </div>
     </div>
