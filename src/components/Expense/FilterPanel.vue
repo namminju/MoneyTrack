@@ -68,7 +68,9 @@ function onTypeChange(event) {
 .filter-panel___label {
   padding: 1rem 0;
 }
+ 
 .button-text {
   font-size: 1.3rem;
 }
+ 
 </style>
