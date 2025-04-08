@@ -58,8 +58,8 @@
           </div>
         </div>
         <div class="edit-box__item__button">
-          <button>저장</button>
-          <button>취소</button>
+          <button class="edit-box__item__button__item">저장</button>
+          <button class="edit-box__item__button__item">취소</button>
         </div>
       </form>
     </div>
