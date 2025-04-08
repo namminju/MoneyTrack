@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
 }
-.detail-box {
+.edit-box {
   background-color: #edf1d6;
   border-radius: 20px;
   height: 90%;
@@ -21,21 +21,21 @@
   justify-content: center;
   align-items: center;
 }
-.detail-box__header {
+.edit-box__header {
   margin-top: 2rem;
   width: 90%;
   position: relative;
 }
-.detail-box__header__button {
+.edit-box__header__button {
   position: absolute;
   left: 2rem;
   cursor: pointer;
 }
-.detail-box__header__title {
+.edit-box__header__title {
   font-weight: bold;
   font-size: larger;
 }
-.detail-box__item {
+.edit-box__item {
   background-color: white;
   text-align: center;
   max-width: 1024px;
@@ -51,28 +51,10 @@
   flex-direction: column;
 }
 
-.detail-box__item__text {
+.edit-box__item__text {
   width: 80%;
   overflow-y: auto;
   padding: 3rem 0;
-}
-
-.amount {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.amount-value {
-  color: blue;
-  font-weight: bold;
-  font-size: xx-large;
-  word-break: break-word; /*줄바꿈 설정*/
-}
-.amount-unit {
-  font-weight: bold;
-  font-size: xx-large;
-  margin-bottom: 2.5rem;
-  word-break: break-word; /*줄바꿈 설정*/
 }
 
 .info {
@@ -94,12 +76,17 @@
   text-align: left;
 }
 
-.value {
+.edit-box__form__input {
   flex: 1;
   text-align: left;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.4rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 15rem;
 }
 
-.detail-box__item__button {
+.edit-box__item__button {
   margin-top: 2rem;
   margin-bottom: 2rem;
   width: 80%;
@@ -107,7 +94,7 @@
   gap: 2rem;
 }
 
-.detail-box__item__button__item {
+.edit-box__item__button__item {
   flex: 1;
   margin-top: 4rem;
   background-color: #609966;
