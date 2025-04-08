@@ -73,6 +73,7 @@ export const useStatisticsStore = defineStore('statistics', () => {
   });
 
   const monthlyTotal = computed(() => {
+    //연간 필터링으로 막대 차트에 쓰일 월간 수입 지출 총합 계산
     const totals = Array.from({ length: 12 }, () => ({
       income: 0,
       expense: 0,
@@ -92,6 +93,7 @@ export const useStatisticsStore = defineStore('statistics', () => {
   });
 
   const dailyTotal = computed(() => {
+    //월간 필터링으로 막대 차트에 쓰일 일일 지출 총합
     if (selectedPeriod.value.id !== 1) return [];
 
     const daysInMonth = new Date(
