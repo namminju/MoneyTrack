@@ -115,7 +115,7 @@ const Item = reactive({
   cate_name: "",
   date: "",
   memo: "",
-  is_salary: false,
+  is_salary: null,
 });
 
 const fetchExpense = async () => {
@@ -150,18 +150,17 @@ const updateExpense = async () => {
     Item.type_name = selectedType ? selectedType.name : "";
     Item.cate_name = selectedCate ? selectedCate.name : "";
 
-    await axios.put(`http://localhost:3000/Expense/${id}`, {
-      id: Number(id), // 혹은 parseInt(id)
+    await axios.patch(`http://localhost:3000/Expense/${id}`, {
       name: Item.name,
-      amount: Number(Item.amount),
-      type: Number(Item.type),
+      amount: parseInt(Item.amount),
+      type: Item.type,
       type_name: Item.type_name,
-      cate_id: Number(Item.cate_id),
+      cate_id: Item.cate_id,
       cate_name: Item.cate_name,
       date: Item.date,
       memo: Item.memo,
-      is_salary: Item.is_salary ? 1 : 0, // boolean → 숫자로
-});
+      is_salary: Item.is_salary ? 1 : 0,
+    });
 
     console.log("수정 완료");
     router.push(`/expenseDetail/${id}`);
