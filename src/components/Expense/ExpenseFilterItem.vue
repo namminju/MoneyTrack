@@ -1,9 +1,12 @@
 <template>
   <div class="filter-container__box pointer">
     <div class="filter-container__box__left">
-      <i class="fa-solid fa-utensils"></i>
+      <CategoryIcon
+        :category="props.transaction.category"
+        class="trk-bg-6 trk-text-1"
+      />
       <div class="filter-container__box__item">
-        <div>{{ props.transaction.memo }}</div>
+        <div class="">{{ props.transaction.memo }}</div>
         <div>{{ props.transaction.time }}</div>
       </div>
     </div>
@@ -15,5 +18,6 @@
 </template>
 <script setup>
 import '@/css/expense/expense.css';
+import CategoryIcon from '@/components/Category/CategoryIcon.vue';
 const props = defineProps(['transaction']);
 </script>
