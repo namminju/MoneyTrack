@@ -10,13 +10,15 @@
     />
 
     <!--<CategoryList :filteredType="selectedType" /> -->
-    <p>🔹 전체 지출 합계: {{ store.totalAmount }} 원</p>
+    <div class="category__ratio">
+      <p>🔹 전체 지출 합계: {{ store.totalAmount }} 원</p>
 
-    <ul>
-      <li v-for="item in store.categoryRatios" :key="item.category">
-        {{ item.category }}: {{ item.amount }}원 ({{ item.ratio }}%)
-      </li>
-    </ul>
+      <ul>
+        <li v-for="item in store.categoryRatios" :key="item.category">
+          {{ item.category }}: {{ item.amount }}원 ({{ item.ratio }}%)
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 

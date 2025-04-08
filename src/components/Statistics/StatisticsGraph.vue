@@ -1,9 +1,9 @@
 <template>
   <div class="statistic-graph">
-    <div class="Pie_chart">
+    <div class="chart-box">
       <PieChart :categoryRatios="categoryRatios" />
     </div>
-    <div class="Bar_chart">
+    <div class="chart-box">
       <BarChart
         :monthlyTotal="monthlyTotal"
         :dailyTotal="dailyTotal"
