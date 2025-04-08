@@ -310,6 +310,7 @@ html {
 }
 .chcekbox-button,
 .radio-button {
+  background-color: white;
   display: flex;
   align-items: center;
   gap: 6px;
