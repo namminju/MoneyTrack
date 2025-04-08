@@ -14,7 +14,7 @@
     <p>🔹 전체 지출 합계: {{ statStore.totalAmount }} 원</p>
 
     <ul>
-      <li v-for="item in statStore.categoryRatios" :key="item.category">
+      <li v-for="item in store.categoryRatios" :key="item.category">
         {{ item.category }}: {{ item.amount }}원 ({{ item.ratio }}%)
       </li>
     </ul>
