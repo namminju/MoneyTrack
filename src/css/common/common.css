@@ -1,59 +1,100 @@
+/* MoneyTrack Color */
+:root {
+  --trk-ivory: #EDF1D6;
+  --trk-light-yellow: #F9E0BB;
+  --trk-yellow: #FFC26F;
+  --trk-light-green: #9DC08B;
+  --trk-green: #609966;
+  --trk-dark-green: #40513B;
+}
+
 /* MoneyTrack Backgorund */
 .trk-bg-1 {
-  background-color: #EDF1D6;
+  background-color: var(--trk-ivory);
 }
 .trk-bg-2 {
-  background-color: #F9E0BB;
+  background-color: var(--trk-light-yellow);
 }
 .trk-bg-3 {
-  background-color: #FFC26F;
+  background-color: var(--trk-yellow);
 }
 .trk-bg-4 {
-  background-color: #9DC08B;
+  background-color: var(--trk-light-green);
 }
 .trk-bg-5 {
-  background-color: #9DC08B;
+  background-color: var(--trk-green);
 }
 .trk-bg-6 {
-  background-color: #40513B;
+  background-color: var(--trk-dark-green);
 }
 
 /* MoneyTrack Text Color */
 .trk-text-1 {
-  color: #EDF1D6;
+  color: var(--trk-ivory);
 }
 .trk-text-2 {
-  color: #F9E0BB;
+  color: var(--trk-light-yellow);
 }
 .trk-text-3 {
-  color: #FFC26F;
+  color: var(--trk-yellow);
 }
 .trk-text-4 {
-  color: #9DC08B;
+  color: var(--trk-light-green);
 }
 .trk-text-5 {
-  color: #9DC08B;
+  color: var(--trk-green);
 }
 .trk-text-6 {
-  color: #40513B;
+  color: var(--trk-dark-green);
 }
 
 /* MoneyTrack Border Color */
 .trk-br-1 {
-  border: 1px#EDF1D6 solid;
+  border: 1px var(--trk-ivory) solid;
 }
 .trk-br-2 {
-  border: 1px#F9E0BB solid;
+  border: 1px var(--trk-light-yellow) solid;
 }
 .trk-br-3 {
-  border: 1px#FFC26F solid;
+  border: 1px var(--trk-yellow) solid;
 }
 .trk-br-4 {
-  border: 1px#9DC08B solid;
+  border: 1px var(--trk-light-green) solid;
 }
 .trk-br-5 {
-  border: 1px#9DC08B solid;
+  border: 1px var(--trk-green) solid;
 }
 .trk-br-6 {
-  border: 1px#40513B solid;
+  border: 1px var(--trk-dark-green) solid;
+}
+
+/* MoneyTrack Button */
+.trk-btn-confirm {
+  padding: 1rem 5rem;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: var(--trk-green);
+  color:var(--trk-ivory);
+  border: none;
+  cursor: pointer;
+}
+.trk-btn-confirm:hover {
+  background-color: #9DC08B;
+}
+
+.trk-btn-cancel {
+  padding: 1rem 5rem;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #7e7e7e;
+  color:var(--trk-ivory);
+  border: none;
+  cursor: pointer;
+}
+.trk-btn-cancel:hover {
+  background-color: #b8b8b8;
 }
