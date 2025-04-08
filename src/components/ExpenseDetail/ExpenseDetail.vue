@@ -12,33 +12,19 @@
           <div class="info">
             <div class="info-row">
               <span class="amount-unit"
-                ><strong class="amount-value">2,000,000</strong> 원</span
+                ><strong class="amount-value">{{
+                  states.expense.amount?.toLocaleString()
+                }}</strong>
+                원</span
               >
             </div>
-            <div class="info-row">
-              <span class="label">제목</span>
-              <span class="value">수입</span>
-            </div>
-            <div class="info-row">
-              <span class="label">결제 수단</span>
-              <span class="value">카드</span>
-            </div>
-            <div class="info-row">
-              <span class="label">카테고리</span>
-              <span class="value">수입</span>
-            </div>
-
-            <div class="info-row">
-              <span class="label">날짜</span>
-              <span class="value">2024-04-05</span>
-            </div>
-            <div class="info-row">
-              <span class="label">메모</span>
-              <span class="value">즐거운 월급이다</span>
-            </div>
-            <div class="info-row">
-              <span class="label">고정비 여부</span>
-              <span class="value"><input type="checkbox" /></span>
+            <div
+              class="info-row"
+              v-for="(value, label) in infoFields"
+              :key="label"
+            >
+              <span class="label">{{ label }}</span>
+              <span class="value">{{ value }}</span>
             </div>
           </div>
         </div>
@@ -53,4 +39,39 @@
 
 <script setup>
 import "@/css/expenseDetail/expenseDetail.css";
+import { reactive, onMounted, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import axios from "axios";
+
+const route = useRoute();
+const router = useRouter();
+
+const states = reactive({ expense: {} });
+const infoFields = ref({});
+const id = parseInt(route.params.id);
+console.log("현재 ID:", id);
+
+const fetchExpense = async () => {
+  const id = parseInt(route.params.id);
+  try {
+    const response = await axios.get(`http://localhost:3000/Expense/${id}`);
+    console.log("응답 데이터:", response.data);
+    if (!response.data) {
+      console.log("error");
+    }
+    states.expense = response.data;
+
+    infoFields.value = {
+      제목: states.expense.name,
+      "결제 수단": states.expense.type_name,
+      카테고리: states.expense.cate_name,
+      날짜: states.expense.date,
+      메모: states.expense.memo || "메모 없음",
+      "고정비 여부": states.expense.is_salary ? "O" : "X",
+    };
+  } catch (err) {
+    console.log("데이터 조회 실패");
+  }
+};
+onMounted(fetchExpense);
 </script>
