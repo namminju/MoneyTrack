@@ -43,8 +43,8 @@
           </div>
         </div>
         <div class="detail-box__item__button">
-          <button>수정</button>
-          <button>삭제</button>
+          <button class="detail-box__item__button__item">수정</button>
+          <button class="detail-box__item__button__item">삭제</button>
         </div>
       </div>
     </div>
