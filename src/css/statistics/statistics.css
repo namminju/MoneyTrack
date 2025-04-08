@@ -1,12 +1,15 @@
-/* .statistics-page {
+.statistics-page {
   display: grid;
   grid-template-rows: repeat(auto-fit, minmax(280px, 1fr));
-} */
+}
 * {
   margin: 0;
   padding: 0;
+  justify-items: center;
 }
 .filter-box {
+  width: 10rem;
+  height: 10rem;
   font-size: 1.2rem;
 }
 .type__buttons {
@@ -14,31 +17,40 @@
   margin-bottom: 0.5rem;
 }
 .type__buttons button {
+  width: auto;
+  white-space: nowrap;
   border: 1px solid black;
-  border-radius: 30%;
+  border-radius: 50px;
   margin: 1rem;
 }
 
 .period_buttons button {
-  border-radius: 30%;
+  width: auto;
+  white-space: nowrap;
+  border-radius: 50px;
 }
 
 .date_navigation button {
   border: none;
 }
+.statistic-graph button {
+  border-radius: 30px;
+}
 .statistic-graph {
   display: flex;
 
   gap: 2rem; /* 차트 사이 간격 */
-
-  margin-top: 2rem;
 }
 
 .Pie_chart {
-  width: 100px;
-  height: 100px;
+  width: 40rem;
+  height: 40rem;
 }
-/* .chart {
-  width: 10rem;
-  height: 10rem;
-} */
+.Bar_chart {
+  width: 40rem;
+  height: 40rem;
+}
+.confirm_year_only {
+  border-radius: 30px;
+  z-index: 30;
+}
