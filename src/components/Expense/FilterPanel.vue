@@ -33,7 +33,6 @@
 </template>
 
 <script setup>
-import 'bootstrap/dist/css/bootstrap.css';
 import CategoryIcon from '../Category/CategoryIcon.vue';
 const props = defineProps({
   allCategories: Array,
@@ -68,36 +67,5 @@ function onTypeChange(event) {
 }
 .filter-panel___label {
   padding: 1rem 0;
-}
-.chcekbox-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background-color: white;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
-}
-.chcekbox-button.selected {
-  background-color: #000000;
-  color: white;
-}
-
-select {
-  appearance: none;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background-color: white;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
 }
 </style>
