@@ -1,41 +1,43 @@
 <template>
   <div class="filter-panel">
     <label class="filter-panel___label">Category</label>
-    <div class="category-button-group">
-      <label
-        v-for="category in allCategories"
-        :key="category.name"
-        :class="[
-          'category-button',
-          { selected: localSelectedCategories.includes(category.name) },
-        ]"
-      >
-        <input
-          type="checkbox"
-          :value="category.name"
-          :checked="localSelectedCategories.includes(category.name)"
-          @change="toggleCategory(category.name)"
-          class="hidden-checkbox"
-        />
-        <i :class="category.icon"></i>
-        {{ category.name }}
-      </label>
+    <div class="row gx-3 gy-3">
+      <div v-for="category in allCategories" :key="category.name" class="col-4">
+        <label
+          :class="[
+            'chcekbox-button',
+            { selected: localSelectedCategories.includes(category.name) },
+          ]"
+          class="button-text"
+        >
+          <input
+            type="checkbox"
+            :value="category.name"
+            :checked="localSelectedCategories.includes(category.name)"
+            @change="toggleCategory(category.name)"
+            class="hidden-checkbox"
+          />
+          <CategoryIcon :category="category.name" />
+          {{ category.name }}
+        </label>
+      </div>
     </div>
 
     <label class="filter-panel___label">Type</label>
     <select :value="selectedType" @change="onTypeChange">
-      <option>전체</option>
-      <option>수입</option>
-      <option>지출</option>
+      <option :value="0">전체</option>
+      <option :value="2">수입</option>
+      <option :value="1">지출</option>
     </select>
   </div>
 </template>
 
 <script setup>
+import CategoryIcon from '../Category/CategoryIcon.vue';
 const props = defineProps({
   allCategories: Array,
   selectedCategories: Array,
-  selectedType: String,
+  selectedType: Number,
 });
 const emit = defineEmits(['update:selectedCategories', 'update:selectedType']);
 
@@ -60,43 +62,15 @@ function onTypeChange(event) {
 <style scoped>
 .category-button-group {
   display: flex;
-  gap: 12px;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 .filter-panel___label {
   padding: 1rem 0;
 }
-.category-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background-color: white;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+ 
+.button-text {
+  font-size: 1.3rem;
 }
-.category-button.selected {
-  background-color: #000000;
-  color: white;
-}
-.hidden-checkbox {
-  display: none;
-}
-select {
-  appearance: none;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background-color: white;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
-}
+ 
 </style>

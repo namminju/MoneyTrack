@@ -1,4 +1,4 @@
-## Default Setting
+## Default Settings
 
 2024-04-05
 - reset.css (index.html)

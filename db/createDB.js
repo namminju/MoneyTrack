@@ -158,6 +158,7 @@ const createData = (id, user_id, currentDate, is_salary = 0, is_hide = 0, is_del
   let name = '';
 
   //월급날인 경우
+  console.log(is_salary);
   if (is_salary == 1) {
     amount = expense.expenseIncome;
     const cate = cateArr.find(item => item.cate_id === 99);
@@ -225,6 +226,7 @@ newUsers.forEach((user, index) => {
     if (currentDate.getDate() == happyDate) {
       data = createData(id, user.id, currentDate, 1);
       id++;
+      expenseArr.push(data);
     }
 
     //평소
