@@ -67,3 +67,34 @@
 .trk-br-6 {
   border: 1px var(--trk-dark-green) solid;
 }
+
+/* MoneyTrack Button */
+.trk-btn-confirm {
+  padding: 1rem 5rem;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: var(--trk-green);
+  color:var(--trk-ivory);
+  border: none;
+  cursor: pointer;
+}
+.trk-btn-confirm:hover {
+  background-color: #9DC08B;
+}
+
+.trk-btn-cancel {
+  padding: 1rem 5rem;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #7e7e7e;
+  color:var(--trk-ivory);
+  border: none;
+  cursor: pointer;
+}
+.trk-btn-cancel:hover {
+  background-color: #b8b8b8;
+}
