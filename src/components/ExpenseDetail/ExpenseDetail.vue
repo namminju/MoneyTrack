@@ -32,8 +32,12 @@
           </div>
         </div>
         <div class="detail-box__item__button">
-          <button class="detail-box__item__button__item">수정</button>
-          <button class="detail-box__item__button__item">삭제</button>
+          <button class="detail-box__item__button__item" @click="gotoEdit">
+            수정
+          </button>
+          <button class="detail-box__item__button__item" @click="deleteExpense">
+            삭제
+          </button>
         </div>
       </div>
     </div>
@@ -52,16 +56,15 @@ const router = useRouter();
 const states = reactive({ expense: {} });
 const infoFields = ref({});
 const id = parseInt(route.params.id);
-console.log("현재 ID:", id);
 
 const fetchExpense = async () => {
-  const id = parseInt(route.params.id);
   try {
     const response = await axios.get(`http://localhost:3000/Expense/${id}`);
-    console.log("응답 데이터:", response.data);
+
     if (!response.data) {
       console.log("error");
     }
+
     states.expense = response.data;
 
     infoFields.value = {
@@ -70,7 +73,7 @@ const fetchExpense = async () => {
       카테고리: states.expense.cate_name,
       날짜: states.expense.date,
       메모: states.expense.memo || "메모 없음",
-      "고정비 여부": states.expense.is_salary ? "O" : "X",
+      "고정비 여부": !!states.expense.is_salary ? "O" : "X",
     };
   } catch (err) {
     console.log("데이터 조회 실패");
@@ -79,21 +82,18 @@ const fetchExpense = async () => {
 onMounted(fetchExpense);
 
 const gotoEdit = () => {
-  const id = parseInt(route.params.id);
   router.push(`/expenseEdit/${id}`);
 };
 
 const deleteExpense = async () => {
-  const id = parseInt(route.params.id);
-
   try {
     await axios.patch(`http://localhost:3000/Expense/${id}`, {
       is_delete: 1,
     });
-    alert("삭제 완료");
+    console.log("삭제 완료");
     router.push("/expense");
   } catch (err) {
-    alert("삭제에 실패했습니다.");
+    console.log("삭제 실패");
   }
 };
 </script>
