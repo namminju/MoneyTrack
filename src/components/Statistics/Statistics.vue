@@ -11,7 +11,7 @@
     <CategoryList :filteredType="selectedType" /> -->
     <h2>📊 테스트용 통계 페이지</h2>
 
-    <p>🔹 전체 지출 합계: {{ statStore.totalAmount }} 원</p>
+    <p>🔹 전체 지출 합계: {{ store.totalAmount }} 원</p>
 
     <ul>
       <li v-for="item in store.categoryRatios" :key="item.category">
@@ -40,9 +40,13 @@ onMounted(() => {
   store.fetchData();
 });
 
-const onFilterUpdate = ({ type, period }) => {
-  selectedType.value = type;
-  selectedPeriod.value = period;
+const onFilterUpdate = ({ type, period, year, month }) => {
+  console.log('🔄 필터 업데이트:', type, period, year, month);
+
+  store.selectedType = type;
+  store.selectedPeriod = period;
+  store.selectedYear = year;
+  store.selectedMonth = month;
 };
 </script>
 
