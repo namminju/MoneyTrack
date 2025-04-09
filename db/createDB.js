@@ -16,18 +16,20 @@ const startTime = new Date();
 
 //expense 정보 가져오기
 const expense = JSON.parse(
-  await readFile(new URL('./expense.json', import.meta.url))
+  await readFile(
+    new URL('./expense.json', import.meta.url)
+  )
 );
 
 //유저가 없을경우 기본값
 const basicUser = {
   id: 1,
   name: '홍길동',
-  email: 'hong@gmail.com',
-  password: '1234567890',
-  join: '2025-04-03',
-  is_data: false,
-};
+  email: "hong@gmail.com",
+  password: "1234567890",
+  join: "2025-04-03",
+  is_data: false
+}
 
 let newUsers = [];
 let dbJson;
@@ -35,12 +37,17 @@ let dbJson;
 try {
   await access(new URL('./db.json', import.meta.url), constants.F_OK);
 
-  dbJson = JSON.parse(await readFile(new URL('./db.json', import.meta.url)));
+  dbJson = JSON.parse(
+    await readFile(
+      new URL('./db.json', import.meta.url)
+    )
+  )
   // console.log(dbJson['user']);
 
-  newUsers = dbJson['user'].filter((item) => item.is_data === false);
-} catch {
-  //없으면 새로 만들어주기
+  newUsers = dbJson['user'].filter(item => item.is_data === false);
+}
+//없으면 새로 만들어주기
+catch {
   dbJson = { user: [], Expense: [], Category: [expense.expenseCategory] };
   dbJson.user.push(basicUser);
 
@@ -67,9 +74,9 @@ const happyDate = expense.happyDate;
 // const expenseUser = expense.user;
 
 //시작 ~ 끝 날짜
-const startDate = new Date(expense.expenseDate['start_date']);
-const endDate = new Date(expense.expenseDate['end_date']);
-let currentDate = new Date(startDate.getTime()); //현재날짜
+const startDate = new Date(expense.expenseDate["start_date"]);
+const endDate = new Date(expense.expenseDate["end_date"]);
+let currentDate = new Date(startDate.getTime());  //현재날짜
 
 //이름
 const preFixArr = expense.expenseNamePrefix['name'];
@@ -78,14 +85,14 @@ const suffixArr = expense.expenseNameSuffix;
 //랜덤값구하기
 const getRandom = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+}
 
 //카테고리 이름 가져오기
 const getCateName = (cate_id) => {
-  const cate = cateArr.find((item) => item.cate_id === cate_id);
+  const cate = cateArr.find(item => item.cate_id === cate_id);
   // console.log(cate);
   return cate['name'];
-};
+}
 
 //카테고리 icon 가져오기
 const getCateIcon = (cate_id) => {
@@ -99,7 +106,7 @@ const getRandomSuffix = () => {
   const randNum = getRandom(0, suffixArr.length - 1);
   const suffix = suffixArr[randNum];
   return suffix;
-};
+}
 
 //랜덤 카테고리
 const getRandomCate = () => {
@@ -113,51 +120,45 @@ const getRandomCate = () => {
     const cateId = suffix['cate_id'];
 
     return { expenseName, cateId };
-  } else {
+  }
+  else {
     console.log(suffix);
   }
-};
+}
 
 //타입 정하기
 const getRandomType = () => {
   const randNum = getRandom(0, 9);
   if (randNum < 4) {
     return 1;
-  } else {
+  }
+  else {
     return 2;
   }
-};
+}
 
 //타입 이름 구하기
 const getTypeName = (type_id) => {
-  const typeName = expenseType.find((item) => item.type_id === type_id);
+  const typeName = expenseType.find(item => item.type_id === type_id);
   // console.log(typeName['name']);
   if (typeName) {
     return typeName['name'];
-  } else {
+  }
+  else {
     throw new Error('Cannot find proper type_id');
   }
-};
+}
 
 //금액 정하기
 const getRandomAmount = () => {
-  const randNum = getRandom(
-    expenseAmount.start_amount,
-    expenseAmount.end_amount
-  );
+  const randNum = getRandom(expenseAmount.start_amount, expenseAmount.end_amount);
   const amount = Math.floor(randNum);
   return amount;
-};
+}
 
 //배열 작성
-const createData = (
-  id,
-  user_id,
-  currentDate,
-  is_salary = 0,
-  is_hide = 0,
-  is_delete = 0
-) => {
+const createData = (id, user_id, currentDate, is_salary = 0, is_hide = 0, is_delete = 0) => {
+
   let amount = '';
   let cateId = '';
   let cateName = '';
@@ -168,7 +169,7 @@ const createData = (
   console.log(is_salary);
   if (is_salary == 1) {
     amount = expense.expenseIncome;
-    const cate = cateArr.find((item) => item.cate_id === 99);
+    const cate = cateArr.find(item => item.cate_id === 99);
     cateId = cate.cate_id;
     cateName = cate.name;
     cateIcon = cate.icon;
@@ -213,10 +214,11 @@ const createData = (
     is_salary: is_salary,
     is_hide: is_hide,
     is_delete: is_delete,
-  };
+  }
 
   return data;
-};
+}
+
 
 //작성 시작
 const expenseArr = [];
@@ -227,8 +229,10 @@ let maxCount = 0;
 
 //유저별로
 newUsers.forEach((user, index) => {
+
   //날짜별 하나씩
   while (currentDate.getTime() <= endDate.getTime()) {
+
     //월급날
     if (currentDate.getDate() == happyDate) {
       data = createData(id, user.id, currentDate, 1);
@@ -237,7 +241,7 @@ newUsers.forEach((user, index) => {
     }
 
     //평소
-    maxCount = getRandom(0, maxExpenseCountPerDay); //하루 데이터 발급량
+    maxCount = getRandom(0, maxExpenseCountPerDay);  //하루 데이터 발급량
     for (i = 0; i < maxCount; i++) {
       data = createData(id, user.id, currentDate);
       id++;
@@ -254,12 +258,14 @@ newUsers.forEach((user, index) => {
 
   //데이터 생성 완료
   user.is_data = true;
-});
+})
 //end foreach user
+
 
 //db.json 생성하기
 async function exportFile() {
   try {
+
     //기존 데이터에 push하기
     dbJson.Expense.push(...expenseArr);
     // console.log(dbJson);
@@ -273,7 +279,8 @@ async function exportFile() {
     console.log(`${diff} 초의 시간이 걸렸음`);
     //만약 오래걸렸다면 똥컴이니 바꾸십쇼
     process.exit(0);
-  } catch (error) {
+  }
+  catch (error) {
     console.log('파일 생성 안됨');
     console.log(error);
     process.exit(1);
