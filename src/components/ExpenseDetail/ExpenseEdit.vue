@@ -75,7 +75,7 @@
             </div>
             <div class="info-row">
               <span class="label">고정비 여부</span>
-              <input type="checkbox" v-model="Item.is_salary" />
+              <input type="checkbox" v-model="Item.is_fixed" />
             </div>
           </div>
         </div>
@@ -120,6 +120,7 @@ const Item = reactive({
   date: "",
   memo: "",
   is_salary: null,
+  is_fixed: null,
 });
 
 const fetchExpense = async () => {
@@ -136,6 +137,7 @@ const fetchExpense = async () => {
     Item.date = data.date;
     Item.memo = data.memo;
     Item.is_salary = !!data.is_salary;
+    Item.is_fixed = !!data.is_fixed;
   } catch (err) {
     console.error("데이터 조회 실패", err);
     gotoExpense();
@@ -164,6 +166,7 @@ const updateExpense = async () => {
       date: Item.date,
       memo: Item.memo,
       is_salary: Item.is_salary ? 1 : 0,
+      is_fixed: Item.is_fixed ? 1 : 0,
     });
 
     console.log("수정 완료");
