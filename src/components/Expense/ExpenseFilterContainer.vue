@@ -134,7 +134,7 @@ const totalExpense = computed(() => {
 }
 
 .category-button.selected {
-  background-color: #000000;
+  background-color: black;
   color: white;
 }
 

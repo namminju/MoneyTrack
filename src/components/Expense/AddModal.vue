@@ -75,7 +75,14 @@
         </label>
         <label> 고정비 <input type="checkbox" v-model="isFixed" /> </label>
       </form>
-
+      <!-- <button
+        type="button"
+        class="trk-btn-confirm"
+        @click="submitForm"
+        :disabled="!place || !date || !amount"
+      >
+        추가
+      </button> -->
       <button
         type="button"
         class="add-btn"
@@ -148,10 +155,11 @@ const submitForm = async () => {
 <style scoped>
 .modal-content__header,
 .modal-content__footer {
-  font-size: 2.4rem;
+  font-size: 2rem;
   height: 8%;
 }
 .input-container {
+  font-size: 1.5rem;
   display: flex;
   flex-direction: column;
   height: 80%;
@@ -160,8 +168,8 @@ const submitForm = async () => {
   display: grid;
   align-items: center;
   grid-template-columns: 4fr 12fr;
-  gap: 2rem;
-  margin: 2% 5%;
+  gap: 1rem;
+  margin: 2% 4%;
 }
 .modal-overlay {
   position: fixed;
@@ -178,31 +186,31 @@ const submitForm = async () => {
 }
 .modal-content {
   font-weight: bold;
-  width: 50%;
-  height: 60vw;
+  width: 54%;
+  height: calc(60vh+2vw);
   min-height: 380px;
   padding: 2.8rem;
   border-radius: 3rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  min-width: 300px;
-  max-width: 600px;
-  max-height: 86%;
+  min-width: 380px;
+  max-width: 500px;
+  max-height: 90vh;
   font-size: 2rem;
-  background-color: #f9e0bb;
+  background-color: var(--trk-light-yellow);
 }
 .input_bg_color {
-  background-color: #edf1d6;
+  background-color: var(--trk-ivory);
 }
 input,
 .input-style {
-  background-color: #edf1d6;
+  background-color: var(--trk-ivory);
   padding: 0.8rem 2rem;
   border-radius: 2rem;
   border: none;
 }
 .add-btn {
   margin: auto;
-  background-color: #609966;
+  background-color: var(--trk-green);
   color: white;
   width: 90%;
   padding: 2% 0;
@@ -217,12 +225,12 @@ input[type='checkbox'] {
   width: 20px;
   height: 20px;
   border: none;
-  accent-color: #609966;
+  accent-color: var(--trk-green);
 }
 .radio-button.selected {
   font-weight: bolder;
-  box-shadow: inset 0 0 0 0.4rem #609966;
-  color: #609966;
+  box-shadow: inset 0 0 0 0.4rem var(--trk-green);
+  color: var(--trk-green);
 }
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
