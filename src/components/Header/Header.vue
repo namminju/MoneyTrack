@@ -109,7 +109,7 @@
 import "@/css/header/header.css";
 import { useRoute, useRouter } from "vue-router";
 import { computed, inject } from "vue";
-import { useUserStore } from "@/stores/usetStore";
+import { useUserStore } from "@/stores/userStore";
 
 const router = useRouter();
 const route = useRoute();
@@ -147,6 +147,7 @@ const alert = inject("useAlert");
 
 const goLogout = () => {
   userStore.logout();
+  sessionStorage['user'] = '';
   alert.success("로그아웃 되었습니다.");
   router.push("/home");
 };
