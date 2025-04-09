@@ -1,10 +1,12 @@
 <template>
   <!-- 적응형 스타일 적용 -->
   <div :class="styles['expense-full-container']">
+    <!-- 달력 컴포넌트 -->
     <ExpenseCalendar
       :recordData="expenseStore.expenseList"
       v-model:selectedDate="selectedDate"
     />
+    <!-- 선택 날짜 내역 -->
     <ExpenseFilterContainer
       :transactions="expenseStore.expenseList"
       :selectedDate="selectedDate"
@@ -14,6 +16,8 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue';
+
+// styles
 import styles from '@/css/expense/expense.module.css';
 
 //components
@@ -24,6 +28,7 @@ import ExpenseFilterContainer from './ExpenseFilterContainer.vue';
 import { useExpenseStore } from '@/stores/expense';
 import { useCategoryStore } from '@/stores/category';
 
+// init store & user
 const expenseStore = useExpenseStore();
 const categoryStore = useCategoryStore();
 const user = ref('');

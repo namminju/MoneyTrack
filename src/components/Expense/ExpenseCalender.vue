@@ -1,22 +1,12 @@
 <template>
   <div class="calendar">
-    <!-- 헤더: 월/년 + 이동 버튼 -->
+    <!-- calendar header -->
     <div class="calendar__header">
-      <button
-        v-if="!editingDate"
-        class="calendar__header__button"
-        @click="prevMonth"
-      >
-        <i class="fa-solid fa-angle-left"></i>
+      <button class="calendar__header__button" @click="prevMonth">
+        <i class="fa-solid fa-angle-left" />
       </button>
 
-      <!-- 텍스트 클릭 시 DatePicker 팝업 열기 -->
-      <!-- <div @click="togglePicker" class="calendar__header__text">
-        {{ currentYear }}년 {{ currentMonth + 1 }}월
-      </div> -->
-
       <DatePicker
-        ref="pickerRef"
         v-model="selectedMonthYear"
         type="month"
         :popup-style="{ zIndex: 9999 }"
@@ -26,17 +16,14 @@
         class="calendar__header__text"
         style="width: 15rem"
       >
+        <!-- input 창 대체  -->
         <template #input>
           {{ currentYear }}년 {{ String(currentMonth + 1).padStart(2, '0') }}월
         </template>
       </DatePicker>
 
-      <button
-        class="calendar__header__button"
-        v-if="!editingDate"
-        @click="nextMonth"
-      >
-        <i class="fa-solid fa-angle-right"></i>
+      <button class="calendar__header__button" @click="nextMonth">
+        <i class="fa-solid fa-angle-right" />
       </button>
     </div>
 
@@ -54,30 +41,17 @@
         {{ day }}
       </div>
     </div>
-
-    <!-- 날짜 셀 -->
+    <!-- 날짜 cell -->
     <div class="calendar__grid">
-      <div
+      <ExpenseCalenderCell
         v-for="(date, index) in calendarDates"
         :key="index"
-        class="calendar__grid__cell"
-        :class="{
-          selected: isSelected(date),
-          sunday: index % 7 === 0,
-          saturday: index % 7 === 6,
-        }"
-        @click="selectDate(date)"
-      >
-        <div v-if="date" class="date-number">{{ date.getDate() }}</div>
-        <div v-show="hasData(date)" class="summary">
-          <div class="summary__income" v-if="getAmount(date, '1')">
-            +{{ getAmount(date, '1') }}
-          </div>
-          <div class="summary__expense" v-if="getAmount(date, '0')">
-            -{{ getAmount(date, '0') }}
-          </div>
-        </div>
-      </div>
+        :date="date"
+        :index="index"
+        :selectedDate="props.selectedDate"
+        :recordData="recordData"
+        @select="selectDate"
+      />
     </div>
   </div>
 </template>
@@ -85,9 +59,15 @@
 <script setup>
 import { ref, computed } from 'vue';
 import DatePicker from 'vue-datepicker-next';
+
+// css
 import 'vue-datepicker-next/index.css';
 import '@/css/expense/expense.css';
 
+// components
+import ExpenseCalenderCell from './ExpenseCalenderCell.vue';
+
+// props
 const props = defineProps({
   selectedDate: {
     type: Date,
@@ -98,31 +78,28 @@ const props = defineProps({
     required: true,
   },
 });
+
 const recordData = computed(() => props.recordData);
 
-const emit = defineEmits(['update:selectedDate']);
-
 const today = new Date();
+
+const selectedMonthYear = ref(today);
 const currentYear = ref(today.getFullYear());
 const currentMonth = ref(today.getMonth());
 
-const editingDate = ref(false);
-const selectedMonthYear = ref(new Date());
+// event 정의
+const emit = defineEmits(['update:selectedDate']);
 
-// 🔁 DatePicker 팝업 제어용
-const pickerRef = ref(null);
-const togglePicker = () => {
-  pickerRef.value.toggle();
-};
-
+// 선택 변경
 function applyDateChangeFromPicker(date) {
   currentYear.value = date.getFullYear();
   currentMonth.value = date.getMonth();
-  editingDate.value = false;
 }
 
+//요일 지정
 const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
 
+// 날짜 계산
 const calendarDates = computed(() => {
   const firstDay = new Date(currentYear.value, currentMonth.value, 1);
   const lastDay = new Date(currentYear.value, currentMonth.value + 1, 0);
@@ -142,6 +119,7 @@ const calendarDates = computed(() => {
   return dates;
 });
 
+//이전 달로 변경
 function prevMonth() {
   if (currentMonth.value === 0) {
     currentMonth.value = 11;
@@ -151,6 +129,7 @@ function prevMonth() {
   }
 }
 
+//다음 달로 변경
 function nextMonth() {
   if (currentMonth.value === 11) {
     currentMonth.value = 0;
@@ -160,57 +139,16 @@ function nextMonth() {
   }
 }
 
+//날짜 선택
 function selectDate(date) {
   if (date) {
     emit('update:selectedDate', date);
   }
 }
-
-function isSelected(date) {
-  if (!date || !props.selectedDate) return false;
-  return (
-    date.getFullYear() === props.selectedDate.getFullYear() &&
-    date.getMonth() === props.selectedDate.getMonth() &&
-    date.getDate() === props.selectedDate.getDate()
-  );
-}
-
-function formatDateToLocalString(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-
-function hasData(date) {
-  if (!date) return false;
-  const dateStr = formatDateToLocalString(date);
-  return recordData.value.some((r) => r.date === dateStr);
-}
-
-function getAmount(date, type) {
-  if (!date) return 0;
-  const dateStr = formatDateToLocalString(date);
-
-  const filtered = recordData.value.filter(
-    (r) => r.date === dateStr && r.is_salary === Number(type)
-  );
-
-  return filtered.reduce((acc, cur) => acc + cur.amount, 0);
-}
 </script>
 
 <style scoped>
-.calendar__header__selects {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-button {
-  border: none;
-  cursor: pointer;
-}
+/* datepicker style 강제 지정정 */
 :deep(.mx-datepicker svg) {
   fill: white !important;
 }
