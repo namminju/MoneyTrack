@@ -25,55 +25,68 @@
     "expenseCategory": [
         {
             "cate_id": 1,
-            "name": "식비"
+            "name": "식비",
+            "icon": "fa-solid fa-utensils"
         },
         {
             "cate_id": 2,
-            "name": "교통비"
+            "name": "교통비",
+            "icon": "fa-solid fa-bus"
         },
         {
             "cate_id": 3,
-            "name": "문화/여가"
+            "name": "문화/여가",
+            "icon": "fa-solid fa-bag-shopping"
         },
         {
             "cate_id": 4,
-            "name": "쇼핑"
+            "name": "쇼핑",
+            "icon": "fa-solid fa-bag-shopping"
         },
         {
             "cate_id": 5,
-            "name": "집"
+            "name": "집",
+            "icon": "fa-solid fa-house"
         },
         {
             "cate_id": 6,
-            "name": "건강"
+            "name": "건강",
+            "icon": "fa-solid fa-heart-pulse"
         },
         {
             "cate_id": 7,
-            "name": "교육"
+            "name": "교육",
+            "icon": "fa-solid fa-book"
         },
         {
             "cate_id": 8,
-            "name": "반려동물"
+            "name": "반려동물",
+            "icon": "fa-solid fa-dog"
         },
         {
             "cate_id": 9,
-            "name": "금융"
+            "name": "금융",
+            "icon": "fa-solid fa-piggy-bank"
         },
         {
             "cate_id": 10,
-            "name": "수입"
+            "name": "수입",
+            "icon": "fa-solid fa-circle-plus"
         },
         {
             "cate_id": 11,
-            "name": "뷰티"
+            "name": "뷰티",
+            "icon": "fa-solid fa-spa"
         },
         {
             "cate_id": 12,
-            "name": "기타"
+            "name": "기타",
+            "icon": "fa-solid fa-question"
         },
         {
             "cate_id": 99,
-            "name": "수입"
+            "name": "수입",
+            "icon": "fa-solid fa-circle-plus"
         }
     ],
 

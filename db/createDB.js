@@ -48,7 +48,7 @@ try {
 }
 //없으면 새로 만들어주기
 catch {
-  dbJson = { user: [], Expense: [] };
+  dbJson = { user: [], Expense: [], Category: [expense.expenseCategory] };
   dbJson.user.push(basicUser);
 
   newUsers.push(basicUser);
@@ -93,6 +93,13 @@ const getCateName = (cate_id) => {
   // console.log(cate);
   return cate['name'];
 }
+
+//카테고리 icon 가져오기
+const getCateIcon = (cate_id) => {
+  const cate = cateArr.find((item) => item.cate_id === cate_id);
+  // console.log(cate);
+  return cate['icon'];
+};
 
 //랜덤 suffix
 const getRandomSuffix = () => {
@@ -156,6 +163,7 @@ const createData = (id, user_id, currentDate, is_salary = 0, is_hide = 0, is_del
   let cateId = '';
   let cateName = '';
   let name = '';
+  let cateIcon = '';
 
   //월급날인 경우
   console.log(is_salary);
@@ -164,6 +172,7 @@ const createData = (id, user_id, currentDate, is_salary = 0, is_hide = 0, is_del
     const cate = cateArr.find(item => item.cate_id === 99);
     cateId = cate.cate_id;
     cateName = cate.name;
+    cateIcon = cate.icon;
 
     name = cateName;
   }
@@ -175,6 +184,7 @@ const createData = (id, user_id, currentDate, is_salary = 0, is_hide = 0, is_del
     // console.log('cate: ' + cate);
     cateId = cate['cateId'];
     name = cate['expenseName'];
+    cateIcon = getCateIcon(cateId);
     // console.log('cateId: ' + cateId);
     cateName = getCateName(cateId);
   }
@@ -200,6 +210,7 @@ const createData = (id, user_id, currentDate, is_salary = 0, is_hide = 0, is_del
     date: formatDate,
     cate_id: cateId,
     cate_name: cateName,
+    cate_icon: cateIcon,
     is_salary: is_salary,
     is_hide: is_hide,
     is_delete: is_delete,
