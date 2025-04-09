@@ -14,14 +14,21 @@
     <div class="period_buttons">
       <button
         v-for="period in periodOptions"
-        :key="period"
+        :key="period.id"
         style="color: white"
-        @click="selectedPeriod = period"
-        :class="{ active: selectedPeriod.value === period }"
+        @click="selectedPeriod.value = period"
+        :class="{ active: selectedPeriod.value === period.id }"
       >
         {{ period.name }}
       </button>
     </div>
+    <DatePicker
+      v-model="currentDate"
+      :type="selectedPeriod.value?.id === 1 ? 'month' : 'year'"
+      format="yyyy-MM"
+      locale="ko"
+      placeholder="날짜 선택"
+    />
 
     <div class="date_navigation">
       <button @click="goToPrev" style="color: white">◀</button>
@@ -32,32 +39,14 @@
     </div>
 
     <button @click="applyFilter" style="color: white">적용</button>
-
-    <div v-if="showDateSelector" class="date_selector_modal">
-      <div class="modal_content">
-        <div class="year_header">
-          <button @click="selectedYear--">◀</button>
-          <span>{{ selectedYear }}년 </span>
-          <button @click="selectedYear++">▶</button>
-        </div>
-
-        <div v-if="selectedPeriod.value === '월간'" class="month_grid">
-          <button v-for="month in 12" :key="month" @click="selectMonth(month)">
-            {{ month }}월
-          </button>
-        </div>
-
-        <div v-else class="confirm_year_only">
-          <button @click="selectYearOnly">확인</button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { typeOptions, periodOptions } from '@/stores/useStatisticsStore.js';
+import DatePicker from 'vue-datepicker-next';
+import 'vue-datepicker-next/index.css';
 
 const emit = defineEmits(['updateFilter']);
 
@@ -71,6 +60,10 @@ const formattedDate = computed(() => {
   const y = currentDate.value.getFullYear();
   const m = currentDate.value.getMonth() + 1;
   return selectedPeriod.value.id === 1 ? `${y}년 ${m}월` : `${y}년`;
+});
+
+watch(currentDate, (newVal) => {
+  console.log('📆 선택된 날짜:', newVal);
 });
 
 const goToPrev = () => {
