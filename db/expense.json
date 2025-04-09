@@ -17,10 +17,10 @@
     },
     "expenseAmount": {
         "start_amount": 10000,
-        "end_amount": 100000
+        "end_amount": 50000
     },
     "expenseIncome": {
-        "income": 2000000
+        "income": 3000000
     },
     "expenseCategory": [
         {
