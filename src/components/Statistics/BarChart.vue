@@ -29,25 +29,57 @@ const props = defineProps({
   selectedPeriod: Object,
   monthlyTotal: Array,
   dailyTotal: Array,
+  filteredData: Array,
 });
 
 const chartData = computed(() => {
+  console.log(props.monthlyTotal);
   const isMonthly = props.selectedPeriod?.id === 1;
   //Period id 는 월간/ 연간을 나타내는 값 1이면 월간 2이면 연간
-  const labels = isMonthly
-    ? props.dailyTotal.map((item) => `${item.day}일`)
-    : props.monthlyTotal.map((item) => `${item.month}월`);
-  const data = isMonthly
-    ? props.dailyTotal.map((item) => item.amount)
-    : props.monthlyTotal.map((item) => item.amount);
+
+  const totals = {};
+
+  props.filteredData.forEach((item) => {
+    const date = new Date(item.date);
+    const key = isMonthly ? `${date.getDate()}일` : `${date.getMonth() + 1}월`;
+
+    if (!totals[key]) {
+      totals[key] = { income: 0, expense: 0 };
+    }
+    if (item.cate_id === 99) {
+      totals[key].income += item.amount;
+    } else {
+      totals[key].expense += item.amount;
+    }
+  });
+
+  const labels = Object.keys(totals).sort((a, b) => parseInt(a) - parseInt(b));
+  const incomeData = labels.map((label) => totals[label].income);
+  const expenseData = labels.map((label) => totals[label].expense);
+
+  const datasets = [
+    {
+      label: '지출',
+      data: expenseData,
+      backgroundColor: '#ff6384',
+    },
+  ];
+  if (!isMonthly) {
+    datasets.push({
+      label: '수입',
+      data: incomeData,
+      backgroundColor: '#36A2EB',
+    });
+  }
   return {
     labels,
-    datasets: [{ label: '지출금액', data, backgroundColor: '#36A2EB' }],
+    datasets,
   };
 });
 
 const chartOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: false,
