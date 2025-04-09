@@ -6,10 +6,10 @@ export const useExpenseStore = defineStore('expense', () => {
   const BASEURL = 'api/Expense';
   const state = reactive({ expenseList: [], isLoading: false });
 
-  const fetchExpenseList = async () => {
+  const fetchExpenseList = async (id = '') => {
     state.isLoading = true;
     try {
-      const response = await axios.get(BASEURL);
+      const response = await axios.get(`${BASEURL}?user_id=${id}`);
       if (response.status === 200) {
         state.expenseList = response.data;
       } else {
