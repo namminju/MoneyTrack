@@ -6,10 +6,17 @@ export const useExpenseStore = defineStore("expense", () => {
   const BASEURL = "api/Expense";
   const state = reactive({ expenseList: [], isLoading: false });
 
-  const fetchExpenseList = async (id = '') => {
+  // ✅ 사용자 ID 가져오는 함수
+  const getUserIdFromSession = () => {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    return user?.id ?? '';
+  };
+
+  const fetchExpenseList = async () => {
     state.isLoading = true;
     try {
-      const response = await axios.get(`${BASEURL}?user_id=${id}`);
+      const userId = getUserIdFromSession(); // ✅ 세션에서 가져옴
+      const response = await axios.get(`${BASEURL}?user_id=${userId}`);
       if (response.status === 200) {
         state.expenseList = response.data;
       } else {
@@ -24,13 +31,10 @@ export const useExpenseStore = defineStore("expense", () => {
 
   const AddExpense = async (expense) => {
     state.isLoading = true;
-    console.log(expense.value);
-    console.log(expense.value);
     try {
       const response = await axios.post(BASEURL, expense);
       if (response.status === 201) {
-        console.log(response.data);
-        fetchExpenseList();
+        await fetchExpenseList(); // ✅ 따로 id 전달하지 않음
       } else {
         console.error("등록 실패");
       }
