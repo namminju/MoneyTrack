@@ -16,13 +16,12 @@
       </div>
     </div>
     <div>
-      {{ props.transaction.type === 2 ? '+' : '-'
-      }}{{ props.transaction.amount.toLocaleString() }}
+      {{ props.transaction.is_salary === 1 ? '+' : '-'
+      }}{{ props.transaction.amount }}
     </div>
   </div>
 </template>
 <script setup>
-import '@/css/expense/expense.css';
 import CategoryIcon from '@/components/Category/CategoryIcon.vue';
 import { useRouter } from 'vue-router';
 const props = defineProps(['transaction']);

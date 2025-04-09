@@ -2,7 +2,7 @@
   <div class="filter-panel">
     <label class="filter-panel___label">Category</label>
     <div class="row gx-3 gy-3">
-      <div v-for="category in allCategories" :key="category.name" class="col-4">
+      <div v-for="category in allCategories" :key="category.name" class="col-4 col-lg-6 col-xxl-4">
         <label
           :class="[
             'chcekbox-button',
@@ -17,7 +17,8 @@
             @change="toggleCategory(category.name)"
             class="hidden-checkbox"
           />
-          <CategoryIcon :category="category.name" />
+
+          <i :class="category.icon"></i>
           {{ category.name }}
         </label>
       </div>
@@ -25,15 +26,14 @@
 
     <label class="filter-panel___label">Type</label>
     <select :value="selectedType" @change="onTypeChange">
-      <option :value="0">전체</option>
-      <option :value="2">수입</option>
-      <option :value="1">지출</option>
+      <option value=''>전체</option>
+      <option :value="1">수입</option>
+      <option :value="0">지출</option>
     </select>
   </div>
 </template>
 
-<script setup>
-import CategoryIcon from '../Category/CategoryIcon.vue';
+<script setup> 
 const props = defineProps({
   allCategories: Array,
   selectedCategories: Array,
@@ -68,9 +68,8 @@ function onTypeChange(event) {
 .filter-panel___label {
   padding: 1rem 0;
 }
- 
+
 .button-text {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
- 
 </style>
