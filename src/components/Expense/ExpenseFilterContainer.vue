@@ -9,7 +9,12 @@
         @click="showFilter = !showFilter"
       ></i>
     </div>
-    <Modal v-if="showModal" @close="showModal = false" :allCategories="categoryStore.categoryList[0]"> </Modal>
+    <Modal
+      v-if="showModal"
+      @close="showModal = false"
+      :allCategories="categoryStore.categoryList[0]"
+    >
+    </Modal>
     <!-- 필터 패널 -->
 
     <FilterPanel
@@ -41,9 +46,7 @@
         }
       "
     >
-      <i 
-      class="fa-solid fa-plus pointer"  
-     ></i>
+      <i class="fa-solid fa-plus pointer"></i>
     </button>
   </div>
 </template>
@@ -67,11 +70,11 @@ const props = defineProps({
     required: true,
   },
 });
-        
+
 const showFilter = ref(false);
- 
+
 const selectedCategories = ref([]); // 체크된 항목들이 배열로 들어감
-const selectedType = ref('0');
+const selectedType = ref('');
 function formatDateToLocalString(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
