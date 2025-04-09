@@ -4,10 +4,8 @@
     @click.stop="router.push(`/expensedetail/${props.transaction.id}`)"
   >
     <div class="filter-container__box__left">
-      <CategoryIcon
-        :category="props.transaction.cate_name"
-        class="trk-bg-6 trk-text-1"
-      />
+      <i :class="props.transaction.cate_icon" class="trk-bg-6 trk-text-1"></i>
+
       <div class="filter-container__box__item">
         <div class="">{{ props.transaction.name }}</div>
         <div>
@@ -22,7 +20,6 @@
   </div>
 </template>
 <script setup>
-import CategoryIcon from '@/components/Category/CategoryIcon.vue';
 import { useRouter } from 'vue-router';
 const props = defineProps(['transaction']);
 const router = useRouter();
