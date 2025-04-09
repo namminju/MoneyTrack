@@ -6,6 +6,11 @@
   --trk-light-green: #9DC08B;
   --trk-green: #609966;
   --trk-dark-green: #40513B;
+
+  --trk-disabled-light: #e0e0e0;
+  --trk-disabled-middle: #a8a8a8;
+  --trk-disabled-dark: #757575;
+  --trk-disabled-bold: #414141;
 }
 
 /* MoneyTrack Backgorund */
@@ -73,7 +78,7 @@
   padding: 1rem 5rem;
   border-radius: 30px;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.6rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   background-color: var(--trk-green);
   color:var(--trk-ivory);
@@ -88,7 +93,7 @@
   padding: 1rem 5rem;
   border-radius: 30px;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.6rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   background-color: #7e7e7e;
   color:var(--trk-ivory);
@@ -97,4 +102,81 @@
 }
 .trk-btn-cancel:hover {
   background-color: #b8b8b8;
+}
+
+.trk-btn-form {
+  padding: 1rem 5rem;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.6rem;
+  box-shadow: 0 1px 0 1px var(--trk-yellow);
+  background-color: var(--trk-light-yellow);
+  color:var(--trk-dark-green);
+  border: 1px solid var(--trk-yellow);
+  cursor: pointer;
+}
+.trk-btn-form:hover {
+  opacity: 0.8;
+}
+.trk-btn-form-selected {
+  padding: 1rem 5rem;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.6rem;
+  box-shadow: 0 1px 0 1px var(--trk-yellow);
+  background-color: var(--trk-yellow);
+  /* color:var(--trk-dark-green); */
+  border: 1px solid var(--trk-yellow);
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+
+/* MoneyTrack Input */
+.trk-input-yellow {
+  width: 100%;
+  background-color: var(--trk-light-yellow);
+  border-radius: 2rem;
+  padding: 0.8rem 2rem;
+  border: 1px solid var(--trk-yellow);
+}
+.trk-input-yellow:focus {
+  border: 1px solid var(--trk-yellow);
+  box-shadow: 0 0 5px 2px var(--trk-yellow);
+  outline: none;
+}
+.trk-input-yellow:hover {
+  opacity: 0.8;
+}
+
+.trk-disabled {
+  background-color: var(--trk-disabled-light) !important;
+  border: 1px solid var(--trk-disabled-middle) !important;
+  cursor: none;
+}
+
+/* MoneyTrack Input-Group */
+.trk-input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+.trk-input-group > :first-child {
+  border-radius: 1rem 0 0 1rem;
+}
+
+.trk-input-group > :last-child {
+  border-radius: 0 1rem 1rem 0;
+}
+
+/* MoneyTrack Width */
+.trk-default-width {
+  width: 100%;
+  max-width: 1080px;
+}
+
+.trk-small-width {
+  width: 100%;
+  max-width: 400px;
 }
