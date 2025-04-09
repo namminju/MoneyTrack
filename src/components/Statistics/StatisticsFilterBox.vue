@@ -4,6 +4,7 @@
       <button
         v-for="type in typeOptions"
         :key="type.id"
+        style="color: white"
         @click="selectedType = type"
         :class="{ active: selectedType.value === type }"
       >
@@ -14,6 +15,7 @@
       <button
         v-for="period in periodOptions"
         :key="period"
+        style="color: white"
         @click="selectedPeriod = period"
         :class="{ active: selectedPeriod.value === period }"
       >
@@ -22,14 +24,14 @@
     </div>
 
     <div class="date_navigation">
-      <button @click="goToPrev">◀</button>
+      <button @click="goToPrev" style="color: white">◀</button>
       <span class="current_date" @click="showDateSelector = true">{{
         formattedDate
       }}</span>
-      <button @click="goToNext">▶</button>
+      <button @click="goToNext" style="color: white">▶</button>
     </div>
 
-    <button @click="applyFilter">적용</button>
+    <button @click="applyFilter" style="color: white">적용</button>
 
     <div v-if="showDateSelector" class="date_selector_modal">
       <div class="modal_content">

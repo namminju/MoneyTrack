@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import axios from 'axios';
+import session from '@/utils/session';
 
 export const typeOptions = [
   { id: 1, name: '전체' },
@@ -15,11 +16,15 @@ export const periodOptions = [
 
 export const useStatisticsStore = defineStore('statistics', () => {
   const rawData = ref([]);
+  const user = session.get();
+  const userID = user?.id;
 
   const fetchData = async () => {
     try {
       const res = await axios.get('http://localhost:3000/Expense');
       rawData.value = res.data;
+      // rawData.value = res.data.filter((item) => item.user_id === userID);
+      console.log('data: ', rawData.value);
     } catch (err) {
       console.error('데이터 가져오기 실패: ', err);
     }
@@ -89,7 +94,11 @@ export const useStatisticsStore = defineStore('statistics', () => {
         totals[month].expense += item.amount;
       }
     });
-    return totals;
+    return totals.map((item, index) => ({
+      month: index + 1,
+      income: item.income,
+      expense: item.expense,
+    }));
   });
 
   const dailyTotal = computed(() => {

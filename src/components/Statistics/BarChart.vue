@@ -32,6 +32,7 @@ const props = defineProps({
 });
 
 const chartData = computed(() => {
+  console.log(props.monthlyTotal);
   const isMonthly = props.selectedPeriod?.id === 1;
   //Period id 는 월간/ 연간을 나타내는 값 1이면 월간 2이면 연간
   const labels = isMonthly
@@ -39,7 +40,7 @@ const chartData = computed(() => {
     : props.monthlyTotal.map((item) => `${item.month}월`);
   const data = isMonthly
     ? props.dailyTotal.map((item) => item.amount)
-    : props.monthlyTotal.map((item) => item.amount);
+    : props.monthlyTotal.map((item) => item.expense);
   return {
     labels,
     datasets: [{ label: '지출금액', data, backgroundColor: '#36A2EB' }],

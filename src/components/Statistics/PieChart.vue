@@ -18,7 +18,7 @@ const props = defineProps({
 });
 
 const chartData = computed(() => ({
-  labels: props.categoryRatios.map((item) => item.category),
+  // labels: props.categoryRatios.map((item) => item.category),
   datasets: [
     {
       label: '지출 비율(%)',
