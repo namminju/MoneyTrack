@@ -128,8 +128,10 @@ const emit = defineEmits(['close', 'submit']);
 const close = () => emit('close');
 
 const submitForm = async () => {
+  const user = ref(JSON.parse(sessionStorage.getItem('user')));
+
   const formData = {
-    user_id: 1,
+    user_id: user.value.id,
     type: paymentMethod.value == '카드' ? 1 : 2,
     type_name: paymentMethod.value,
     name: place.value,
