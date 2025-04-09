@@ -1,26 +1,35 @@
 <template>
   <div
-    class="filter-container__box pointer"
+    :class="[styles['filter-container__box'], styles.pointer]"
     @click.stop="router.push(`/expensedetail/${props.transaction.id}`)"
   >
-    <div class="filter-container__box__left">
-      <i :class="props.transaction.cate_icon" class="trk-bg-6 trk-text-1"></i>
+    <div :class="styles['filter-container__box__left']">
+      <i :class="[props.transaction.cate_icon, 'trk-bg-6', 'trk-text-1']"></i>
 
-      <div class="filter-container__box__item">
-        <div class="">{{ props.transaction.name }}</div>
+      <div :class="styles['filter-container__box__item']">
+        <!-- 내역 title -->
+        <div>{{ props.transaction.name }}</div>
         <div>
+          <!-- category 및 type 표기 -->
           {{ props.transaction.cate_name }}/{{ props.transaction.type_name }}
         </div>
       </div>
     </div>
     <div>
-      {{ props.transaction.is_salary === 1 ? '+' : '-'
-      }}{{ props.transaction.amount }}
+      <!-- 수익/지출에 따라 표기 -->
+      {{ props.transaction.is_salary === 1 ? '+' : '-' }}
+      {{ props.transaction.amount }}
     </div>
   </div>
 </template>
 <script setup>
 import { useRouter } from 'vue-router';
-const props = defineProps(['transaction']);
+
+//styles
+import styles from '@/css/expense/expenseFilterItem.module.css';
+
 const router = useRouter();
+
+//props
+const props = defineProps(['transaction']);
 </script>

@@ -89,6 +89,11 @@
   import loginService from '@/utils/loginService.js';
   import router from '@/router';
   import session from '@/utils/session.js';
+  
+  //로그인 되어있으면 홈으로
+  if(userService.checkIsLogin()) {
+    router.push('/redirect');
+  }
 
   //모든 값들 reactive 생성
   const valuesArr = [ 'name', 'email', 'pwd', 'pwd2', 'gender']

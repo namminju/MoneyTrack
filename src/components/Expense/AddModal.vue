@@ -142,6 +142,7 @@ const submitForm = async () => {
     cate_icon: selectedCategory.value?.icon ?? '',
     is_salary: transactionType.value == 1 ? 1 : 0,
     is_fixed: isFixed.value ? 1 : 0,
+    memo: memo.value,
     is_hide: 0,
     is_delete: 0,
   };
@@ -238,8 +239,5 @@ input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-input[type='number'] {
-  -moz-appearance: textfield;
 }
 </style>

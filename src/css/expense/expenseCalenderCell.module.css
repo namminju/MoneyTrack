@@ -1,0 +1,67 @@
+/* 달력 날짜 cell css */
+.calendar__grid__cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  border-radius: 1rem;
+  padding: 0.4rem 0;
+
+  height: clamp(10px, 12vh, 200px);
+  position: relative;
+  cursor: pointer;
+}
+
+/* 투명도로 인해 변경 불가(방법 모색 필요) */
+.calendar__grid__cell:active {
+  background-color: #60996626;
+}
+
+.calendar__grid__cell.selected {
+  background-color: #6099667d;
+}
+
+.date-number {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.summary {
+  margin: auto;
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 1.2rem;
+}
+.summary__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 44%;
+  background-color: white;
+  border-radius: 0.5rem;
+}
+
+.summary__income {
+  color: green;
+}
+
+.summary__expense {
+  color: red;
+}
+
+.sunday {
+  color: red;
+}
+
+.saturday {
+  color: blue;
+}
+
+@media (max-width: 1024px) {
+  .calendar__grid__cell {
+    height: clamp(20px, 8vh, 100px);
+  }
+}
