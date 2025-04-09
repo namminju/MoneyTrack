@@ -1,13 +1,14 @@
 <template>
-  <div class="default-width flex-center trk-bg-1">
-    <div class="login-form-width">
+  <div class="login-container flex-center min-h-50">
+    <div class="login-container__form trk-small-width">
 
       <div>
         <!-- form-start -->
         <form>
           <div class="text-start">
-              <div class="fw-600 trk-text-6">Email</div>
-              <input type="text" class="form-control fs-20" v-model="email">
+              <div class="fw-600 trk-text-6">이메일</div>
+              <div class="clear-5"></div>
+              <input type="text" class="trk-input-yellow fs-20" v-model="email">
           </div>
           <div class="text-start" v-show="emailShow">
             <span class="fs-15 text-danger">{{ emailText }}</span>
@@ -17,7 +18,8 @@
 
           <div class="text-start">
               <div class="fw-600 trk-text-6">Password</div>
-              <input type="password" class="form-control fs-20" v-model="pwd">
+              <div class="clear-5"></div>
+              <input type="password" class="trk-input-yellow fs-20" v-model="pwd">
           </div>
           <div class="text-start" v-show="pwdShow">
             <span class="fs-15 text-danger">{{ pwdText }}</span>
@@ -29,20 +31,20 @@
         <!-- form-end -->
       </div>
 
-      <div class="clear-10"></div>
+      <div class="clear-20"></div>
 
-      <button @click="postLogin">로그인</button>
+      <button @click="postLogin" class="trk-btn-confirm fs-20">로그인</button>
 
-      <div class="clear-10"></div>
+      <div class="clear-15"></div>
 
       <div class="d-flex justify-content-around fs-15 text-primary">
-        <div>
+        <div class="cursor-pointer">
           <router-link to="/findId">아이디 찾기</router-link>
         </div>
-        <div>
+        <div class="cursor-pointer">
           <router-link to="/findPw">비밀번호 찾기</router-link>
         </div>
-        <div>
+        <div class="cursor-pointer">
           <router-link to="/join">회원가입</router-link>
         </div>
       </div>
@@ -54,12 +56,13 @@
 </template>
 
 <script setup>
-  import '@/css/user/user.css';
+  import '@/css/user/login.css';
   import { ref } from 'vue';
   import hash from '@/utils/hash.js';
   import session from '@/utils/session.js';
   import userService from '@/utils/userService.js';
   import loginService from '@/utils/loginService.js';
+  import router from '@/router';
   
 
   //임시
@@ -109,6 +112,7 @@
     const response = await userService.getList('',email.value, hashPwd);
     if(response[0]) {
       session.create(response[0]);
+      router.push('/redirect');
     }
     else {
       //미정
@@ -118,12 +122,3 @@
   
   
 </script>
-
-<style>
-/* 임시 스타일 */
-.login-form-width {
-  width: 100%;
-  max-width: 400px;
-}
-
-</style>
