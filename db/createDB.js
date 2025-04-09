@@ -172,6 +172,7 @@ const createData = (
     cateId = cate.cate_id;
     cateName = cate.name;
     cateIcon = cate.icon;
+
     name = cateName;
   }
   //기본일 경우
@@ -182,9 +183,9 @@ const createData = (
     // console.log('cate: ' + cate);
     cateId = cate['cateId'];
     name = cate['expenseName'];
+    cateIcon = getCateIcon(cateId);
     // console.log('cateId: ' + cateId);
     cateName = getCateName(cateId);
-    cateIcon = getCateIcon(cateId);
   }
 
   //천의 자리 반올림
