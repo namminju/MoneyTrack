@@ -13,6 +13,7 @@ import Statistics from "@/components/Statistics/Statistics.vue";
 import ExpenseEdit from "@/components/ExpenseDetail/ExpenseEdit.vue";
 import NotFound from '@/components/NotFound/NotFound.vue';
 import Redirect from '@/components/Redirect/Redirect.vue';
+import UiTest from "@/components/common/uiTest.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -125,7 +126,16 @@ const router = createRouter({
         header: Header,
         default: NotFound,
       },
-    }
+    },
+    {
+      // ui 테스트용
+      path: "/uiTest",
+      name: "uiTest",
+      components: {
+        header: Header,
+        default: UiTest,
+      },
+    },
   ],
 });
 
