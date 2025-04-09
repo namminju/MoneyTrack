@@ -1,20 +1,20 @@
 <template>
-  <div class="content-box">
-    <div class="edit-box">
+  <div class="full-container2 trk-bg-2">
+    <div class="edit-box trk-bg-2">
       <div class="edit-box__header">
         <span class="edit-box__header__button" @click="gotoDetail">
           <i class="fa-solid fa-chevron-left"></i>
         </span>
         <span class="edit-box__header__title">지출 내역 수정</span>
       </div>
-      <form class="edit-box__item" @submit.prevent="updateExpense">
+      <form class="edit-box__item trk-bg-1" @submit.prevent="updateExpense">
         <div class="edit-box__item__text">
           <div class="info">
             <div class="info-row">
               <span class="label">금액</span>
               <input
                 type="text"
-                class="edit-box__form__input"
+                class="trk-br-6 edit-box__form__input"
                 v-model.number="Item.amount"
               />
             </div>
@@ -22,13 +22,16 @@
               <span class="label">제목</span>
               <input
                 type="text"
-                class="edit-box__form__input"
+                class="trk-br-6 edit-box__form__input"
                 v-model="Item.name"
               />
             </div>
             <div class="info-row">
               <span class="label">결제 수단</span>
-              <select class="edit-box__form__input" v-model="Item.type">
+              <select
+                class="trk-br-6 edit-box__form__input"
+                v-model="Item.type"
+              >
                 <option
                   v-for="type in expenseTypes"
                   :key="type.type_id"
@@ -41,7 +44,10 @@
 
             <div class="info-row">
               <span class="label">카테고리</span>
-              <select class="edit-box__form__input" v-model="Item.cate_id">
+              <select
+                class="trk-br-6 edit-box__form__input"
+                v-model="Item.cate_id"
+              >
                 <option
                   v-for="cate in expenseCategories"
                   :key="cate.cate_id"
@@ -55,7 +61,7 @@
               <span class="label">날짜</span>
               <input
                 type="date"
-                class="edit-box__form__input"
+                class="trk-br-6 edit-box__form__input"
                 v-model="Item.date"
               />
             </div>
@@ -63,7 +69,7 @@
               <span class="label">메모</span>
               <input
                 type="text"
-                class="edit-box__form__input"
+                class="trk-br-6 edit-box__form__input"
                 v-model="Item.memo"
               />
             </div>
@@ -74,14 +80,8 @@
           </div>
         </div>
         <div class="edit-box__item__button">
-          <button type="submit" class="edit-box__item__button__item">
-            저장
-          </button>
-          <button
-            type="button"
-            class="edit-box__item__button__item"
-            @click="gotoDetail"
-          >
+          <button type="submit" class="trk-btn-confirm">저장</button>
+          <button type="button" class="trk-btn-cancel" @click="gotoDetail">
             취소
           </button>
         </div>
@@ -99,7 +99,7 @@ import useRouterUtil from "@/utils/routers";
 
 const route = useRoute();
 
-const { gotoExpense, gotoExpenseDetail, gotoExpenseEdit } = useRouterUtil();
+const { gotoExpense, gotoExpenseDetail } = useRouterUtil();
 
 const id = parseInt(route.params.id);
 
@@ -120,7 +120,7 @@ const Item = reactive({
 
 const fetchExpense = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/Expense/${id}`);
+    const response = await axios.get(`/api/Expense/${id}`);
     const data = response.data;
 
     Item.name = data.name;
@@ -150,7 +150,7 @@ const updateExpense = async () => {
     Item.type_name = selectedType ? selectedType.name : "";
     Item.cate_name = selectedCate ? selectedCate.name : "";
 
-    await axios.patch(`http://localhost:3000/Expense/${id}`, {
+    await axios.patch(`/api/Expense/${id}`, {
       name: Item.name,
       amount: parseInt(Item.amount),
       type: Item.type,
