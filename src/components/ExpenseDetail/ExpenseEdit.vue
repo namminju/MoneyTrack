@@ -97,7 +97,7 @@ import { reactive, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import expenseData from "../../../db/expense.json";
-import useRouterUtil from "@/utils/routers";
+import useRouterUtil from "@/utils/useRouterUtil";
 import { useExpenseStore } from "@/stores/expense";
 
 const expenseStore = useExpenseStore();

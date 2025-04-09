@@ -47,7 +47,7 @@ import "@/css/expenseDetail/expenseDetail.css";
 import { reactive, onMounted, ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
-import useRouterUtil from "@/utils/routers";
+import useRouterUtil from "@/utils/useRouterUtil";
 import ExpenseFilterContainer from "@/components/Expense/ExpenseFilterContainer.vue";
 import { useExpenseStore } from "@/stores/expense";
 
