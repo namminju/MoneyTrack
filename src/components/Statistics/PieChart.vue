@@ -18,7 +18,7 @@ const props = defineProps({
 });
 
 const chartData = computed(() => ({
-  // labels: props.categoryRatios.map((item) => item.category),
+  labels: props.categoryRatios.map((item) => item.category),
   datasets: [
     {
       label: '지출 비율(%)',
@@ -45,7 +45,7 @@ const chartOptions = {
   maintainAspectRatio: false,
   plugins: {
     legend: {
-      position: 'bottom',
+      position: 'right',
     },
   },
 };
