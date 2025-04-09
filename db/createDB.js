@@ -26,7 +26,8 @@ const basicUser = {
   id: 1,
   name: '홍길동',
   email: "hong@gmail.com",
-  password: "1234567890",
+  // 비밀번호: 1111
+  password: "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
   join: "2025-04-03",
   is_data: false
 }

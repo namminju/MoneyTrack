@@ -60,13 +60,14 @@
   import { ref } from 'vue';
   import hash from '@/utils/hash.js';
   import session from '@/utils/session.js';
-  import userService from '@/utils/userService.js';
   import loginService from '@/utils/loginService.js';
   import router from '@/router';
+  import userService from '@/utils/userService.js';
   
-
-  //임시
-  sessionStorage.removeItem('user');
+  //로그인 되어있으면 홈으로
+  if(userService.checkIsLogin()) {
+    router.push('/redirect');
+  }
 
   //기본값
   const email = ref('');
@@ -112,6 +113,7 @@
     const response = await userService.getList('',email.value, hashPwd);
     if(response[0]) {
       session.create(response[0]);
+      userService.checkIsLogin();
       router.push('/redirect');
     }
     else {
