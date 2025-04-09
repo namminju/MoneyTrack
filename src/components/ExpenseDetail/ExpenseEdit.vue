@@ -80,7 +80,9 @@
           </div>
         </div>
         <div class="edit-box__item__button">
-          <button type="submit" class="trk-btn-confirm">저장</button>
+          <button type="submit" class="trk-btn-confirm" @click="updateExpense">
+            저장
+          </button>
           <button type="button" class="trk-btn-cancel" @click="gotoDetail">
             취소
           </button>
@@ -96,7 +98,9 @@ import { useRoute } from "vue-router";
 import axios from "axios";
 import expenseData from "../../../db/expense.json";
 import useRouterUtil from "@/utils/routers";
+import { useExpenseStore } from "@/stores/expense";
 
+const expenseStore = useExpenseStore();
 const route = useRoute();
 
 const { gotoExpense, gotoExpenseDetail } = useRouterUtil();

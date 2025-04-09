@@ -81,16 +81,18 @@ const fetchExpense = async () => {
 
     infoFields.value = {
       제목: states.expense.name,
+      분류: !!states.expense.is_salary ? "수입" : "지출",
       "결제 수단": states.expense.type_name,
       카테고리: states.expense.cate_name,
       날짜: states.expense.date,
       메모: states.expense.memo || "메모 없음",
-      "고정비 여부": !!states.expense.is_salary ? "O" : "X",
+      "고정비 여부": !!states.expense.is_fixed ? "O" : "X",
     };
   } catch (err) {
     console.log("데이터 조회 실패");
   }
 };
+
 onMounted(fetchExpense);
 
 const gotoEdit = () => {
