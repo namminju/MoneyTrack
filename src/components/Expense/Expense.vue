@@ -1,5 +1,5 @@
 <template>
-  //적응형 스타일 적용
+  <!-- 적응형 스타일 적용 -->
   <div :class="styles['expense-full-container']">
     <ExpenseCalendar
       :recordData="expenseStore.expenseList"
