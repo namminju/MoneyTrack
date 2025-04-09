@@ -16,15 +16,36 @@ export const useExpenseStore = defineStore('expense', () => {
         console.error('조회 실패');
       }
     } catch (e) {
-      alert('error: ' + e);
+      console.error('error: ' + e);
     } finally {
       state.isLoading = false;
     }
   };
+
+  const AddExpense = async (expense) => {
+    state.isLoading = true;
+    console.log(expense.value);
+    console.log(expense.value);
+    try {
+      const response = await axios.post(BASEURL, expense);
+      if (response.status === 201) {
+        console.log(response.data);
+        fetchExpenseList();
+      } else {
+        console.error('등록 실패');
+      }
+    } catch (e) {
+      console.error('error: ' + e);
+    } finally {
+      state.isLoading = false;
+    }
+  };
+
   const expenseList = computed(() => state.expenseList);
 
   return {
     expenseList,
     fetchExpenseList,
+    AddExpense,
   };
 });

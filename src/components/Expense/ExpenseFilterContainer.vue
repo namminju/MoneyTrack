@@ -9,12 +9,17 @@
         @click="showFilter = !showFilter"
       ></i>
     </div>
-    <Modal v-if="showModal" @close="showModal = false"> </Modal>
+    <Modal
+      v-if="showModal"
+      @close="showModal = false"
+      :allCategories="categoryStore.categoryList[0]"
+    >
+    </Modal>
     <!-- 필터 패널 -->
 
     <FilterPanel
       v-if="showFilter"
-      :allCategories="allCategories"
+      :allCategories="categoryStore.categoryList[0]"
       v-model:selectedCategories="selectedCategories"
       v-model:selectedType="selectedType"
     />
@@ -41,7 +46,7 @@
         }
       "
     >
-      <i class="fa-solid fa-plus"></i>
+      <i class="fa-solid fa-plus pointer"></i>
     </button>
   </div>
 </template>
@@ -52,6 +57,8 @@ import '@/css/expense/expense.css';
 import ExpenseFilterItem from './ExpenseFilterItem.vue';
 import FilterPanel from './FilterPanel.vue';
 import Modal from './AddModal.vue';
+import { useCategoryStore } from '@/stores/category';
+const categoryStore = useCategoryStore();
 const showModal = ref(false);
 const props = defineProps({
   transactions: {
@@ -65,22 +72,9 @@ const props = defineProps({
 });
 
 const showFilter = ref(false);
-const allCategories = [
-  { name: '식비' },
-  { name: '교통비' },
-  { name: '문화/여가' },
-  { name: '건강' },
-  { name: '쇼핑' },
-  { name: '뷰티' },
-  { name: '집' },
-  { name: '금융' },
-  { name: '교육' },
-  { name: '반려동물' },
-  { name: '기타' },
-];
 
 const selectedCategories = ref([]); // 체크된 항목들이 배열로 들어감
-const selectedType = ref('0');
+const selectedType = ref('');
 function formatDateToLocalString(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -92,7 +86,7 @@ const filteredTransactions = computed(() => {
 
   return props.transactions.filter((tx) => {
     const matchType =
-      selectedType.value === '0' || tx.type == selectedType.value;
+      selectedType.value === '' || tx.is_salary == selectedType.value;
 
     const matchCategory =
       selectedCategories.value.length === 0 ||
@@ -106,13 +100,13 @@ const filteredTransactions = computed(() => {
 
 const totalIncome = computed(() => {
   return filteredTransactions.value
-    .filter((tx) => tx.type === 2)
+    .filter((tx) => tx.is_salary === 1)
     .reduce((sum, tx) => sum + tx.amount, 0);
 });
 
 const totalExpense = computed(() => {
   return filteredTransactions.value
-    .filter((tx) => tx.type === 1)
+    .filter((tx) => tx.is_salary === 0)
     .reduce((sum, tx) => sum + tx.amount, 0);
 });
 </script>
@@ -127,7 +121,6 @@ const totalExpense = computed(() => {
   padding: 1rem 0;
 }
 .category-button {
-  font-size: 100rem;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -141,7 +134,7 @@ const totalExpense = computed(() => {
 }
 
 .category-button.selected {
-  background-color: #000000;
+  background-color: black;
   color: white;
 }
 

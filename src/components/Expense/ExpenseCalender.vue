@@ -10,35 +10,26 @@
         <i class="fa-solid fa-angle-left"></i>
       </button>
 
-      <!-- 년/월 표시 또는 드롭다운 -->
-      <div
-        v-if="!editingDate"
-        @click="editingDate = true"
-        class="calendar__header__text"
-      >
+      <!-- 텍스트 클릭 시 DatePicker 팝업 열기 -->
+      <!-- <div @click="togglePicker" class="calendar__header__text">
         {{ currentYear }}년 {{ currentMonth + 1 }}월
-      </div>
+      </div> -->
 
-      <div v-else class="calendar__header__selects">
-        <select v-model="tempYear">
-          <option v-for="year in yearRange" :key="year" :value="year">
-            {{ year }}
-          </option></select
-        >년
-        <select v-model="tempMonth">
-          <option v-for="month in 12" :key="month" :value="month - 1">
-            {{ month }}
-          </option>
-        </select>
-        월
-        <button
-          class="calendar__header__selects__confirm-button"
-          @click="applyDateChange"
-        >
-          확인
-        </button>
-        <!-- <button @click="editingDate = false">취소</button> -->
-      </div>
+      <DatePicker
+        ref="pickerRef"
+        v-model="selectedMonthYear"
+        type="month"
+        :popup-style="{ zIndex: 9999 }"
+        :editable="false"
+        :clearable="false"
+        @change="applyDateChangeFromPicker"
+        class="calendar__header__text"
+        style="width: 15rem"
+      >
+        <template #input>
+          {{ currentYear }}년 {{ String(currentMonth + 1).padStart(2, '0') }}월
+        </template>
+      </DatePicker>
 
       <button
         class="calendar__header__button"
@@ -79,11 +70,11 @@
       >
         <div v-if="date" class="date-number">{{ date.getDate() }}</div>
         <div v-show="hasData(date)" class="summary">
-          <div class="summary__income" v-if="getAmount(date, 1)">
-            +{{ getAmount(date, 1) }}
+          <div class="summary__income" v-if="getAmount(date, '1')">
+            +{{ getAmount(date, '1') }}
           </div>
-          <div class="summary__expense" v-if="getAmount(date, 2)">
-            -{{ getAmount(date, 2) }}
+          <div class="summary__expense" v-if="getAmount(date, '0')">
+            -{{ getAmount(date, '0') }}
           </div>
         </div>
       </div>
@@ -93,6 +84,8 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import DatePicker from 'vue-datepicker-next';
+import 'vue-datepicker-next/index.css';
 import '@/css/expense/expense.css';
 
 const props = defineProps({
@@ -107,35 +100,29 @@ const props = defineProps({
 });
 const recordData = computed(() => props.recordData);
 
-console.log(props.recordData);
 const emit = defineEmits(['update:selectedDate']);
 
 const today = new Date();
 const currentYear = ref(today.getFullYear());
 const currentMonth = ref(today.getMonth());
 
-// 날짜 수정 드롭다운 상태
 const editingDate = ref(false);
-const tempYear = ref(currentYear.value);
-const tempMonth = ref(currentMonth.value);
-const yearRange = Array.from({ length: 11 }, (_, i) => 2020 + i);
+const selectedMonthYear = ref(new Date());
 
-function applyDateChange() {
-  currentYear.value = tempYear.value;
-  currentMonth.value = tempMonth.value;
+// 🔁 DatePicker 팝업 제어용
+const pickerRef = ref(null);
+const togglePicker = () => {
+  pickerRef.value.toggle();
+};
+
+function applyDateChangeFromPicker(date) {
+  currentYear.value = date.getFullYear();
+  currentMonth.value = date.getMonth();
   editingDate.value = false;
 }
-function formatDateToLocalString(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
 
-// 요일
 const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
 
-// 달력용 날짜 계산
 const calendarDates = computed(() => {
   const firstDay = new Date(currentYear.value, currentMonth.value, 1);
   const lastDay = new Date(currentYear.value, currentMonth.value + 1, 0);
@@ -155,7 +142,6 @@ const calendarDates = computed(() => {
   return dates;
 });
 
-// 월 이동
 function prevMonth() {
   if (currentMonth.value === 0) {
     currentMonth.value = 11;
@@ -174,14 +160,12 @@ function nextMonth() {
   }
 }
 
-// 날짜 선택
 function selectDate(date) {
   if (date) {
     emit('update:selectedDate', date);
   }
 }
 
-// 선택된 날짜인지 확인
 function isSelected(date) {
   if (!date || !props.selectedDate) return false;
   return (
@@ -191,20 +175,27 @@ function isSelected(date) {
   );
 }
 
-// 해당 날짜에 기록이 있는지
+function formatDateToLocalString(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 function hasData(date) {
   if (!date) return false;
   const dateStr = formatDateToLocalString(date);
   return recordData.value.some((r) => r.date === dateStr);
 }
 
-// 수입/지출 합계
 function getAmount(date, type) {
   if (!date) return 0;
   const dateStr = formatDateToLocalString(date);
+
   const filtered = recordData.value.filter(
-    (r) => r.date === dateStr && r.type === type
+    (r) => r.date === dateStr && r.is_salary === Number(type)
   );
+
   return filtered.reduce((acc, cur) => acc + cur.amount, 0);
 }
 </script>
@@ -212,9 +203,18 @@ function getAmount(date, type) {
 <style scoped>
 .calendar__header__selects {
   display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 button {
   border: none;
+  cursor: pointer;
+}
+:deep(.mx-datepicker svg) {
+  fill: white !important;
+}
+:deep(.mx-datepicker) {
+  cursor: pointer;
 }
 </style>
