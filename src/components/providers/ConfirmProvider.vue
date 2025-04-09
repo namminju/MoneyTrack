@@ -5,6 +5,7 @@
     @confirm="handleConfirm"
     @cancel="handleCancel"
   />
+  <slot />
 </template>
 
 <script setup>
