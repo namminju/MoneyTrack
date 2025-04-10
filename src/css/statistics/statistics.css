@@ -103,11 +103,25 @@
 .category__ratio {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 1000px;
+
   gap: 1rem;
   margin-bottom: 2rem;
   margin-top: 2rem;
   border-radius: 1rem;
   background-color: #fffecf;
+  padding: 4%;
+
+  width: 100%;
+  max-width: 850px;
+}
+.category__ratio__header {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .category__ratio {
+    max-width: 700px;
+    width: 100%;
+  }
 }

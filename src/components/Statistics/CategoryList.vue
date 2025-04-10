@@ -1,12 +1,18 @@
 <template>
   <div class="category-list">
-    <h2>카테고리별 비율</h2>
+    <h1>
+      <span><i class="fa-solid fa-magnifying-glass-chart"></i> </span>
+      카테고리별 비율
+    </h1>
     <div
       v-for="item in filteredcategoryRatios"
       :key="item.category"
       class="category-list_item"
     >
-      <span class="__label">{{ item.category }}</span>
+      <span class="__label"
+        ><i class="fa-solid fa-heart fa-2xs" style="color: green"></i
+        >&nbsp;&nbsp;{{ item.category }}</span
+      >
       <div class="category-list__container">
         <div
           class="category-list__bar__fill"
@@ -55,23 +61,28 @@ const getColor = (category) => {
 <style scoped>
 .category-list {
   padding: 1rem;
-  width: 300px;
+  width: 100%;
+  margin: auto;
 }
-
+h1 {
+  font-size: 2rem;
+}
 .category-list_item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 3.6fr 5fr 2fr;
   align-items: center;
-  margin-bottom: 10px;
+  margin: 1.2rem 2rem;
 }
 
 .__label {
-  width: 50px;
+  font-weight: 500;
+  width: 100%;
 }
 
 .category-list__container {
   flex: 1;
   height: 10px;
-
+  background-color: whitesmoke;
   margin: 0 10px;
   border-radius: 5px;
   overflow: hidden;

@@ -141,7 +141,11 @@ const istoggletype = () => {
 <style scoped>
 .chart_box {
   gap: 1rem;
-  padding: 2rem 5rem 6rem 5rem;
+  padding: 2rem 4rem 6rem 4rem;
+}
+canvas {
+  width: 80% !important;
+  height: 100% !important;
 }
 .button-container {
   align-self: flex-end;

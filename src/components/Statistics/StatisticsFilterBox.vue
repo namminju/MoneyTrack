@@ -244,4 +244,16 @@ console.log('currentDate:', currentDate.value);
     display: none;
   }
 }
+/* select style */
+select {
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  border: 0;
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
 </style>

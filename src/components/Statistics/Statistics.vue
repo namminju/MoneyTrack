@@ -10,7 +10,9 @@
     />
 
     <div class="category__ratio">
-      <p>🔹 전체 합계: {{ store.totalAmount }} 원</p>
+      <p class="category__ratio__header">
+        🔹 전체 합계: {{ store.totalAmount }} 원
+      </p>
       <CategoryList :categoryRatios="categoryRatios" />
       <!-- <ul>
         <li v-for="item in store.categoryRatios" :key="item.category">

@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar">
+  <div class="calendar m-3">
     <!-- calendar header -->
     <div class="calendar__header">
       <!-- 이전 달 이동 버튼 -->
