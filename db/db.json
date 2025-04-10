@@ -16,15 +16,6 @@
       "gender": "1",
       "join": "2025-04-09",
       "is_data": false
-    },
-    {
-      "id": "3",
-      "name": "임창진",
-      "email": "cj2349@naver.com",
-      "password": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
-      "gender": 1,
-      "is_data": true,
-      "join": "2025-04-10"
     }
   ],
   "Expense": [
