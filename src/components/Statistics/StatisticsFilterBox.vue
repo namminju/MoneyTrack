@@ -124,11 +124,11 @@ watch(currentDate, (newVal) => {
   applyFilter();
 });
 
-const toggleDatepicker = () => {
-  showDatepicker.value = !showDatepicker.value;
-};
+// const toggleDatepicker = () => {
+//   showDatepicker.value = !showDatepicker.value;
+// };
 
-const showDateSelector = ref(false);
+// const showDateSelector = ref(false);
 
 watch(selectedPeriod, (newVal) => {
   if (newVal?.id === 1) {

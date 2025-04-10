@@ -9,15 +9,14 @@
       :dailyTotal="dailyTotal"
     />
 
-    <!--<CategoryList :filteredType="selectedType" /> -->
     <div class="category__ratio">
       <p>🔹 전체 지출 합계: {{ store.totalAmount }} 원</p>
-
-      <ul>
+      <CategoryList :categoryRatios="categoryRatios" />
+      <!-- <ul>
         <li v-for="item in store.categoryRatios" :key="item.category">
           {{ item.category }}: {{ item.amount }}원 ({{ item.ratio }}%)
         </li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </template>
@@ -26,7 +25,7 @@
 import '@/css/statistics/statistics.css';
 import StatisticsFilterBox from './StatisticsFilterBox.vue';
 import StatisticsGraph from './StatisticsGraph.vue';
-// import CategoryList from './CategoryList.vue';
+import CategoryList from './CategoryList.vue';
 import { useStatisticsStore } from '@/stores/useStatisticsStore';
 import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
