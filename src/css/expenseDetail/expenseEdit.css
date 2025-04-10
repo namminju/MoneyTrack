@@ -3,14 +3,6 @@
   padding: 0;
 }
 
-.full-container2 {
-  display: flex;
-
-  border-radius: 1.25rem;
-  padding: 2rem;
-  margin: 2rem;
-}
-
 .edit-box {
   border-radius: 20px;
   height: 90%;
@@ -36,6 +28,7 @@
   font-size: larger;
 }
 .edit-box__item {
+  background-color: white;
   text-align: center;
   max-width: 1024px;
   border-radius: 20px;

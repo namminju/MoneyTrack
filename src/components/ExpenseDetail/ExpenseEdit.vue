@@ -1,13 +1,13 @@
 <template>
-  <div class="full-container2 trk-bg-2">
-    <div class="edit-box trk-bg-2">
+  <div class="full-container trk-bg-2">
+    <div class="detail-box trk-bg-1">
       <div class="edit-box__header">
         <span class="edit-box__header__button" @click="gotoDetail">
           <BackButton />
         </span>
         <span class="edit-box__header__title">지출 내역 수정</span>
       </div>
-      <form class="edit-box__item trk-bg-1" @submit.prevent="updateExpense">
+      <form class="edit-box__item" @submit.prevent="updateExpense">
         <div class="edit-box__item__text">
           <div class="info">
             <div class="info-row">
@@ -89,17 +89,22 @@
         </div>
       </form>
     </div>
+    <ExpenseFilterContainer
+      :transactions="expenseStore.expenseList"
+      :selectedDate="selectedDate"
+    />
   </div>
 </template>
 <script setup>
 import "@/css/expenseDetail/expenseEdit.css";
-import { reactive, onMounted } from "vue";
+import { reactive, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import expenseData from "../../../db/expense.json";
 import useRouterUtil from "@/utils/useRouterUtil";
 import { useExpenseStore } from "@/stores/expense";
 import BackButton from "../common/BackButton.vue";
+import ExpenseFilterContainer from "@/components/Expense/ExpenseFilterContainer.vue";
 
 const expenseStore = useExpenseStore();
 const route = useRoute();
@@ -110,6 +115,7 @@ const id = parseInt(route.params.id);
 
 const expenseTypes = expenseData.expenseType;
 const expenseCategories = expenseData.expenseCategory;
+const selectedDate = ref(new Date());
 
 const Item = reactive({
   name: "",
@@ -128,6 +134,7 @@ const fetchExpense = async () => {
   try {
     const response = await axios.get(`/api/Expense/${id}`);
     const data = response.data;
+    selectedDate.value = new Date(data.date);
 
     Item.name = data.name;
     Item.amount = data.amount;
