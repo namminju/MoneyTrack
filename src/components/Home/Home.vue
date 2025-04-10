@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-  import { computed, ref } from 'vue';
+  import { computed, ref, onMounted } from 'vue';
   
   import userService from '@/utils/userService.js';
   import { useStatisticsStore } from '@/stores/useStatisticsStore.js';
@@ -52,21 +52,33 @@
   //Expense 카드 start
   // stores
   import { useExpenseStore } from '@/stores/expense';
+  import { useCategoryStore } from '@/stores/category';
 
   //expense 입력용
   import ExpenseFilterContainer from '@/components/Expense/ExpenseFilterContainer.vue';
   // init store & user
   const expenseStore = useExpenseStore();
+  const categoryStore = useCategoryStore();
 
   //오늘 날짜로 default 설정
   const today = new Date();
   const selectedDate = ref(today);
+
+  //db 데이터 fetch
+  onMounted(async () => {
+    try {
+      await categoryStore.fetchcategoryList();
+      await expenseStore.fetchExpenseList();
+    } catch (e) {
+      console.error('지출 데이터 불러오기 실패:', e);
+    }
+  });
   //Expense 카드 end
 
   //초기화
   userService.checkIsLogin();
 
-  //데이터 가져오기
+  //지출 데이터 가져오기
   const statisticsStore = useStatisticsStore();
   const totalData = computed(() => statisticsStore.rawData);
   
@@ -112,6 +124,7 @@
     //저번주 = 저번주 일요일 ~ 이번주 일요일
     const lastSunday = new Date();
     lastSunday.setDate(thisSunday.getDate() - 7);
+    // console.log(lastSunday);
 
 
     // 수입 데이터 별도로 만들기
@@ -120,12 +133,16 @@
       const expenseDate = new Date(expense.date); //지출날짜
       //이번주 일요일 ~ 오늘
       if(expenseDate.getTime() > thisSunday.getTime() && expenseDate.getTime() < now.getTime()) {
-        thisWeekArr.value.push(expense);
+        if(!expense.is_salary) {
+          thisWeekArr.value.push(expense);
+        }
       }
 
       //저번주 일요일 ~ 이번주 일요일
       if(expenseDate.getTime() > lastSunday.getTime() && expenseDate.getTime() < thisSunday.getTime()) {
-        lastWeekArr.value.push(expense);
+        if(!expense.is_salary) {
+          lastWeekArr.value.push(expense);
+        }
       }
 
       //수입일경우
@@ -178,3 +195,9 @@
 }
 </style>
 
+<style scoped>
+  .filter-container {
+    width: 100%;
+    height: auto;
+  }
+</style>
