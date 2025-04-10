@@ -110,6 +110,16 @@ const router = createRouter({
       },
     },
     {
+      //id 없이 detail 페이지 요청시 expense 페이지로 이동
+      path: "/expenseDetail",
+      redirect: "/expense",
+    },
+    {
+      //id 없이 edit 페이지 요청시 expense 페이지로 이동
+      path: "/expenseEdit",
+      redirect: "/expense",
+    },
+    {
       //통계
       path: "/statistics",
       name: "statistics",
