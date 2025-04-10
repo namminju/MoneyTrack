@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay" @click.self="close">
     <div class="modal-content">
-      <div class="modal-content__header d-flex justify-content-between">
+      <div class="d-flex justify-content-between">
         <div>
           <input
             type="text"
@@ -69,15 +69,15 @@
         </label>
 
         <label>날짜 <input type="date" v-model="date" /></label>
-        <label
-          >메모 <input type="text" v-model="memo" placeholder="입력하세요"
-        /></label>
+        <label>
+          메모 <input type="text" v-model="memo" placeholder="입력하세요" />
+        </label>
         <label>고정비 <input type="checkbox" v-model="isFixed" /></label>
       </form>
 
       <button
         type="button"
-        class="add-btn"
+        class="trk-btn-confirm"
         @click="submitForm"
         :disabled="!place || !date || !amount"
       >
@@ -88,14 +88,19 @@
 </template>
 
 <script setup>
-import '@/css/expense/expense.css';
-import { ref, watch, computed } from 'vue';
+import { ref, watch, computed, inject } from 'vue';
+
+//store
 import { useExpenseStore } from '@/stores/expense';
-import { inject } from 'vue';
+const { AddExpense } = useExpenseStore();
+
+//components
 import CategoryOption from './CategoryOption.vue';
 
+//성공, 실패 모달
 const alert = inject('useAlert');
 
+//변수 입력
 const transactionType = ref(1); // 1: 수입, 0: 지출
 const selectedCategory = ref('');
 const paymentMethod = ref('카드');
@@ -106,25 +111,25 @@ const date = ref(today);
 const memo = ref('');
 const isFixed = ref(false);
 
-const { AddExpense } = useExpenseStore();
-
+//props
 const props = defineProps({
   selectedDate: {
     type: Date,
   },
 });
 
-// 💸 쉼표 포함 금액 표시용
+// 쉼표 포함 금액 표시
 const formattedAmount = computed(() =>
   amount.value ? amount.value.toLocaleString() : ''
 );
 
-// 💸 입력 시 숫자만 추출해서 저장
+// 입력 시 숫자만 추출해서 저장
 function onAmountInput(e) {
   const raw = e.target.value.replaceAll(',', '').replace(/[^\d]/g, '');
   amount.value = Number(raw);
 }
 
+// 값 변경 실시간 반영
 watch(
   () => props.selectedDate,
   (newVal) => {
@@ -139,21 +144,25 @@ watch(
 );
 
 // Emits
-const emit = defineEmits(['close', 'submit']);
+const emit = defineEmits(['close']);
 const close = () => emit('close');
 
+//add 성공시 팝업
 const successPopup = () => {
   alert.success('내역이 추가되었습니다.');
   close();
 };
 
+//add 실패시 팝업
 const failPopup = () => {
   alert.error('내역 추가를 실패했습니다.\n 다시 시도해주세요');
 };
 
+//내역 추가 함수
 const submitForm = async () => {
   const user = ref(JSON.parse(sessionStorage.getItem('user')));
 
+  //데이터 형태
   const formData = {
     user_id: user.value.id,
     type: paymentMethod.value === '카드' ? 1 : 2,
@@ -176,31 +185,11 @@ const submitForm = async () => {
   } catch (e) {
     console.error('추가 실패:', e);
   }
-
-  emit('submit', formData);
 };
 </script>
 
 <style scoped>
-.modal-content__header,
-.modal-content__footer {
-  font-size: 2rem;
-  height: 10%;
-}
-.input-container {
-  font-size: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  height: 80%;
-  justify-content: space-between;
-}
-.input-container > label {
-  display: grid;
-  align-items: center;
-  grid-template-columns: 4fr 12fr;
-  gap: 1rem;
-  margin: 2% 4%;
-}
+/* modal style */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -215,22 +204,30 @@ const submitForm = async () => {
   backdrop-filter: blur(1px);
 }
 .modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   font-weight: bold;
   width: 54%;
-  height: calc(60vh + 4vw);
+  height: calc(70vh + 3vw);
   min-height: 380px;
   padding: 2.8rem;
   border-radius: 3rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  min-width: 380px;
+  min-width: 300px;
   max-width: 500px;
   max-height: 90vh;
-  font-size: 2rem;
+  font-size: 1.6rem;
   background-color: var(--trk-light-yellow);
 }
-.input_bg_color {
-  background-color: var(--trk-ivory);
+
+/* Input Style */
+input {
+  /* 주어진 범위의 크기만큼 */
+  width: 100%;
+  cursor: pointer;
 }
+
 input,
 .input-style {
   background-color: var(--trk-ivory);
@@ -238,36 +235,83 @@ input,
   border-radius: 2rem;
   border: none;
 }
-.add-btn {
-  margin: auto;
-  background-color: var(--trk-green);
-  color: white;
-  width: 90%;
-  padding: 2% 0;
-  border: none;
-  border-radius: 4rem;
-  font-weight: bold;
+
+/* Input Container Style */
+.input-container {
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  justify-content: space-between;
 }
-.add-btn:disabled {
-  background-color: #afafaf;
+.input-container > label {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 4.8fr 12fr;
+  gap: 1rem;
+  margin: 2% 4%;
 }
+
+.input_bg_color {
+  background-color: var(--trk-ivory);
+}
+
+/* 버튼 비활성화 상태 */
+button:disabled {
+  box-shadow: 0 0;
+  background-color: var(--trk-disabled-middle);
+}
+
+/* 체크 박스 스타일 */
 input[type='checkbox'] {
-  width: 20px;
-  height: 20px;
+  width: 2rem;
+  height: 2rem;
   border: none;
   accent-color: var(--trk-green);
 }
+
+/* radio-button 선택 시  */
 .radio-button.selected {
   font-weight: bolder;
   box-shadow: inset 0 0 0 0.4rem var(--trk-green);
   color: var(--trk-green);
 }
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+
+/* 체크 박스 보이지 않도록록 */
 .hidden-checkbox {
   display: none;
+}
+/* 체크 박스 선택(버튼형) */
+
+.radio-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.radio-button {
+  border-radius: 2rem;
+}
+
+/* select style */
+select {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .modal-content {
+    padding: 1.6rem;
+  }
 }
 </style>
