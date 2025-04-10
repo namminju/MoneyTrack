@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
+import userService from "@/utils/userService";
 
+/**Router Pages */
 import Header from "../components/Header/Header.vue";
 import Login from "../components/User/Login.vue";
 import FindId from '../components/User/FindId.vue';
@@ -17,6 +19,15 @@ import Redirect from '@/components/Redirect/Redirect.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      //기본
+      path: "/",
+      name: "",
+      components: {
+        header: Header,
+        default: Home,
+      },
+    },
     {
       //기본 home
       path: "/home",
@@ -43,7 +54,14 @@ const router = createRouter({
         header: Header,
         default: Login,
       },
-
+      beforeEnter: (to, from, next) => {
+        if (userService.checkIsLogin()) {
+          next('/');
+        }
+        else {
+          next();
+        }
+      }
     },
     {
       //아이디 찾기

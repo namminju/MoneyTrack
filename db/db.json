@@ -1,12 +1,21 @@
 {
   "user": [
     {
-      "id": 1,
+      "id": "1",
       "name": "홍길동",
       "email": "hong@gmail.com",
       "password": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
       "join": "2025-04-03",
       "is_data": true
+    },
+    {
+      "id": "2",
+      "name": "황병권",
+      "email": "laeongmulticampus@gmail.com",
+      "password": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
+      "gender": 1,
+      "is_data": false,
+      "join": "2025-04-10"
     }
   ],
   "Expense": [
