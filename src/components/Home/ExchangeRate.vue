@@ -2,6 +2,7 @@
   <div class="home-card" @click="toNaverCurrency">
     <div class="position-relative w-100">
       <div class="fw-600 fs-20 trk-text-6 text-center">지금 환율은?</div>
+      <div class="clear-10"></div>
       <div class="home-card__income">
         <div class="d-flex justify-content-around gap-2 w-100">
           
@@ -33,9 +34,9 @@ import { ref } from 'vue';
 import exchangeRate from '@/utils/exchangeRate.js';
 
 //현재 환율 구하기 start
-const dollarRate = ref('');
-const yenRate = ref('');
-const cDollarRate = ref('');
+const dollarRate = ref(1470);
+const yenRate = ref(1070);
+const cDollarRate = ref(195);
 const curUnit = ['USD', 'JPY(100)', 'CNH'];
 
 const getCurrency = async () => {

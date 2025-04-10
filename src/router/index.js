@@ -56,6 +56,7 @@ const router = createRouter({
         default: Login,
       },
       beforeEnter: (to, from, next) => {
+        //로그인 판별 후 리다렉션
         if (userService.checkIsLogin()) {
           next('/');
         }
@@ -65,24 +66,6 @@ const router = createRouter({
       }
     },
     {
-      //아이디 찾기
-      path: '/findId',
-      name: 'findId',
-      components: {
-        header: Header,
-        default: FindId,
-      },
-    },
-    {
-      //비밀번호 찾기
-      path: '/findPw',
-      name: 'findPw',
-      components: {
-        header: Header,
-        default: FindPw,
-      },
-    },
-    {
       //회원가입
       path: '/join',
       name: 'join',
@@ -90,6 +73,15 @@ const router = createRouter({
         header: Header,
         default: Join,
       },
+      beforeEnter: (to, from, next) => {
+        //로그인 판별 후 리다렉션
+        if (userService.checkIsLogin()) {
+          next('/');
+        }
+        else {
+          next();
+        }
+      }
     },
     {
       //마이페이지
@@ -99,6 +91,15 @@ const router = createRouter({
         header: Header,
         default: Mypage,
       },
+      beforeEnter: (to, from, next) => {
+        //로그인 판별 후 리다렉션
+        if (userService.checkIsLogin()) {
+          next();
+        }
+        else {
+          next('/');
+        }
+      }
     },
     {
       //지출&기록 페이지
@@ -108,6 +109,15 @@ const router = createRouter({
         header: Header,
         default: Expense,
       },
+      beforeEnter: (to, from, next) => {
+        //로그인 판별 후 리다렉션
+        if (userService.checkIsLogin()) {
+          next();
+        }
+        else {
+          next('/');
+        }
+      }
     },
     {
       //지출 자세히
@@ -117,6 +127,15 @@ const router = createRouter({
         header: Header,
         default: ExpenseDetail,
       },
+      beforeEnter: (to, from, next) => {
+        //로그인 판별 후 리다렉션
+        if (userService.checkIsLogin()) {
+          next();
+        }
+        else {
+          next('/');
+        }
+      }
     },
     {
       //지출 자세히
@@ -126,6 +145,15 @@ const router = createRouter({
         header: Header,
         default: ExpenseEdit,
       },
+      beforeEnter: (to, from, next) => {
+        //로그인 판별 후 리다렉션
+        if (userService.checkIsLogin()) {
+          next();
+        }
+        else {
+          next('/');
+        }
+      }
     },
     {
       //id 없이 detail 페이지 요청시 expense 페이지로 이동
@@ -145,6 +173,15 @@ const router = createRouter({
         header: Header,
         default: Statistics,
       },
+      beforeEnter: (to, from, next) => {
+        //로그인 판별 후 리다렉션
+        if (userService.checkIsLogin()) {
+          next();
+        }
+        else {
+          next('/');
+        }
+      }
     },
     {
       //에러페이지
@@ -156,6 +193,7 @@ const router = createRouter({
       },
     },
     {
+      // 라이브시 삭제
       // ui 테스트용
       path: "/uiTest",
       name: "uiTest",

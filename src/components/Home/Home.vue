@@ -3,7 +3,7 @@
     <div class="home-box">
 
         <div class="home-box__content max-w-25">
-          <MyTotal>{{ incomeTotal - expenseTotal }}</MyTotal>
+          <MyTotal>{{ parseInt(incomeTotal - expenseTotal).toLocaleString('ko-KR') }}</MyTotal>
         </div>
 
         <div class="home-box__content max-w-50">
@@ -16,7 +16,16 @@
 
         <div class="home-box__content max-w-40">
           <div class="home-card">
-            통계칸
+            <div class="d-flex w-100 justify-content-center gap-2">
+              <div class="home-rabbit">
+                <img src="@/images/character/rabbit-1.png" alt="">
+              </div>
+              <div class="home-speech">
+                <div class="speech-bubble">
+                  어떻게 하면 효율적으로 내 자산을 관리할까?
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -31,7 +40,7 @@
         </div>
 
         <div class="home-box__content max-w-40 min-h-40">
-          <div class="home-card h-100">
+          <div class="home-card h-100" @click="toStatistics">
             <CategoryList :categoryRatios="categoryRatios"></CategoryList>
           </div>
         </div>
@@ -51,6 +60,9 @@
   import ExchangeRate from './ExchangeRate.vue';
   import CategoryList from '../Statistics/CategoryList.vue';
   import { storeToRefs } from 'pinia';  
+  import { useRouter } from 'vue-router';
+
+  const router = useRouter();
 
   //Expense 카드 start
   // stores
@@ -160,22 +172,24 @@
 
   })
 
+//통계 필수 start
 const store = useStatisticsStore();
-
 const {
   selectedType,
   selectedPeriod,
   categoryRatios,
 } = storeToRefs(store);
 
-// console.log(selectedType.value);
-// selectedType.value = 1;
 onMounted(() => {
   const a = store.fetchData();
   useCategoryStore().fetchcategoryList();
-
-  // console.log(a);
 });
+//통계 필수 end
+
+//통계페이지로 보내기
+const toStatistics = () => {
+  router.push('/statistics');
+}
 
 </script>
 
@@ -211,6 +225,34 @@ onMounted(() => {
   .home-box__content {
     max-width: 100%;
   }
+}
+
+.home-rabbit > img {
+  max-height: 12rem;
+}
+
+.home-speech {
+  position: relative;
+  padding: 10px;
+}
+.speech-bubble {
+  position: relative;
+  background: var(--trk-ivory);
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 200px;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -40px;
+  border-width: 20px;
+  border-style: solid;
+  border-color: transparent var(--trk-ivory) transparent transparent;
+  transform: translateY(-50%);
+  z-index: 1; /* z-index 추가 */
 }
 </style>
 

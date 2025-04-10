@@ -25,5 +25,7 @@
   .home-card__income__span {
     position: absolute;
     bottom: 0px;
+    color:blue;
+    font-weight: 600;
   }
 </style>
