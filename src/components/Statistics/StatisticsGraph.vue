@@ -1,6 +1,5 @@
 <template>
   <div class="statistic-graph row">
-    
     <div class="chart_box col-md-9">
       <div class="button-container">
         <button
@@ -116,6 +115,14 @@ const istoggletype = () => {
 };
 </script>
 <style scoped>
+.chart_box {
+  gap: 1rem;
+  padding: 2rem 4rem 6rem 4rem;
+}
+canvas {
+  width: 80% !important;
+  height: 100% !important;
+}
 .button-container {
   align-self: flex-end;
   width: 7rem;
@@ -156,6 +163,16 @@ button {
   color: white; /* 선택된 차트 색상 강조 */
 }
 
+/* select style */
+select {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
 @media (max-width: 1024px) {
   .category_box {
     flex-wrap: wrap;
@@ -165,7 +182,10 @@ button {
     max-width: 700px;
     width: 100%;
   }
-
+  .chart_box {
+    gap: 1rem;
+    padding: 2rem;
+  }
   .category_box > * {
     width: 23%; /* 두 개씩 배치 (6열 느낌) */
   }
