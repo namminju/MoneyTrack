@@ -6,6 +6,7 @@
         <i class="fa-solid fa-angle-left" />
       </button>
 
+      <!-- 원하는 달 선택 -->
       <DatePicker
         v-model="selectedMonthYear"
         type="month"
@@ -49,7 +50,7 @@
         :date="date"
         :index="index"
         :selectedDate="props.selectedDate"
-        :recordData="recordData"
+        :recordData="props.recordData"
         @select="selectDate"
       />
     </div>
@@ -79,8 +80,7 @@ const props = defineProps({
   },
 });
 
-const recordData = computed(() => props.recordData);
-
+// default를 오늘로 지정
 const today = new Date();
 
 const selectedMonthYear = ref(today);
@@ -148,7 +148,7 @@ function selectDate(date) {
 </script>
 
 <style scoped>
-/* datepicker style 강제 지정정 */
+/* datepicker style 강제 지정 */
 :deep(.mx-datepicker svg) {
   fill: white !important;
 }
