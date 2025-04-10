@@ -100,18 +100,19 @@
   </div>
 </template>
 <script setup>
-import "@/css/expenseDetail/expenseEdit.css";
-import { reactive, onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
-import axios from "axios";
-import expenseData from "../../../db/expense.json";
-import useRouterUtil from "@/utils/useRouterUtil";
-import { useExpenseStore } from "@/stores/expense";
-import BackButton from "../common/BackButton.vue";
-import ExpenseFilterContainer from "@/components/Expense/ExpenseFilterContainer.vue";
+import '@/css/expenseDetail/expenseEdit.css';
+import { reactive, onMounted, ref, inject } from 'vue';
+import { useRoute } from 'vue-router';
+import axios from 'axios';
+import expenseData from '../../../db/expense.json';
+import useRouterUtil from '@/utils/useRouterUtil';
+import { useExpenseStore } from '@/stores/expense';
+import BackButton from '../common/BackButton.vue';
+import ExpenseFilterContainer from '@/components/Expense/ExpenseFilterContainer.vue';
 
 const expenseStore = useExpenseStore();
 const route = useRoute();
+const alert = inject('useAlert');
 
 const { gotoExpense, gotoExpenseDetail } = useRouterUtil();
 
@@ -122,14 +123,14 @@ const expenseCategories = expenseData.expenseCategory;
 const selectedDate = ref(new Date());
 
 const Item = reactive({
-  name: "",
-  amount: "",
+  name: '',
+  amount: '',
   type: null,
-  type_name: "",
+  type_name: '',
   cate_id: null,
-  cate_name: "",
-  date: "",
-  memo: "",
+  cate_name: '',
+  date: '',
+  memo: '',
   is_salary: null,
   is_fixed: null,
 });
@@ -151,7 +152,7 @@ const fetchExpense = async () => {
     Item.is_salary = !!data.is_salary;
     Item.is_fixed = !!data.is_fixed;
   } catch (err) {
-    console.error("데이터 조회 실패", err);
+    console.error('데이터 조회 실패', err);
     gotoExpense();
   }
 };
@@ -165,8 +166,8 @@ const updateExpense = async () => {
       (c) => c.cate_id === Item.cate_id
     );
 
-    Item.type_name = selectedType ? selectedType.name : "";
-    Item.cate_name = selectedCate ? selectedCate.name : "";
+    Item.type_name = selectedType ? selectedType.name : '';
+    Item.cate_name = selectedCate ? selectedCate.name : '';
 
     await axios.patch(`/api/Expense/${id}`, {
       name: Item.name,
@@ -181,10 +182,11 @@ const updateExpense = async () => {
       is_fixed: Item.is_fixed ? 1 : 0,
     });
 
-    console.log("수정 완료");
+    console.log('수정 완료');
     gotoExpenseDetail(id);
+    alert.success('내역이 수정되었습니다.');
   } catch (err) {
-    console.log("저장 실패");
+    console.log('저장 실패');
   }
 };
 
