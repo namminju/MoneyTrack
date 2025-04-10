@@ -1,0 +1,47 @@
+/* ExpenseFilterItem css */
+.filter-container__box {
+  font-weight: bold;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem auto;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 1.2rem;
+  font-size: 1.6rem;
+}
+.filter-container__box__left i {
+  text-align: center;
+  align-content: center;
+  height: 4rem;
+  aspect-ratio: 1 / 1;
+  font-size: 2rem;
+  border-radius: 50%;
+}
+.filter-container__box__item :nth-child(1) {
+  font-size: 1.4rem;
+}
+.filter-container__box__item :nth-child(2) {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
+}
+.filter-container__box__left {
+  text-align: left;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .filter-container__box {
+    height: 6rem;
+    background-color: var(--trk-ivory);
+    padding: 2% 4%;
+    font-size: 2rem;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}

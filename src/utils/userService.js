@@ -2,6 +2,7 @@ import axios from 'axios';
 import { resJson } from '@/utils/common.js';
 import hash from '@/utils/hash.js';
 import dateUtil from '@/utils/date.js';
+import { useUserStore } from "@/stores/userStore";
 
 const userService = {
   //회원 정보 가져오기
@@ -143,6 +144,18 @@ const userService = {
     catch (error) {
       return resJson('603', '', '잘못된 요청입니다.' + error);
     }
+  },
+
+  //로그인 되어있는지 확인
+  checkIsLogin() {
+    const userStore = useUserStore();
+    if (sessionStorage['user']) {
+      userStore.login();
+    }
+    else {
+      userStore.logout();
+    }
+    return userStore.isLoggedIn;
   }
 }
 

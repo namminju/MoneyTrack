@@ -93,14 +93,10 @@
   import { ref, reactive } from 'vue';
   import userService from '@/utils/userService.js';
   import loginService from '@/utils/loginService.js';
-  import router from '@/router';
-  import session from '@/utils/session.js';
-
-  if(!sessionStorage['user']) {
-    console.log('user empty');
-  }
-  else {
-    // console.log(sessionStorage);
+  
+  //로그인 안되어있으면 로그인으로
+  if(!userService.checkIsLogin()) {
+    router.push('/redirect?path=login');
   }
 
   //모든 값들 reactive 생성
