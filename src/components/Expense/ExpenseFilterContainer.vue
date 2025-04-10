@@ -5,10 +5,7 @@
       <div>
         {{ selectedDate ? selectedDate.toLocaleDateString() : '' }}
       </div>
-      <i
-        class="fa-solid fa-filter pointer"
-        @click="showFilter = !showFilter"
-      ></i>
+      <i class="fa-solid fa-filter pointer" @click="showFilter = !showFilter" />
     </div>
 
     <!-- 내역 추가 모달(provider로 분리 필요) -->
@@ -31,7 +28,8 @@
       <div>총 {{ filteredTransactions.length }}건</div>
       <div>
         {{
-          (totalIncome > totalExpense ? '+' : '') + (totalIncome - totalExpense)
+          (totalIncome > totalExpense ? '+' : '') +
+          (totalIncome - totalExpense).toLocaleString()
         }}
       </div>
     </div>
@@ -112,21 +110,21 @@ const filteredTransactions = computed(() => {
 
     const matchDate = tx.date === selectedDateStr;
 
-    return matchType && matchCategory && matchDate;
+    return matchType && matchCategory && matchDate && tx.is_delete === 0;
   });
 });
 
 //수익 합계 계산
 const totalIncome = computed(() => {
   return filteredTransactions.value
-    .filter((tx) => tx.is_salary === 1)
+    .filter((tx) => tx.is_salary === 1 && tx.is_delete === 0)
     .reduce((sum, tx) => sum + tx.amount, 0);
 });
 
 //지출 합계 계산
 const totalExpense = computed(() => {
   return filteredTransactions.value
-    .filter((tx) => tx.is_salary === 0)
+    .filter((tx) => tx.is_salary === 0 && tx.is_delete === 0)
     .reduce((sum, tx) => sum + tx.amount, 0);
 });
 </script>

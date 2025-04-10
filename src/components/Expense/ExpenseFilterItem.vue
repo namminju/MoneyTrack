@@ -19,7 +19,7 @@
     <div>
       <!-- 수익/지출에 따라 표기 -->
       {{ props.transaction.is_salary === 1 ? '+' : '-' }}
-      {{ props.transaction.amount }}
+      {{ props.transaction.amount.toLocaleString() }}
     </div>
   </div>
 </template>

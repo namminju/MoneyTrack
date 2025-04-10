@@ -60,7 +60,7 @@ const route = useRoute();
 
 const states = reactive({ expense: {} });
 const infoFields = ref({});
-const id = computed(() => parseInt(route.params.id));
+const id = computed(() => route.params.id);
 const selectedDate = ref(new Date());
 
 watch(
