@@ -113,14 +113,28 @@ const isFixed = ref(false);
 const categoryStore = useCategoryStore();
 const { AddExpense } = useExpenseStore();
 
+const props = defineProps({
+  selectedDate: {
+    type: Date,
+  },
+});
+
+// 날짜를 YYYY-MM-DD로 변환
+const formatDateToInputString = (dateObj) => {
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 watch(
-  () => categoryStore.categoryList[0],
+  () => props.selectedDate,
   (newVal) => {
-    if (newVal?.length && !selectedCategory.value) {
-      selectedCategory.value = newVal[0];
+    if (newVal) {
+      date.value = formatDateToInputString(newVal); // 💡 input에 맞게 포맷팅
     }
   },
-  { immediate: true } // 바로 실행되도록 설정
+  { immediate: true }
 );
 
 // Emits
