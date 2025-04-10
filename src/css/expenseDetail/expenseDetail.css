@@ -26,7 +26,7 @@
 
 .detail-box__item {
   background-color: white;
-  max-width: 1024px;
+  min-width: 370px;
   border-radius: 20px;
   width: 70%;
   margin-top: 3rem;
