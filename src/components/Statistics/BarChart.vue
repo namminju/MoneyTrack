@@ -46,7 +46,7 @@ const chartData = computed(() => {
     if (!totals[key]) {
       totals[key] = { income: 0, expense: 0 };
     }
-    if (item.is_salary === 1) {
+    if (item.is_salary === 1 || item.cate_id === 99) {
       totals[key].income += item.amount;
     } else {
       totals[key].expense += item.amount;

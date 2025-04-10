@@ -2,7 +2,7 @@
   <div class="category-list">
     <h2>카테고리별 비율</h2>
     <div
-      v-for="item in categoryRatios"
+      v-for="item in filteredcategoryRatios"
       :key="item.category"
       class="category-list_item"
     >
@@ -23,11 +23,15 @@
   </div>
 </template>
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, computed } from 'vue';
 import '@/css/statistics/statistics.css';
 
 const props = defineProps({
   categoryRatios: Array,
+});
+
+const filteredcategoryRatios = computed(() => {
+  return props.categoryRatios.filter((item) => item.category !== '수입');
 });
 
 const getColor = (category) => {

@@ -17,7 +17,7 @@ export const periodOptions = [
 export const useStatisticsStore = defineStore('statistics', () => {
   const rawData = ref([]);
   const user = session.get();
-  const userID = user?.id; // 세션에서 user ID 가져오기
+  const userID = parseInt(user?.id); // 세션에서 user ID 가져오기
   console.log('userID:', userID); // 디버깅용
 
   const fetchData = async () => {
@@ -39,8 +39,16 @@ export const useStatisticsStore = defineStore('statistics', () => {
     return rawData.value.filter((item) => {
       const date = new Date(item.date);
 
-      if (selectedType.value.id === 2 && item.is_salary !== 1) return false; // 수입만
-      if (selectedType.value.id === 3 && item.is_salary === 1) return false; // 지출만
+      if (
+        selectedType.value.id === 2 &&
+        (item.is_salary !== 1 || item.cate_id !== 99)
+      )
+        return false; // 수입만
+      if (
+        selectedType.value.id === 3 &&
+        (item.is_salary === 1 || item.cate_id === 99)
+      )
+        return false; // 지출만
 
       if (
         selectedPeriod.value.id === 1 &&
@@ -62,6 +70,7 @@ export const useStatisticsStore = defineStore('statistics', () => {
   });
 
   const categoryTotals = computed(() => {
+    console.log('categoryTotals:', categoryTotals.value); // 디버깅용);
     const result = {};
 
     // filteredData에서 하나씩 반복하면서
@@ -94,7 +103,7 @@ export const useStatisticsStore = defineStore('statistics', () => {
 
       const month = date.getMonth();
 
-      if (item.is_salary === 1) {
+      if (item.is_salary === 1 || item.cate_id === 99) {
         totals[month].income += item.amount;
       } else {
         totals[month].expense += item.amount;
@@ -122,7 +131,7 @@ export const useStatisticsStore = defineStore('statistics', () => {
       const date = new Date(item.date);
       const day = date.getDate();
 
-      if (item.is_salary !== 1) {
+      if (item.is_salary !== 1 || item.cate_id !== 99) {
         total[day - 1] += item.amount;
       }
     });
@@ -133,9 +142,12 @@ export const useStatisticsStore = defineStore('statistics', () => {
   });
 
   const totalAmount = computed(() => {
-    return Object.values(categoryTotals.value).reduce((a, b) => a + b, 0);
+    // return Object.values(categoryTotals.value).reduce((a, b) => a + b, 0);
     //reduce(a,b) a에 b를 누적시키면서 더하는 함수
     //카테고리별 금액인 categoryTotals의 값들의 합계를 반환
+    return Object.entries(categoryTotals.value)
+      .filter(([key]) => key !== '수입') // '수입' 카테고리 제외
+      .reduce((acc, [, value]) => acc + value, 0);
   });
 
   const categoryRatios = computed(() => {
