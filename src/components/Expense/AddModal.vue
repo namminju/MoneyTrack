@@ -137,6 +137,16 @@ watch(
   { immediate: true }
 );
 
+watch(
+  () => categoryStore.categoryList[0],
+  (newVal) => {
+    if (newVal) {
+      selectedCategory.value = newVal[0];
+    }
+  },
+  { immediate: true }
+);
+
 // Emits
 const emit = defineEmits(['close', 'submit']);
 const close = () => emit('close');
