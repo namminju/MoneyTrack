@@ -10,7 +10,7 @@
           :category="category"
           :isSelected="localSelectedCategories.includes(category.name)"
           :toggleCategory="toggleCategory"
-          wrapperClass="col-6 col-sm-4 col-lg-6 col-xxl-4"
+          wrapperClass="col-4 col-sm-4 col-lg-6 col-xxl-4"
         />
       </div>
     </div>
@@ -88,6 +88,13 @@ function onTypeChange(event) {
   .filter-panel {
     padding: 2%;
     width: 58%;
+    right: 2%;
+  }
+}
+@media (max-width: 600px) {
+  .filter-panel {
+    padding: 4%;
+    width: 96%;
     right: 2%;
   }
 }

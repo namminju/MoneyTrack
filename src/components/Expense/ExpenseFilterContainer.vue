@@ -5,10 +5,7 @@
       <div>
         {{ selectedDate ? selectedDate.toLocaleDateString() : '' }}
       </div>
-      <i
-        class="fa-solid fa-filter pointer"
-        @click="showFilter = !showFilter"
-      ></i>
+      <i class="fa-solid fa-filter pointer" @click="showFilter = !showFilter" />
     </div>
 
     <!-- 내역 추가 모달(provider로 분리 필요) -->
