@@ -1,61 +1,71 @@
 .header .trk-bg-55 {
-	background-color: #609966;
+  background-color: #609966;
 }
 .header .trk-text-55 {
-	color: #609966;
+  color: #609966;
 }
 
 .header {
-	padding: 0 4rem;
+  padding: 0 4rem;
 }
 
 .header__main {
-	display: flex;
-	align-items: center;
-	position: relative;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .header button {
-	flex: none;
-	margin-top: 0;
-	height: auto;
+  flex: none;
+  margin-top: 0;
+  height: auto;
 }
 
 .header__nav {
-	display: flex;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	gap: 4rem;
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 4rem;
 }
 
 .header__btn-menu {
-	padding: 1rem 2rem;
-	width: 8rem;
+  padding: 1rem 2rem;
+  width: 8rem;
+  font-size: 1.2rem;
+}
+
+.header__user {
+  position: absolute;
+  right: 12rem;
+}
+.header__user:hover {
+  color: var(--trk-dark-green);
 }
 
 .header__btn-login {
-	position: absolute;
-	right: 3rem;
-	padding: 1rem 2rem;
+  position: absolute;
+  right: 3rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
 }
 
 .header__mobile-nav {
-	position: fixed;
-	bottom: 10rem;
-	left: 0;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	z-index: 999;
+  position: fixed;
+  bottom: 10rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 999;
 }
 
 .header__nav-container {
-	background-color: #fde4b0;
-	display: flex;
-	gap: 2rem;
+  background-color: #fde4b0;
+  display: flex;
+  gap: 2rem;
 }
 
 .header__mobile-btn-menu {
-	width: 6rem;
+  width: 6rem;
 }

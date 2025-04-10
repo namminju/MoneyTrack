@@ -18,10 +18,7 @@
       </div>
 
       <!-- 네비게이션 메뉴 -->
-      <nav
-        class="header__nav"
-        v-if="menuItems.length"
-      >
+      <nav class="header__nav" v-if="menuItems.length">
         <button
           v-for="item in menuItems"
           :key="item.id"
@@ -32,6 +29,15 @@
           {{ item.label }}
         </button>
       </nav>
+
+      <!-- 사용자 이름 (마이페이지 이동) -->
+      <div
+        v-if="isLoggedIn"
+        class="header__user cursor-pointer trk-text-5 fw-bold"
+        @click="goMyPage"
+      >
+        {{ userName }}님
+      </div>
 
       <!-- 로그아웃 버튼 -->
       <button
@@ -52,11 +58,10 @@
     </div>
 
     <!-- 모바일 상단 헤더 -->
-    <div class="justify-content-between align-items-center px-3 d-flex d-md-none">
-      <div
-        class="d-flex align-items-center cursor-pointer"
-        @click="goHome"
-      >
+    <div
+      class="justify-content-between align-items-center px-3 d-flex d-md-none"
+    >
+      <div class="d-flex align-items-center cursor-pointer" @click="goHome">
         <img
           src="@/images/logo_rabbit.png"
           alt="logo"
@@ -65,6 +70,15 @@
           height="20"
         />
         <span class="trk-text-3 fw-bold">Money Track</span>
+      </div>
+
+      <!-- 사용자 이름 (마이페이지 이동) -->
+      <div
+        v-if="isLoggedIn"
+        class="header__user cursor-pointer me-3 trk-text-5 fw-bold"
+        @click="goMyPage"
+      >
+        {{ userName }}님
       </div>
 
       <!-- 로그아웃 버튼 -->
@@ -86,10 +100,7 @@
     </div>
 
     <!-- 모바일 하단 탭 메뉴 -->
-    <nav
-      class="header__mobile-nav d-md-none"
-      v-if="menuItems.length"
-    >
+    <nav class="header__mobile-nav d-md-none" v-if="menuItems.length">
       <div class="header__nav-container rounded-pill px-3 py-2">
         <button
           v-for="item in menuItems"
@@ -108,14 +119,19 @@
 <script setup>
 import "@/css/header/header.css";
 import { useRoute, useRouter } from "vue-router";
-import { computed, inject } from "vue";
+import { computed, inject, onMounted } from "vue";
 import { useUserStore } from "@/stores/userStore";
+import userService from "@/utils/userService.js";
 
 const router = useRouter();
 const route = useRoute();
 
 const userStore = useUserStore();
 const isLoggedIn = computed(() => userStore.isLoggedIn);
+
+onMounted(() => {
+  userService.checkIsLogin();
+});
 
 const menuItems = computed(() =>
   isLoggedIn.value
@@ -128,6 +144,11 @@ const menuItems = computed(() =>
 );
 
 const isCurrent = (path) => route.path === path;
+
+const userName = computed(() => {
+  const user = JSON.parse(sessionStorage.getItem("user") || "{}");
+  return user.name;
+});
 
 const navigateTo = (path) => {
   if (route.path !== path) {
@@ -144,12 +165,23 @@ const goLogin = () => {
 };
 
 const alert = inject("useAlert");
+const confirm = inject("useConfirm");
 
 const goLogout = () => {
-  userStore.logout();
-  sessionStorage['user'] = '';
-  alert.success("로그아웃 되었습니다.");
-  router.push("/home");
+  confirm("로그아웃 하시겠습니까?")
+    .then(() => {
+      userStore.logout();
+      sessionStorage["user"] = "";
+      alert.success("로그아웃 되었습니다.");
+      router.push("/home");
+    })
+    .catch(() => {
+      return;
+    });
+};
+
+const goMyPage = () => {
+  router.push("/mypage");
 };
 </script>
 
