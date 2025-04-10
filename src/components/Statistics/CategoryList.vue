@@ -1,24 +1,35 @@
 <template>
   <div class="category-list">
-    <h2>카테고리별 비율</h2>
-    <div
-      v-for="item in filteredcategoryRatios"
-      :key="item.category"
-      class="category-list_item"
-    >
-      <span class="__label">{{ item.category }}</span>
-      <div class="category-list__container">
-        <div
-          class="category-list__bar__fill"
-          :style="{
-            width: `${item.ratio}%`,
-            backgroundColor: getColor(item.category),
-          }"
-        ></div>
+    
+    <div class="w-100">
+
+      <div class="w-100 text-center">
+        <div class="fw-600 fs-20">카테고리별 비율</div>
       </div>
-      <span class="percentage" :style="{ color: getColor(item.category) }"
-        >{{ item.ratio }}%</span
-      >
+
+      <div class="clear-10"></div>
+
+      <div v-for="item in filteredcategoryRatios" :key="item.category" class="category-list_item">
+        
+        <div class="__label">
+          {{ item.category }}
+        </div>
+        
+        <div class="category-list__container">
+          <!-- 가시성을 위한 2배길이 -->
+          <div class="category-list__bar__fill" :style="{ width: `${item.ratio * 2}%`, backgroundColor: getColor(item.category) }">
+            
+          </div>
+        </div>
+        <div class="percentage" :style="{ color: getColor(item.category) }">
+          {{ item.ratio }}%
+        </div>
+
+        <div :style="{ color: getColor(item.category) }" class="fw-600">
+          {{ parseInt(item.amount).toLocaleString('ko-KR') }} 원
+        </div>
+      </div>
+      <!-- v-for end -->
     </div>
   </div>
 </template>
@@ -54,14 +65,16 @@ const getColor = (category) => {
 </script>
 <style scoped>
 .category-list {
+  display: flex;
   padding: 1rem;
-  width: 300px;
+  width :100%;
 }
-
 .category-list_item {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  justify-content: space-around;
+  gap: 2rem;
 }
 
 .__label {

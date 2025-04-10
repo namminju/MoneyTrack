@@ -122,7 +122,7 @@ const changeDate = (date) => {
   applyFilter();
 };
 watch(currentDate, (newVal) => {
-  console.log('📆 선택된 날짜:', newVal);
+  // console.log('📆 선택된 날짜:', newVal);
   applyFilter();
 });
 
@@ -187,9 +187,9 @@ const applyFilter = () => {
     month: selectedPeriod.value.id === 1 ? currentDate.value.getMonth() + 1 : 0,
   });
 };
-console.log('selectedPeriod:', selectedPeriod.value);
-console.log('periodOptions:', periodOptions);
-console.log('currentDate:', currentDate.value);
+// console.log('selectedPeriod:', selectedPeriod.value);
+// console.log('periodOptions:', periodOptions);
+// console.log('currentDate:', currentDate.value);
 </script>
 <style scoped>
 .filter-box {

@@ -33,7 +33,7 @@ import CategoryButton from './CategoryButton.vue';
 const props = defineProps({
   allCategories: Array,
   selectedCategories: Array,
-  selectedType: Number,
+  selectedType: String,
 });
 
 //선택된 category 목록 변경 이벤트

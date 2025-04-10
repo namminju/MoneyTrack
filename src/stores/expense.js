@@ -5,7 +5,7 @@ import axios from 'axios';
 export const useExpenseStore = defineStore('expense', () => {
   const BASEURL = 'api/Expense';
   const state = reactive({ expenseList: [], isLoading: false });
-
+  
   //  사용자 ID 가져오는 함수
   const getUserIdFromSession = () => {
     const user = JSON.parse(sessionStorage.getItem('user'));
