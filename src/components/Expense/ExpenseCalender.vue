@@ -6,6 +6,7 @@
         <i class="fa-solid fa-angle-left" />
       </button>
 
+      <!-- 원하는 달 선택 -->
       <DatePicker
         v-model="selectedMonthYear"
         type="month"
