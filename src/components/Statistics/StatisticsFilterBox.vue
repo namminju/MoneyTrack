@@ -244,4 +244,16 @@ const applyFilter = () => {
     display: none;
   }
 }
+/* select style */
+select {
+  border: 0;
+  border-radius: 1.2rem;
+  font-weight: 600;
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
 </style>
