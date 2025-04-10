@@ -7,6 +7,7 @@ import '@/css/statistics/statistics.css';
 import { Pie } from 'vue-chartjs';
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { computed } from 'vue';
+// import { preprocessCSS } from 'vite';
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
@@ -45,6 +46,7 @@ const chartOptions = {
   maintainAspectRatio: false,
   plugins: {
     legend: {
+      onClick: () => {},
       position: 'right',
     },
   },

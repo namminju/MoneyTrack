@@ -16,6 +16,11 @@ export default defineConfig({
         target: "http://localhost:3000",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+      "/exchange": {
+        target: "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/exchange/, ''),
       }
     },
   },

@@ -1,4 +1,5 @@
 <template>
+  <!-- 클릭 시 해당하는 detail 페이지로 이동 -->
   <div
     :class="[styles['filter-container__box'], styles.pointer]"
     @click.stop="router.push(`/expensedetail/${props.transaction.id}`)"
@@ -28,6 +29,7 @@ import { useRouter } from 'vue-router';
 //styles
 import styles from '@/css/expense/expenseFilterItem.module.css';
 
+// 페이지 이동을 위하여
 const router = useRouter();
 
 //props

@@ -167,9 +167,8 @@ const createData = (id, user_id, currentDate, is_salary = 0, is_hide = 0, is_del
   let cateIcon = '';
 
   //월급날인 경우
-  console.log(is_salary);
   if (is_salary == 1) {
-    amount = expense.expenseIncome;
+    amount = expense.expenseIncome.income;
     const cate = cateArr.find(item => item.cate_id === 99);
     cateId = cate.cate_id;
     cateName = cate.name;
@@ -202,7 +201,7 @@ const createData = (id, user_id, currentDate, is_salary = 0, is_hide = 0, is_del
 
   //데이터 세팅
   const data = {
-    id: id,
+    id: id.toString(),
     user_id: user_id,
     type: typeId,
     type_name: typeName,

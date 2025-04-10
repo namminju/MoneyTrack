@@ -24,7 +24,7 @@ export const useStatisticsStore = defineStore('statistics', () => {
       const res = await axios.get('http://localhost:3000/Expense');
       rawData.value = res.data;
       // rawData.value = res.data.filter((item) => item.user_id === userID);
-      console.log('data: ', rawData.value);
+      // console.log('data: ', rawData.value);
     } catch (err) {
       console.error('데이터 가져오기 실패: ', err);
     }
@@ -45,14 +45,17 @@ export const useStatisticsStore = defineStore('statistics', () => {
         selectedPeriod.value.id === 1 &&
         (date.getFullYear() !== selectedYear.value ||
           date.getMonth() + 1 !== selectedMonth.value)
-      )
+      ) {
         return false;
+      }
 
+      // 연간이면 month는 비교 안 함
       if (
         selectedPeriod.value.id === 2 &&
         date.getFullYear() !== selectedYear.value
-      )
+      ) {
         return false;
+      }
       return true;
     });
   });
