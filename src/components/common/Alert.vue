@@ -1,50 +1,72 @@
 <script setup>
+import { onBeforeUnmount, ref, watch } from "vue";
 
-    const props = defineProps({
-        show: Boolean,
-        type: {
-            type: String,
-            default: 'info',
-        },
-        message: {
-            type: String,
-            required: true,
-        }
-    });
+const props = defineProps({
+  show: Boolean,
+  type: {
+    type: String,
+    default: "info",
+  },
+  message: {
+    type: String,
+    required: true,
+  },
+  duration: {
+    type: Number,
+    default: 2000,
+  },
+});
 
-    const emit = defineEmits(['close']);
+const emit = defineEmits(["close"]);
 
-    const close = () => {
-        emit('close'); // 부모가 상태 관리
+const timeout = ref(null);
+
+const close = () => {
+  clearTimeout(timeout.value);
+  emit("close"); // 부모가 상태 관리
+};
+
+watch(
+  () => props.show,
+  (newVal) => {
+    if (newVal) {
+      clearTimeout(timeout.value);
+      timeout.value = setTimeout(() => {
+        close();
+      }, props.duration);
     }
+  }
+);
 
+onBeforeUnmount(() => {
+  clearTimeout(timeout.value);
+});
 </script>
 
 <template>
-    <Transition name="fade">
-        <div v-if="show" class="trk-alert" :class="`trk-alert-${type}`">
-            <span class="trk-alert-icon">
-                <i v-if="type === 'success'" class="fa-solid fa-circle-check"></i>
-                <i v-else-if="type === 'error'" class="fa-solid fa-circle-exclamation"></i>
-                <i v-else-if="type === 'warning'" class="fa-solid fa-triangle-exclamation"></i>
-                <i v-else class="fa-solid fa-circle-info"></i>
-            </span>
-            <span class="trk-alert-text">{{ message }}</span>
-            <button class="trk-alert-close" @click=close><i class="fa-solid fa-xmark"></i></button>
-        </div>
-    </Transition>
+  <Transition name="fade">
+    <div v-if="show" class="trk-alert" :class="`trk-alert-${type}`">
+      <span class="trk-alert-icon">
+        <i v-if="type === 'success'" class="fa-solid fa-circle-check"></i>
+        <i v-else-if="type === 'error'" class="fa-solid fa-circle-exclamation"></i>
+        <i v-else-if="type === 'warning'" class="fa-solid fa-triangle-exclamation"></i>
+        <i v-else class="fa-solid fa-circle-info"></i>
+      </span>
+      <span class="trk-alert-text">{{ message }}</span>
+    </div>
+  </Transition>
 </template>
 
 <style scoped>
 .trk-alert {
-  position:fixed;
+  position: fixed;
   display: flex;
   align-items: center;
   top: 2.5rem;
-  left:50%;
+  left: 50%;
   transform: translateX(-50%);
   max-width: 400px;
-  width:calc(100% - 2rem);
+  width: calc(100% - 2rem);
   z-index: 1000;
   gap: 0.75rem;
   padding: 1rem 1.5rem;
@@ -68,16 +90,6 @@
 .trk-alert-info {
   background-color: #d3e1f8;
   color: #1a73e8;
-}
-
-.trk-alert-close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: inherit;
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
 }
 
 /* 트랜지션 클래스 정의 (Vue 규칙) */
