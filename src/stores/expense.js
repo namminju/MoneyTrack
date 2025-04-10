@@ -59,7 +59,7 @@ export const useExpenseStore = defineStore("expense", () => {
 
   const deleteExpense = async (id) => {
     try {
-      await axios.patch(`${BASEURL}/${id}`, { is_delete: 1 });
+      await axios.patch(`/${BASEURL}/${id}`, { is_delete: 1 });
     } catch (err) {
       console.error("삭제 실패", err);
       throw err;
