@@ -29,8 +29,10 @@ import CategoryList from './CategoryList.vue';
 import { useStatisticsStore } from '@/stores/useStatisticsStore';
 import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
+import { useCategoryStore } from '@/stores/category';
 
 const store = useStatisticsStore();
+
 const {
   selectedType,
   selectedPeriod,
@@ -44,6 +46,7 @@ const {
 
 onMounted(() => {
   store.fetchData();
+  useCategoryStore().fetchcategoryList();
 });
 
 const onFilterUpdate = ({ type, period, year, month }) => {
