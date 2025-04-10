@@ -1,22 +1,26 @@
 <template>
-  <div class="statistics-page m-3">
-    <StatisticsFilterBox @updateFilter="onFilterUpdate" />
-    <StatisticsGraph
-      :categoryRatios="categoryRatios"
-      :filteredData="filteredData"
-      :selectedPeriod="selectedPeriod"
-      :monthlyTotal="monthlyTotal"
-      :dailyTotal="dailyTotal"
-    />
+  <div class="clear-30"></div>
+    <div class="statistics-page">
 
-    <div class="category__ratio">
-      <p>🔹 전체 합계: {{ store.totalAmount }} 원</p>
-      <CategoryList :categoryRatios="categoryRatios" />
-      <!-- <ul>
-        <li v-for="item in store.categoryRatios" :key="item.category">
-          {{ item.category }}: {{ item.amount }}원 ({{ item.ratio }}%)
-        </li>
-      </ul> -->
+          <StatisticsFilterBox @updateFilter="onFilterUpdate" />
+          <StatisticsGraph
+          :categoryRatios="categoryRatios"
+          :filteredData="filteredData"
+          :selectedPeriod="selectedPeriod"
+          :monthlyTotal="monthlyTotal"
+          :dailyTotal="dailyTotal"
+          />
+
+        
+        <div class="category__ratio p-4">
+          <!-- <p>🔹 전체 합계: {{ store.totalAmount }} 원</p> -->
+          <CategoryList :categoryRatios="categoryRatios" />
+          <!-- <ul>
+            <li v-for="item in store.categoryRatios" :key="item.category">
+              {{ item.category }}: {{ item.amount }}원 ({{ item.ratio }}%)
+            </li>
+          </ul> -->
+
     </div>
   </div>
 </template>

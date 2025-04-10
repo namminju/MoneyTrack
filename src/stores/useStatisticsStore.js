@@ -3,12 +3,14 @@ import { ref, computed } from 'vue';
 import axios from 'axios';
 import session from '@/utils/session';
 
+//조회 타입
 export const typeOptions = [
   { id: 1, name: '전체' },
   { id: 2, name: '수입' },
   { id: 3, name: '지출' },
 ];
 
+//조회 기간
 export const periodOptions = [
   { id: 1, name: '월간' },
   { id: 2, name: '연간' },
@@ -18,8 +20,9 @@ export const useStatisticsStore = defineStore('statistics', () => {
   const rawData = ref([]);
   const user = session.get();
   const userID = parseInt(user?.id); // 세션에서 user ID 가져오기
-  console.log('userID:', userID); // 디버깅용
+  // console.log('userID:', userID); // 디버깅용
 
+  //회원의 기본 지출 내용 출력
   const fetchData = async () => {
     try {
       const res = await axios.get('http://localhost:3000/Expense');
@@ -30,26 +33,39 @@ export const useStatisticsStore = defineStore('statistics', () => {
       console.error('데이터 가져오기 실패: ', err);
     }
   };
-  const selectedType = ref(typeOptions[0]);
-  const selectedPeriod = ref(periodOptions[0]);
-  const selectedMonth = ref(0);
-  const selectedYear = ref(0);
+
+  //필터링 조건들 export 후 페이지에서 사용자가 가져와야함
+  const selectedType = ref(typeOptions[0]); //조회 타입 기본 전체
+  const selectedPeriod = ref(periodOptions[0]); //조회 기간 기본 월간
+
+  //년 & 월 변수들 초기값 = 오늘
+  const today = new Date();
+  const selectedMonth = ref(today.getMonth() + 1);
+  const selectedYear = ref(today.getFullYear());
 
   const filteredData = computed(() => {
-    return rawData.value.filter((item) => {
+
+    const filteredArr = rawData.value.filter((item) => {
+    // return rawData.value.filter((item) => {
+
+      //해당 날짜
       const date = new Date(item.date);
 
+      //수입을 선택했는데 && (지출이거나 || 수입 카테고리가 아닌 경우) == 수입만
       if (
         selectedType.value.id === 2 &&
         (item.is_salary !== 1 || item.cate_id !== 99)
       )
-        return false; // 수입만
+        return false;
+
+      //지출을 선택했는데 && (수입이거나 || 수입 카테고리인 경우) == 지출만
       if (
         selectedType.value.id === 3 &&
         (item.is_salary === 1 || item.cate_id === 99)
       )
-        return false; // 지출만
+        return false; 
 
+      //월간을 선택했는데 && (해당날짜가 선택된 날짜와 같지 않거나 || 해당 월이 선택된 월과 같지 않을 경우)
       if (
         selectedPeriod.value.id === 1 &&
         (date.getFullYear() !== selectedYear.value ||
@@ -67,10 +83,13 @@ export const useStatisticsStore = defineStore('statistics', () => {
       }
       return true;
     });
+
+    // console.log(filteredArr);
+    return filteredArr;
   });
 
   const categoryTotals = computed(() => {
-    console.log('categoryTotals:', categoryTotals.value); // 디버깅용);
+    // console.log('categoryTotals:', categoryTotals.v alue); // 디버깅용);
     const result = {};
 
     // filteredData에서 하나씩 반복하면서

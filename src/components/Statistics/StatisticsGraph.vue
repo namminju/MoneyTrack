@@ -1,16 +1,7 @@
 <template>
-  <div class="statistic-graph">
-    <!-- <div class="chart-box">
-      <PieChart :categoryRatios="categoryRatios" />
-    </div>
-    <div class="chart-box">
-      <BarChart
-        :monthlyTotal="monthlyTotal"
-        :dailyTotal="dailyTotal"
-        :selectedPeriod="selectedPeriod"
-      />
-    </div> -->
-    <div class="chart_box">
+  <div class="statistic-graph row">
+    
+    <div class="chart_box col-md-9">
       <div class="button-container">
         <button
           @click="istoggletype"
@@ -36,23 +27,9 @@
         :filteredData="filteredCatergory"
       ></component>
     </div>
-    <!-- <div class="category_box">
-      <ul>
-        <li v-for="item in props.categoryRatios" :key="item.category">
-          <label
-            ><input
-              type="checkbox"
-              :value="item.category"
-              v-model="selectedCategory"
-            />{{ item.category }}
-          </label>
-        </li>
-      </ul>
-    </div> -->
 
     <!-- category_box -->
-    <div>
-      <!-- <div>Category</div> -->
+    <div class="col-md-3">
       <div class="category_box">
         <CategoryButton
           v-for="category in categoryStore.categoryList[0]"
@@ -139,10 +116,6 @@ const istoggletype = () => {
 };
 </script>
 <style scoped>
-.chart_box {
-  gap: 1rem;
-  padding: 2rem 5rem 6rem 5rem;
-}
 .button-container {
   align-self: flex-end;
   width: 7rem;

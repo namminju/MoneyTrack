@@ -21,8 +21,8 @@
         </div>
 
         
-        <div class="home-box__content max-w-35">
-          <div class="home-card">
+        <div class="home-box__content max-w-35 min-h-40">
+          <div class="home-card h-100">
             <ExpenseFilterContainer
             :transactions="expenseStore.expenseList"
             :selectedDate="selectedDate"
@@ -30,8 +30,10 @@
           </div>
         </div>
 
-        <div class="home-box__content max-w-40">
-          asdf
+        <div class="home-box__content max-w-40 min-h-40">
+          <div class="home-card h-100">
+            <CategoryList :categoryRatios="categoryRatios"></CategoryList>
+          </div>
         </div>
         
 
@@ -47,7 +49,8 @@
   import MyTotal from './MyTotal.vue';
   import MyExpense from './MyExpense.vue';
   import ExchangeRate from './ExchangeRate.vue';
-  
+  import CategoryList from '../Statistics/CategoryList.vue';
+  import { storeToRefs } from 'pinia';  
 
   //Expense 카드 start
   // stores
@@ -56,7 +59,7 @@
 
   //expense 입력용
   import ExpenseFilterContainer from '@/components/Expense/ExpenseFilterContainer.vue';
-  
+
   // init store & user
   const expenseStore = useExpenseStore();
   const categoryStore = useCategoryStore();
@@ -125,8 +128,6 @@
     //저번주 = 저번주 일요일 ~ 이번주 일요일
     const lastSunday = new Date();
     lastSunday.setDate(thisSunday.getDate() - 7);
-    // console.log(lastSunday);
-
 
     // 수입 데이터 별도로 만들기
     expenseData.forEach(expense => {
@@ -158,6 +159,23 @@
     });
 
   })
+
+const store = useStatisticsStore();
+
+const {
+  selectedType,
+  selectedPeriod,
+  categoryRatios,
+} = storeToRefs(store);
+
+// console.log(selectedType.value);
+// selectedType.value = 1;
+onMounted(() => {
+  const a = store.fetchData();
+  useCategoryStore().fetchcategoryList();
+
+  // console.log(a);
+});
 
 </script>
 
@@ -200,5 +218,8 @@
   .filter-container {
     width: 100%;
     height: auto;
+  }
+  .margin-button {
+    height: auto !important;
   }
 </style>
