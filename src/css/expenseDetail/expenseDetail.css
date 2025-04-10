@@ -8,9 +8,8 @@
 .detail-box {
   border-radius: 2.4rem;
   width: 68%;
-  padding: 0 0 1rem 0;
+  padding: 2.5% 2%;
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -20,17 +19,8 @@
 .detail-box__header {
   margin-top: 2rem;
   width: 90%;
-  position: relative;
 }
-.detail-box__header__button {
-  position: absolute;
-  left: 2rem;
-  cursor: pointer;
-}
-.detail-box__header__title {
-  font-weight: bold;
-  font-size: 2rem;
-}
+
 .detail-box__item {
   background-color: white;
   text-align: center;
