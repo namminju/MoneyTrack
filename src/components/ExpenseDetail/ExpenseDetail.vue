@@ -2,35 +2,37 @@
   <div class="full-container trk-bg-2">
     <div class="detail-box trk-bg-1">
       <div class="detail-box__header">
-        <span @click="gotoExpense()" class="detail-box__header__button">
-          <i class="fa-solid fa-chevron-left"></i>
+        <span class="header__button">
+          <BackButton @click="gotoExpense()" />
         </span>
-        <span class="detail-box__header__title">세부 지출 내역</span>
+        <span class="fw-600 fs-20">세부 지출 내역</span>
       </div>
       <div class="detail-box__item">
-        <div class="detail-box__item__text">
-          <div class="info">
-            <div class="info-row">
-              <span class="amount-unit"
-                ><strong class="amount-value">{{
-                  states.expense.amount?.toLocaleString()
-                }}</strong>
-                원</span
+        <div class="box__itemWrapper">
+          <div class="detail-box__item__text">
+            <div class="info">
+              <div class="info-row">
+                <span class="label-amt fw-600 fs-30">
+                  <strong class="amount-value">{{
+                    states.expense.amount?.toLocaleString()
+                  }}</strong>
+                </span>
+                <span class="value"></span>
+              </div>
+              <div
+                class="info-row"
+                v-for="(value, label) in infoFields"
+                :key="label"
               >
-            </div>
-            <div
-              class="info-row"
-              v-for="(value, label) in infoFields"
-              :key="label"
-            >
-              <span class="label">{{ label }}</span>
-              <span class="value">{{ value }}</span>
+                <span class="label">{{ label }}</span>
+                <span class="value">{{ value }}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="detail-box__item__button">
-          <button class="trk-btn-confirm" @click="gotoEdit">수정</button>
-          <button class="trk-btn-cancel" @click="handleDelete">삭제</button>
+          <div class="detail-box__item__button">
+            <button class="trk-btn-confirm" @click="gotoEdit">수정</button>
+            <button class="trk-btn-cancel" @click="handleDelete">삭제</button>
+          </div>
         </div>
       </div>
     </div>
@@ -50,6 +52,7 @@ import axios from "axios";
 import useRouterUtil from "@/utils/useRouterUtil";
 import ExpenseFilterContainer from "@/components/Expense/ExpenseFilterContainer.vue";
 import { useExpenseStore } from "@/stores/expense";
+import BackButton from "../common/BackButton.vue";
 
 const expenseStore = useExpenseStore();
 const { gotoExpense, gotoExpenseDetail, gotoExpenseEdit } = useRouterUtil();
@@ -85,7 +88,7 @@ const fetchExpense = async () => {
       "결제 수단": states.expense.type_name,
       카테고리: states.expense.cate_name,
       날짜: states.expense.date,
-      메모: states.expense.memo || "메모 없음",
+      메모: states.expense.memo || "",
       "고정비 여부": !!states.expense.is_fixed ? "O" : "X",
     };
   } catch (err) {

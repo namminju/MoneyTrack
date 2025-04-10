@@ -8,9 +8,8 @@
 .detail-box {
   border-radius: 2.4rem;
   width: 68%;
-  padding: 0 0 1rem 0;
+  padding: 2% 2%;
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -18,26 +17,18 @@
   align-items: center;
 }
 .detail-box__header {
-  margin-top: 2rem;
   width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
 }
-.detail-box__header__button {
-  position: absolute;
-  left: 2rem;
-  cursor: pointer;
-}
-.detail-box__header__title {
-  font-weight: bold;
-  font-size: larger;
-}
+
 .detail-box__item {
   background-color: white;
-  text-align: center;
   max-width: 1024px;
   border-radius: 20px;
-  height: 90%;
-  width: 90%;
+  width: 70%;
   margin-top: 3rem;
   margin-bottom: 3rem;
   border: 2px solid rgb(173, 173, 173);
@@ -48,27 +39,21 @@
 }
 
 .detail-box__item__text {
-  width: 80%;
+  width: 95%;
   overflow-y: auto;
-  padding: 3rem 0;
-}
-
-.amount {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  padding: 4rem 0;
 }
 
 .amount-value {
   color: blue;
-  font-weight: bold;
-  font-size: xx-large;
   word-break: break-word; /*줄바꿈 설정*/
 }
 .amount-unit {
-  font-weight: bold;
-  font-size: xx-large;
-  margin-bottom: 2.5rem;
+  margin-top: 1.5rem;
   word-break: break-word; /*줄바꿈 설정*/
+  width: 100%;
+  text-align: left;
+  display: flex;
 }
 
 .info {
@@ -80,7 +65,7 @@
 .info-row {
   display: flex;
   gap: 3rem;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap; /*줄바꿈 설정*/
 }
 
@@ -89,23 +74,27 @@
   font-weight: bold;
   text-align: left;
 }
+.label-amt {
+  width: 12rem;
+  text-align: left;
+}
 
 .value {
-  flex: 1;
+  width: 15rem;
   text-align: left;
 }
 
 .detail-box__item__button {
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   width: 80%;
   display: flex;
   gap: 2rem;
+  justify-content: center;
 }
 
 .full-container {
   display: flex;
-
   border-radius: 1.25rem;
   padding: 2rem;
   margin: 2rem;
