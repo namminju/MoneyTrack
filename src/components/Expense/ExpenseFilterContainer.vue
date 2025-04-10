@@ -55,7 +55,6 @@
       <i class="fa-solid fa-plus pointer"></i>
     </button>
   </div>
-  {{ transaction }}
 </template>
 
 <script setup>
