@@ -63,6 +63,7 @@ const infoFields = ref({});
 const id = computed(() => route.params.id);
 const selectedDate = ref(new Date());
 const alert = inject('useAlert');
+const confirm = inject('useConfirm');
 
 watch(
   () => route.params.id,
@@ -103,13 +104,15 @@ const gotoEdit = () => {
   gotoExpenseEdit(id.value);
 };
 
-const handleDelete = async () => {
-  try {
-    await expenseStore.deleteExpense(id.value);
-    gotoExpense();
-    alert.success('내역이 삭제되었습니다.');
-  } catch (e) {
-    console.log('삭제 실패');
-  }
+const handleDelete = () => {
+  confirm('정말 삭제하시겠습니까?')
+    .then(() => {
+      expenseStore.deleteExpense(id.value);
+      gotoExpense();
+      alert.success('내역이 삭제되었습니다.');
+    })
+    .catch(() => {
+      console.log('삭제 취소');
+    });
 };
 </script>
