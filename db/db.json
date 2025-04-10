@@ -7918,16 +7918,17 @@
     {
       "id": "578",
       "user_id": 1,
-      "type": 1,
-      "type_name": "카드",
-      "name": "성장편의점",
+      "type": 2,
+      "type_name": "현금",
+      "name": "성장",
       "amount": 23000,
       "date": "2025-04-08",
-      "cate_id": 4,
-      "cate_name": "쇼핑",
+      "cate_id": 3,
+      "cate_name": "문화/여가",
       "is_salary": 0,
       "is_hide": 0,
-      "is_delete": 0
+      "is_delete": 0,
+      "is_fixed": 0
     },
     {
       "id": "579",
@@ -8021,11 +8022,12 @@
       "name": "성장은행",
       "amount": 77000,
       "date": "2025-04-11",
-      "cate_id": 9,
-      "cate_name": "금융",
+      "cate_id": 8,
+      "cate_name": "반려동물",
       "is_salary": 0,
       "is_hide": 0,
-      "is_delete": 0
+      "is_delete": 0,
+      "is_fixed": 0
     },
     {
       "id": "586",
@@ -8119,11 +8121,12 @@
       "name": "성장편의점",
       "amount": 24000,
       "date": "2025-04-14",
-      "cate_id": 4,
-      "cate_name": "쇼핑",
+      "cate_id": 2,
+      "cate_name": "교통비",
       "is_salary": 0,
       "is_hide": 0,
-      "is_delete": 0
+      "is_delete": 0,
+      "is_fixed": 0
     },
     {
       "id": "593",
