@@ -1,6 +1,6 @@
 <template>
   <div class="home-card">
-    <div class="position-relative w-100">
+    <div class="position-relative w-100" >
       <div class="fw-600 fs-20 trk-text-6">나의 순자산</div>
       <div class="home-card__income">
         <span class="fs-30 home-card__income__span">
@@ -9,6 +9,7 @@
       </div>
     </div>
   </div>
+  {{ isLoggedIn }}
 </template>
 
 <script setup>

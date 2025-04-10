@@ -2,12 +2,21 @@
   <div class="w-100 min-h-50 p-4">
     <div class="home-box">
 
-        <div class="home-box__content max-w-25">
+        <div class="home-box__content max-w-25" v-show="isUser">
           <MyTotal>{{ parseInt(incomeTotal - expenseTotal).toLocaleString('ko-KR') }}</MyTotal>
         </div>
 
-        <div class="home-box__content max-w-50">
+        <div class="home-box__content max-w-50" v-show="isUser">
           <MyExpense :thisWeekTotal="thisWeekTotal" :lastWeekTotal="lastWeekTotal"></MyExpense>
+        </div>
+
+        <!-- 비로그인시 -->
+        <div class="home-box__content max-w-75" v-show="!isUser">
+          <div class="home-card" @click="toLogin">
+            <div class="flex-center w-100 fw-600 fs-30 trk-text-6">
+                로그인 해서 내 정보를 불러오세요!
+            </div>
+          </div>
         </div>
 
         <div class="home-box__content max-w-35">
@@ -30,7 +39,7 @@
         </div>
 
         
-        <div class="home-box__content max-w-35 min-h-40">
+        <div class="home-box__content max-w-35 min-h-40" v-show="isUser">
           <div class="home-card h-100">
             <ExpenseFilterContainer
             :transactions="expenseStore.expenseList"
@@ -39,7 +48,7 @@
           </div>
         </div>
 
-        <div class="home-box__content max-w-40 min-h-40">
+        <div class="home-box__content max-w-40 min-h-40" v-show="isUser">
           <div class="home-card h-100" @click="toStatistics">
             <CategoryList :categoryRatios="categoryRatios"></CategoryList>
           </div>
@@ -61,8 +70,12 @@
   import CategoryList from '../Statistics/CategoryList.vue';
   import { storeToRefs } from 'pinia';  
   import { useRouter } from 'vue-router';
+  import { useUserStore } from '@/stores/userStore.js';
 
   const router = useRouter();
+
+  //유저 초기화
+  const isUser = userService.checkIsLogin();
 
   //Expense 카드 start
   // stores
@@ -90,9 +103,6 @@
     }
   });
   //Expense 카드 end
-
-  //초기화
-  userService.checkIsLogin();
 
   //지출 데이터 가져오기
   const statisticsStore = useStatisticsStore();
@@ -189,6 +199,11 @@ onMounted(() => {
 //통계페이지로 보내기
 const toStatistics = () => {
   router.push('/statistics');
+}
+
+//로그인으로 보내기
+const toLogin = () => {
+  router.push('/login');
 }
 
 </script>
