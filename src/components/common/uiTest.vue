@@ -1,7 +1,7 @@
 <template>
   <main class="p-4">
+    <BackButton />
     <h2>Confirm 컴포넌트 테스트</h2>
-
     <button
       class="trk-btn-confirm"
       @click="handleLogout"
@@ -13,6 +13,7 @@
 
 <script setup>
 import { inject } from "vue";
+import BackButton from "@/components/common/BackButton.vue";
 
 const alert = inject("useAlert");
 const confirm = inject("useConfirm");

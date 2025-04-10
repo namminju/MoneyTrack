@@ -12,7 +12,7 @@
     <Modal
       v-if="showModal"
       @close="showModal = false"
-      :allCategories="categoryStore.categoryList[0]"
+      :selectedDate="props.selectedDate"
     >
     </Modal>
     <!-- 필터 패널 -->
@@ -60,6 +60,7 @@ import Modal from './AddModal.vue';
 import { useCategoryStore } from '@/stores/category';
 const categoryStore = useCategoryStore();
 const showModal = ref(false);
+
 const props = defineProps({
   transactions: {
     type: Array,
