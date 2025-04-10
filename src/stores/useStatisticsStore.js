@@ -17,13 +17,14 @@ export const periodOptions = [
 export const useStatisticsStore = defineStore('statistics', () => {
   const rawData = ref([]);
   const user = session.get();
-  const userID = user?.id;
+  const userID = user?.id; // 세션에서 user ID 가져오기
+  console.log('userID:', userID); // 디버깅용
 
   const fetchData = async () => {
     try {
       const res = await axios.get('http://localhost:3000/Expense');
-      rawData.value = res.data;
-      // rawData.value = res.data.filter((item) => item.user_id === userID);
+      // rawData.value = res.data;
+      rawData.value = res.data.filter((item) => item.user_id === userID);
       console.log('data: ', rawData.value);
     } catch (err) {
       console.error('데이터 가져오기 실패: ', err);
@@ -38,8 +39,8 @@ export const useStatisticsStore = defineStore('statistics', () => {
     return rawData.value.filter((item) => {
       const date = new Date(item.date);
 
-      if (selectedType.value.id === 2 && item.cate_id !== 99) return false; // 수입만
-      if (selectedType.value.id === 3 && item.cate_id === 99) return false; // 지출만
+      if (selectedType.value.id === 2 && item.is_salary !== 1) return false; // 수입만
+      if (selectedType.value.id === 3 && item.is_salary === 1) return false; // 지출만
 
       if (
         selectedPeriod.value.id === 1 &&
@@ -87,11 +88,13 @@ export const useStatisticsStore = defineStore('statistics', () => {
       expense: 0,
     })); //12월까지 각 월별 수입과 지출을 저장할 객체 배열 생성 및 초기화{income: 0, expense: 0}
 
-    filteredData.value.forEach((item) => {
+    rawData.value.forEach((item) => {
       const date = new Date(item.date);
+      if (date.getFullYear() !== selectedYear.value) return;
+
       const month = date.getMonth();
 
-      if (item.cate_id === 99) {
+      if (item.is_salary === 1) {
         totals[month].income += item.amount;
       } else {
         totals[month].expense += item.amount;
@@ -119,7 +122,7 @@ export const useStatisticsStore = defineStore('statistics', () => {
       const date = new Date(item.date);
       const day = date.getDate();
 
-      if (item.cate_id !== 99) {
+      if (item.is_salary !== 1) {
         total[day - 1] += item.amount;
       }
     });
