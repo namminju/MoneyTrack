@@ -110,21 +110,21 @@ const filteredTransactions = computed(() => {
 
     const matchDate = tx.date === selectedDateStr;
 
-    return matchType && matchCategory && matchDate;
+    return matchType && matchCategory && matchDate && tx.is_delete === 0;
   });
 });
 
 //수익 합계 계산
 const totalIncome = computed(() => {
   return filteredTransactions.value
-    .filter((tx) => tx.is_salary === 1)
+    .filter((tx) => tx.is_salary === 1 && tx.is_delete === 0)
     .reduce((sum, tx) => sum + tx.amount, 0);
 });
 
 //지출 합계 계산
 const totalExpense = computed(() => {
   return filteredTransactions.value
-    .filter((tx) => tx.is_salary === 0)
+    .filter((tx) => tx.is_salary === 0 && tx.is_delete === 0)
     .reduce((sum, tx) => sum + tx.amount, 0);
 });
 </script>

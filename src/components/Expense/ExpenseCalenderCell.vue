@@ -85,7 +85,7 @@ const income = computed(() => {
   if (!props.date) return 0;
   const dateStr = formatDate(props.date);
   return props.recordData
-    .filter((r) => r.date === dateStr && r.is_salary === 1)
+    .filter((r) => r.date === dateStr && r.is_salary === 1 && r.is_delete === 0)
     .reduce((sum, r) => sum + r.amount, 0);
 });
 
@@ -94,7 +94,7 @@ const expense = computed(() => {
   if (!props.date) return 0;
   const dateStr = formatDate(props.date);
   return props.recordData
-    .filter((r) => r.date === dateStr && r.is_salary === 0)
+    .filter((r) => r.date === dateStr && r.is_salary === 0 && r.is_delete === 0)
     .reduce((sum, r) => sum + r.amount, 0);
 });
 
