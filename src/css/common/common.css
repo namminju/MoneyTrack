@@ -1,11 +1,11 @@
 /* MoneyTrack Color */
 :root {
-  --trk-ivory: #EDF1D6;
-  --trk-light-yellow: #F9E0BB;
-  --trk-yellow: #FFC26F;
-  --trk-light-green: #9DC08B;
+  --trk-ivory: #edf1d6;
+  --trk-light-yellow: #f9e0bb;
+  --trk-yellow: #ffc26f;
+  --trk-light-green: #9dc08b;
   --trk-green: #609966;
-  --trk-dark-green: #40513B;
+  --trk-dark-green: #40513b;
 
   --trk-disabled-light: #e0e0e0;
   --trk-disabled-middle: #a8a8a8;
@@ -81,12 +81,12 @@
   font-size: 1.6rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   background-color: var(--trk-green);
-  color:var(--trk-ivory);
+  color: var(--trk-ivory);
   border: none;
   cursor: pointer;
 }
 .trk-btn-confirm:hover {
-  background-color: #9DC08B;
+  background-color: #9dc08b;
 }
 
 .trk-btn-cancel {
@@ -96,7 +96,7 @@
   font-size: 1.6rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   background-color: #7e7e7e;
-  color:var(--trk-ivory);
+  color: var(--trk-ivory);
   border: none;
   cursor: pointer;
 }
@@ -111,7 +111,7 @@
   font-size: 1.6rem;
   box-shadow: 0 1px 0 1px var(--trk-yellow);
   background-color: var(--trk-light-yellow);
-  color:var(--trk-dark-green);
+  color: var(--trk-dark-green);
   border: 1px solid var(--trk-yellow);
   cursor: pointer;
 }
@@ -130,7 +130,6 @@
   cursor: pointer;
   opacity: 0.8;
 }
-
 
 /* MoneyTrack Input */
 .trk-input-yellow {

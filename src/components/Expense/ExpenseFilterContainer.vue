@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <hr class="hidden" />
+    <hr />
 
     <ExpenseFilterItem
       v-for="(transaction, index) in filteredTransactions"
@@ -130,8 +130,17 @@ const totalExpense = computed(() => {
 </script>
 
 <style scoped>
-/* 스크롤바 제거 */
+/* filter container style */
 .filter-container {
+  position: relative;
+  text-align: left;
+  width: 28%;
+  padding: 2% 2%;
+  background-color: var(--trk-ivory);
+  border-radius: 2.4rem;
+  height: 80vh;
+  /* 스크롤바 제거 */
+  overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }

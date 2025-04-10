@@ -60,8 +60,20 @@
   color: blue;
 }
 
+.msummary {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .calendar__grid__cell {
     height: clamp(20px, 8vh, 100px);
+  }
+  .summary {
+    display: none;
+  }
+  .msummary {
+    font-size: 1.2rem;
+    color: rgb(133, 133, 133);
+    display: block;
   }
 }

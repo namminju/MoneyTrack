@@ -31,6 +31,9 @@
         -{{ expense.toLocaleString() }}
       </div>
     </div>
+    <div v-show="hasData" :class="styles.msummary">
+      총 {{ hasDataLength }}건
+    </div>
   </div>
 </template>
 
@@ -78,6 +81,12 @@ const hasData = computed(() => {
   if (!props.date) return false;
   const dateStr = formatDate(props.date);
   return props.recordData.some((r) => r.date === dateStr);
+});
+
+const hasDataLength = computed(() => {
+  if (!props.date) return false;
+  const dateStr = formatDate(props.date);
+  return props.recordData.filter((r) => r.date === dateStr).length;
 });
 
 //수익 합산 게산

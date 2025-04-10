@@ -54,4 +54,10 @@ defineProps({
   background-color: #000000;
   color: white;
 }
+@media (max-width: 380px) {
+  .chcekbox-button,
+  .radio-button {
+    padding: 6px 8px;
+  }
+}
 </style>
