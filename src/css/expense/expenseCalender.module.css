@@ -22,19 +22,9 @@
   font-size: 2rem;
   padding: clamp(4px, 1.6rem, 8px);
 }
-.calendar__header select,
-.calendar__header__selects__confirm-button {
-  background-color: white;
-  font-size: 1.6rem;
-  padding: 0.2rem 0.4rem;
-
-  border-radius: 0.4rem;
-  margin: 0 0 0 0.8rem;
-  text-align: center;
-  font-weight: bold;
-}
 
 .calendar__header__button {
+  font-size: 2rem;
   margin: 0 4%;
   color: white;
   border: none;
@@ -44,7 +34,7 @@
 .calendar__grid {
   font-weight: bold;
   font-size: 1.6rem;
-  padding: 0 1rem;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
@@ -56,61 +46,6 @@
   padding: 1rem;
   position: relative;
 }
-.calendar__grid__cell {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  border-radius: 1rem;
-  padding: 0.4rem 0;
-
-  height: clamp(10px, 12vh, 200px);
-  position: relative;
-  cursor: pointer;
-}
-
-/* 투명도로 인해 변경 불가(방법 모색 필요) */
-.calendar__grid__cell:active {
-  background-color: #60996626;
-}
-
-.calendar__grid__cell.selected {
-  background-color: #6099667d;
-}
-
-.date-number {
-  font-weight: bold;
-  font-size: 1.6rem;
-}
-
-.summary {
-  margin: auto;
-  width: 90%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  font-size: 1.2rem;
-}
-.summary__income {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 44%;
-  background-color: white;
-  border-radius: 0.5rem;
-  color: green;
-}
-.summary__expense {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 44%;
-  background-color: white;
-  border-radius: 0.5rem;
-  color: red;
-}
 
 .sunday {
   color: red;
@@ -120,193 +55,24 @@
   color: blue;
 }
 
-/* 구조 */
-
-.filter-container {
-  position: relative;
-  text-align: left;
-  width: 28%;
-  padding: 2% 2%;
-  background-color: var(--trk-ivory);
-  border-radius: 2.4rem;
-}
-.filter-container__header {
-  font-size: 2rem;
-  display: flex;
-  font-weight: bold;
-  justify-content: space-between;
-}
-.summary-box {
-  display: flex;
-  font-size: 1.6rem;
-  font-weight: bold;
-  padding-top: 1rem;
-  justify-content: space-between;
-}
-
-.summary-box :nth-child(1) {
-  color: rgba(0, 0, 0, 0.5);
-}
-.filter-container__box {
-  font-weight: bold;
-  padding: 1rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 1rem auto;
-  width: 100%;
-  background-color: transparent;
-  border-radius: 1.2rem;
-  font-size: 1.6rem;
-}
-.filter-container__box__left i {
-  text-align: center;
-  align-content: center;
-  height: 4rem;
-  aspect-ratio: 1 / 1;
-  font-size: 2rem;
-  border-radius: 50%;
-}
-.filter-container__box__item :nth-child(1) {
-  font-size: 1.4rem;
-}
-.filter-container__box__item :nth-child(2) {
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 1.2rem;
-}
-.filter-container__box__left {
-  text-align: left;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-.filter-panel {
-  font-weight: bold;
-  background-color: var(--trk-light-yellow);
-  position: absolute;
-  width: 90%;
-  border-radius: 2rem;
-  right: 5%;
-  z-index: 999;
-  padding: 1rem;
-  margin: 1rem 0;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.filter-panel select {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 1rem;
-}
-.flex {
-  display: flex;
-}
-
-/* plus button */
-.plus_button {
-  position: absolute;
-  right: 4%;
-  bottom: 4%;
-  width: clamp(10px, 8rem, 70px);
-  height: clamp(10px, 8rem, 70px);
-  border-radius: 50%;
-  border: 0;
-  background-color: var(--trk-green);
-}
-.plus_button * {
-  color: var(--trk-yellow);
-  margin: auto;
-  font-size: clamp(5px, 4rem, 35px);
-}
-
-.expense-full-container {
-  display: flex;
-  background-color: var(--trk-yellow);
-  border-radius: 1.25rem;
-  padding: 2rem;
-  margin: 2rem;
-}
-
 @media (max-width: 1024px) {
-  .expense-full-container {
-    display: block;
-    background-color: transparent;
-    margin: 0;
-    padding: 0;
-  }
-  .hidden {
-    display: none;
-  }
-  .flex {
-    display: block;
-  }
   .calendar {
-    width: 90%;
+    width: 96vw;
     height: auto;
   }
-  .filter-container {
-    width: 94%;
-    margin: auto;
-    background-color: transparent;
+  .calendar__header {
+    width: 96vw;
   }
-  .filter-panel {
-    padding: 2%;
-    width: 58%;
-    right: 2%;
-  }
+
   .calendar__grid__cell {
     height: clamp(20px, 8vh, 100px);
   }
-  .plus_button {
-    position: fixed;
-  }
-  .filter-container__box {
-    height: 6rem;
-    background-color: var(--trk-ivory);
-    padding: 2% 4%;
-    font-size: 2rem;
-  }
 }
 
-.pointer {
+/* datepicker style 강제 지정 */
+:deep(.mx-datepicker svg) {
+  fill: white !important;
+}
+:deep(.mx-datepicker) {
   cursor: pointer;
-}
-
-/* 체크 박스 선택(버튼형) */
-.hidden-checkbox {
-  display: none;
-}
-.chcekbox-button,
-.radio-button {
-  background-color: white;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
-}
-.radio-button {
-  border-radius: 2rem;
-}
-.chcekbox-button.selected {
-  background-color: #000000;
-  color: white;
-}
-select {
-  appearance: none;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background-color: white;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
 }

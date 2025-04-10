@@ -70,7 +70,7 @@ function onTypeChange(event) {
   right: 5%;
   z-index: 999;
   padding: 1rem;
-  margin: 1rem 0;
+  margin: auto;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
