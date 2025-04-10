@@ -1,8 +1,5 @@
-<!-- components/CategoryButton.vue -->
-<!-- category 버튼 -->
 <template>
-  <!-- screen 크기에 따라 가로 버튼 개수 변경 -->
-  <div class="col-6 col-sm-4 col-lg-6 col-xxl-4">
+  <div :class="wrapperClass">
     <label
       :class="['chcekbox-button', { selected: isSelected }]"
       class="button-text"
@@ -14,7 +11,6 @@
         @change="toggleCategory(category.name)"
         class="hidden-checkbox"
       />
-      <!-- 카테고리 아이콘 및 이름 출력 -->
       <i :class="category.icon" />
       {{ category.name }}
     </label>
@@ -22,11 +18,14 @@
 </template>
 
 <script setup>
-//props
 defineProps({
   category: Object,
   isSelected: Boolean,
   toggleCategory: Function,
+  wrapperClass: {
+    type: String,
+    default: '', // 기본은 아무 클래스도 적용하지 않음
+  },
 });
 </script>
 

@@ -10,6 +10,7 @@
           :category="category"
           :isSelected="localSelectedCategories.includes(category.name)"
           :toggleCategory="toggleCategory"
+          wrapperClass="col-6 col-sm-4 col-lg-6 col-xxl-4"
         />
       </div>
     </div>
