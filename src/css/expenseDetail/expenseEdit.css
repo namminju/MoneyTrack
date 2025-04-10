@@ -16,15 +16,14 @@
 .edit-box__header {
   width: 90%;
   display: flex;
-  justify-content: center; /* ✅ 가운데 정렬 */
+  justify-content: center;
   align-items: center;
   position: relative;
 }
-.edit-box__header__button {
+.header__button {
   position: absolute;
   left: 2rem;
   cursor: pointer;
-  position: absolute;
   left: 0;
 }
 .edit-box__item {
@@ -58,11 +57,15 @@
   gap: 3rem;
   flex-wrap: wrap; /*줄바꿈 설정*/
 }
-
+.info-rowcb {
+  display: flex;
+  gap: 3rem;
+  justify-content: start;
+}
 .label {
   width: 12rem;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
 }
 
 .edit-box__form__input {
@@ -70,20 +73,20 @@
   text-align: left;
   padding: 0.8rem 1.2rem;
   font-size: 1.4rem;
-  border-radius: 2.4rem;
+  border-radius: 1.5rem;
   width: 15rem;
 }
 
 .edit-box__item__button {
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   width: 80%;
   display: flex;
   gap: 2rem;
   justify-content: center;
 }
 
-.edit-box__itemWrapper {
+.box__itemWrapper {
   width: 90%;
   display: flex;
   flex-direction: column;

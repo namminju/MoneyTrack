@@ -2,13 +2,11 @@
   <div class="full-container trk-bg-2">
     <div class="detail-box trk-bg-1">
       <div class="edit-box__header">
-        <span class="edit-box__header__button"
-          ><BackButton @click="gotoDetail"
-        /></span>
+        <span class="header__button"><BackButton @click="gotoDetail" /></span>
         <span class="fw-600 fs-20">지출 내역 수정</span>
       </div>
       <form class="edit-box__item" @submit.prevent="updateExpense">
-        <div class="edit-box__itemWrapper">
+        <div class="box__itemWrapper">
           <div class="edit-box__item__text">
             <div class="info">
               <div class="info-row">
@@ -74,7 +72,7 @@
                   v-model="Item.memo"
                 />
               </div>
-              <div class="info-row">
+              <div class="info-rowcb">
                 <span class="label">고정비 여부</span>
                 <input type="checkbox" v-model="Item.is_fixed" />
               </div>
