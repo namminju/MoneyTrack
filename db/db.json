@@ -1,7 +1,7 @@
 {
   "user": [
     {
-      "id": "3",
+      "id": "1",
       "name": "홍길동",
       "email": "hong@gmail.com",
       "password": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
@@ -18,7 +18,7 @@
       "is_data": false
     },
     {
-      "id": "1",
+      "id": "3",
       "name": "임창진",
       "email": "cj2349@naver.com",
       "password": "96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e",
