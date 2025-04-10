@@ -3,7 +3,7 @@
     <div class="position-relative w-100">
       <div class="fw-600 fs-20 trk-text-6 text-center">지금 환율은?</div>
       <div class="home-card__income">
-        <div class="d-flex justify-content-around gap-2 w-100">
+        <div class="d-flex justify-content-around w-100">
           
 
             <div class="text-center overflow-hidden">
@@ -47,7 +47,7 @@ const getCurrency = async () => {
   yenRate.value = filteredItem.find((item) => item.cur_unit === 'JPY(100)').bkpr;
   cDollarRate.value = filteredItem.find((item) => item.cur_unit === 'CNH').bkpr;
 }
-getCurrency();
+// getCurrency();
 //현재 환율 구하기 end
 
 

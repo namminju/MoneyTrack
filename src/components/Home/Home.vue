@@ -1,27 +1,67 @@
 <template>
   <div class="w-100 min-h-50 p-4">
     <div class="home-box">
-        <div class="home-box__content max-w-30">
+
+        <div class="home-box__content max-w-25">
           <MyTotal>{{ incomeTotal - expenseTotal }}</MyTotal>
         </div>
-        <div class="home-box__content max-w-60">
+
+        <div class="home-box__content max-w-50">
           <MyExpense :thisWeekTotal="thisWeekTotal" :lastWeekTotal="lastWeekTotal"></MyExpense>
         </div>
-        <div class="home-box__content max-w-30">
-          <!-- <ExchangeRate/> -->
+
+        <div class="home-box__content max-w-35">
+          <ExchangeRate/>
         </div>
+
+        <div class="home-box__content max-w-40">
+          <div class="home-card">
+            통계칸
+          </div>
+        </div>
+
+        
+        <div class="home-box__content max-w-35">
+          <div class="home-card">
+            <ExpenseFilterContainer
+            :transactions="expenseStore.expenseList"
+            :selectedDate="selectedDate"
+            />
+          </div>
+        </div>
+
+        <div class="home-box__content max-w-40">
+          asdf
+        </div>
+        
+
     </div>
   </div>
 </template>
 
 <script setup>
   import { computed, ref } from 'vue';
+  
   import userService from '@/utils/userService.js';
   import { useStatisticsStore } from '@/stores/useStatisticsStore.js';
   import MyTotal from './MyTotal.vue';
   import MyExpense from './MyExpense.vue';
   import ExchangeRate from './ExchangeRate.vue';
+  
 
+  //Expense 카드 start
+  // stores
+  import { useExpenseStore } from '@/stores/expense';
+
+  //expense 입력용
+  import ExpenseFilterContainer from '@/components/Expense/ExpenseFilterContainer.vue';
+  // init store & user
+  const expenseStore = useExpenseStore();
+
+  //오늘 날짜로 default 설정
+  const today = new Date();
+  const selectedDate = ref(today);
+  //Expense 카드 end
 
   //초기화
   userService.checkIsLogin();
@@ -100,10 +140,6 @@
     });
 
   })
-
-
-
-
 
 </script>
 
