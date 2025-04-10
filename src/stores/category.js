@@ -1,4 +1,4 @@
-import { ref, computed, reactive } from 'vue';
+import { computed, reactive } from 'vue';
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
@@ -6,6 +6,7 @@ export const useCategoryStore = defineStore('Category', () => {
   const BASEURL = 'api/Category';
   const state = reactive({ categoryList: [], isLoading: false });
 
+  //카테고리 조회
   const fetchcategoryList = async () => {
     state.isLoading = true;
     try {
@@ -23,6 +24,8 @@ export const useCategoryStore = defineStore('Category', () => {
       state.isLoading = false;
     }
   };
+
+  //카테고리 읽기 전용으로 읽도록 computed
   const categoryList = computed(() => state.categoryList);
 
   return {
