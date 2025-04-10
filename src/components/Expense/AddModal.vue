@@ -100,6 +100,9 @@ import '@/css/expense/expense.css';
 import { ref, watch } from 'vue';
 import { useCategoryStore } from '@/stores/category';
 import { useExpenseStore } from '@/stores/expense';
+import { inject } from 'vue';
+
+const alert = inject('useAlert');
 
 const transactionType = ref(1); // 1: 수입, 0: 지출
 const selectedCategory = ref(''); // 카테고리 전체 객체
@@ -151,6 +154,15 @@ watch(
 const emit = defineEmits(['close', 'submit']);
 const close = () => emit('close');
 
+const successPopup = () => {
+  alert.success('내역이 추가되었습니다.');
+  close();
+};
+
+const failPopup = () => {
+  alert.error('내역 추가를 실패했습니다.\n 다시 시도해주세요');
+};
+
 const submitForm = async () => {
   const user = ref(JSON.parse(sessionStorage.getItem('user')));
 
@@ -171,11 +183,10 @@ const submitForm = async () => {
     is_delete: 0,
   };
   try {
-    await AddExpense(formData);
+    await AddExpense(formData, successPopup, failPopup);
   } catch (e) {}
 
   emit('submit', formData);
-  close();
 };
 </script>
 
@@ -208,7 +219,7 @@ const submitForm = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 20;
   backdrop-filter: blur(1px);
 }
 .modal-content {
