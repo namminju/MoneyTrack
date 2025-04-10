@@ -44,6 +44,7 @@
             <ExpenseFilterContainer
             :transactions="expenseStore.expenseList"
             :selectedDate="selectedDate"
+            :plusButtonShow="false"
             />
           </div>
         </div>
