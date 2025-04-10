@@ -68,12 +68,16 @@
 
 <script setup>
 import PieChart from './PieChart.vue';
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, defineEmits } from 'vue';
 import BarChart from './BarChart.vue';
 import CategoryButton from '../Expense/CategoryButton.vue';
 import { useCategoryStore } from '@/stores/category';
 
 const categoryStore = useCategoryStore();
+
+const emit = defineEmits(['update:selectedCategories']);
+//카테고리 선택시 emit을 정의 하지 않았다는 에러메세지가 발생
+//해결하기 위한 emit 정의
 
 const props = defineProps({
   categoryRatios: Array,
