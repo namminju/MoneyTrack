@@ -101,7 +101,7 @@ const gotoEdit = () => {
 
 const handleDelete = async () => {
   try {
-    await axios.patch(`/api/Expense/${id.value}`, { is_delete: 1 });
+    await expenseStore.deleteExpense(id.value);
     gotoExpense();
   } catch (e) {
     console.log("삭제 실패");
