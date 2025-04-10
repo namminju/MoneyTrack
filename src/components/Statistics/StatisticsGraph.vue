@@ -24,7 +24,7 @@
         :filteredData="filteredCatergory"
       ></component>
     </div>
-    <div class="category_box">
+    <!-- <div class="category_box">
       <ul>
         <li v-for="item in props.categoryRatios" :key="item.category">
           <label
@@ -36,6 +36,17 @@
           </label>
         </li>
       </ul>
+    </div> -->
+
+    <!-- category_box -->
+    <div class="category_box">
+      <CategoryButton
+        v-for="category in categoryStore.categoryList[0]"
+        :key="category.name"
+        :category="category"
+        :isSelected="selectedCategory.includes(category.name)"
+        :toggleCategory="toggleCategory"
+      />
     </div>
   </div>
 </template>
@@ -44,6 +55,11 @@
 import PieChart from './PieChart.vue';
 import { ref, computed, onMounted } from 'vue';
 import BarChart from './BarChart.vue';
+import CategoryButton from '../Expense/CategoryButton.vue';
+import { useCategoryStore } from '@/stores/category';
+
+const categoryStore = useCategoryStore();
+
 const props = defineProps({
   categoryRatios: Array,
   filteredData: Array,
@@ -63,6 +79,20 @@ const filteredCatergory = computed(() => {
     selectedCategory.value.includes(item.cate_name)
   );
 });
+
+function toggleCategory(name) {
+  const updated = [...selectedCategory.value]; // ✅ ref이므로 .value
+  const index = updated.indexOf(name);
+
+  if (index === -1) {
+    updated.push(name);
+  } else {
+    updated.splice(index, 1);
+  }
+
+  selectedCategory.value = updated;
+  emit('update:selectedCategories', updated);
+}
 
 const totalAmount = computed(() =>
   filteredCatergory.value.reduce((sum, item) => sum + item.amount, 0)
@@ -89,3 +119,34 @@ const istoggletype = () => {
   chartType.value = chartType.value === 'pie' ? 'bar' : 'pie';
 };
 </script>
+<style scoped>
+.category_box {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .category_box {
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding: 2rem;
+    gap: 1rem 0;
+    max-width: 90vw;
+  }
+
+  .category_box > * {
+    width: 23%; /* 두 개씩 배치 (6열 느낌) */
+  }
+}
+@media (max-width: 700px) {
+  .category_box > * {
+    width: 30%; /* 두 개씩 배치 (6열 느낌) */
+  }
+}
+@media (max-width: 400px) {
+  .category_box > * {
+    width: 48%; /* 두 개씩 배치 (6열 느낌) */
+  }
+}
+</style>

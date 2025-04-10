@@ -176,6 +176,11 @@
   max-width: 1080px;
 }
 
+.trk-medium-width {
+  width: 100%;
+  max-width: 768px;
+}
+
 .trk-small-width {
   width: 100%;
   max-width: 400px;

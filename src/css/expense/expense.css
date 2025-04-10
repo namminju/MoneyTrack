@@ -36,6 +36,7 @@
 }
 
 .calendar__header__button {
+  font-size: 2rem;
   margin: 0 4%;
   color: white;
   border: none;
@@ -75,24 +76,10 @@
   padding: 2% 2%;
   background-color: var(--trk-ivory);
   border-radius: 2.4rem;
-}
-.filter-container__header {
-  font-size: 2rem;
-  display: flex;
-  font-weight: bold;
-  justify-content: space-between;
-}
-.summary-box {
-  display: flex;
-  font-size: 1.6rem;
-  font-weight: bold;
-  padding-top: 1rem;
-  justify-content: space-between;
+  height: 80vh;
+  overflow-y: scroll;
 }
 
-.summary-box :nth-child(1) {
-  color: rgba(0, 0, 0, 0.5);
-}
 .filter-container__box {
   font-weight: bold;
   padding: 1rem 0;
@@ -126,49 +113,12 @@
   gap: 1rem;
   align-items: center;
 }
-.filter-panel {
-  font-weight: bold;
-  background-color: var(--trk-light-yellow);
-  position: absolute;
-  width: 90%;
-  border-radius: 2rem;
-  right: 5%;
-  z-index: 999;
-  padding: 1rem;
-  margin: 1rem 0;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
 
-.filter-panel select {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 1rem;
-}
 .flex {
   display: flex;
 }
 
-/* plus button */
-.plus_button {
-  position: absolute;
-  right: 4%;
-  bottom: 4%;
-  width: clamp(10px, 8rem, 70px);
-  height: clamp(10px, 8rem, 70px);
-  border-radius: 50%;
-  border: 0;
-  background-color: var(--trk-green);
-}
-.plus_button * {
-  color: var(--trk-yellow);
-  margin: auto;
-  font-size: clamp(5px, 4rem, 35px);
-}
-
 @media (max-width: 1024px) {
-  .hidden {
-    display: none;
-  }
   .flex {
     display: block;
   }
@@ -176,22 +126,11 @@
     width: 90%;
     height: auto;
   }
-  .filter-container {
-    width: 94%;
-    margin: auto;
-    background-color: transparent;
-  }
-  .filter-panel {
-    padding: 2%;
-    width: 58%;
-    right: 2%;
-  }
+
   .calendar__grid__cell {
     height: clamp(20px, 8vh, 100px);
   }
-  .plus_button {
-    position: fixed;
-  }
+
   .filter-container__box {
     height: 6rem;
     background-color: var(--trk-ivory);
@@ -205,10 +144,7 @@
 }
 
 /* 체크 박스 선택(버튼형) */
-.hidden-checkbox {
-  display: none;
-}
-.chcekbox-button,
+
 .radio-button {
   background-color: white;
   display: flex;
@@ -221,13 +157,11 @@
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
 }
+
 .radio-button {
   border-radius: 2rem;
 }
-.chcekbox-button.selected {
-  background-color: #000000;
-  color: white;
-}
+
 select {
   appearance: none;
   font-weight: bold;

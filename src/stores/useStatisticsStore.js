@@ -23,9 +23,9 @@ export const useStatisticsStore = defineStore('statistics', () => {
   const fetchData = async () => {
     try {
       const res = await axios.get('http://localhost:3000/Expense');
-      // rawData.value = res.data;
-      rawData.value = res.data.filter((item) => item.user_id === userID);
-      console.log('data: ', rawData.value);
+      rawData.value = res.data;
+      // rawData.value = res.data.filter((item) => item.user_id === userID);
+      // console.log('data: ', rawData.value);
     } catch (err) {
       console.error('데이터 가져오기 실패: ', err);
     }
