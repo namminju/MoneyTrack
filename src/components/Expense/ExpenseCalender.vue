@@ -2,6 +2,7 @@
   <div class="calendar">
     <!-- calendar header -->
     <div class="calendar__header">
+      <!-- 이전 달 이동 버튼 -->
       <button class="calendar__header__button" @click="prevMonth">
         <i class="fa-solid fa-angle-left" />
       </button>
@@ -23,6 +24,7 @@
         </template>
       </DatePicker>
 
+      <!-- 다음 달 이동 버튼 -->
       <button class="calendar__header__button" @click="nextMonth">
         <i class="fa-solid fa-angle-right" />
       </button>
@@ -63,7 +65,6 @@ import DatePicker from 'vue-datepicker-next';
 
 // css
 import 'vue-datepicker-next/index.css';
-import '@/css/expense/expense.css';
 
 // components
 import ExpenseCalenderCell from './ExpenseCalenderCell.vue';
@@ -147,7 +148,79 @@ function selectDate(date) {
 }
 </script>
 
+<!-- style -->
 <style scoped>
+/* 달력 */
+.calendar {
+  display: grid;
+  grid-auto-rows: 0.1fr 0.1fr 1fr;
+  border-radius: 2.4rem;
+  width: 68%;
+  padding: 0 0 1rem 0;
+  margin: 0 auto;
+  font-family: sans-serif;
+  background-color: var(--trk-ivory);
+}
+.calendar__header {
+  height: 5rem;
+  background-color: var(--trk-green);
+  display: flex;
+  border-radius: 2.4rem 2.4rem 0 0;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+  padding: clamp(4px, 1.6rem, 8px);
+}
+
+.calendar__header__button {
+  font-size: 2rem;
+  margin: 0 4%;
+  color: white;
+  border: none;
+  background-color: transparent;
+}
+.calendar__weekdays,
+.calendar__grid {
+  font-weight: bold;
+  font-size: 1.6rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+.calendar__weekdays {
+  font-weight: bold;
+}
+.calendar__weekdays__day {
+  padding: 1rem;
+  position: relative;
+}
+
+.sunday {
+  color: red;
+}
+
+.saturday {
+  color: blue;
+}
+
+@media (max-width: 1024px) {
+  .calendar {
+    width: 96vw;
+    height: auto;
+  }
+  .calendar__header {
+    width: 96vw;
+  }
+
+  .calendar__grid__cell {
+    height: clamp(20px, 8vh, 100px);
+  }
+}
+
 /* datepicker style 강제 지정 */
 :deep(.mx-datepicker svg) {
   fill: white !important;
