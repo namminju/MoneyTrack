@@ -3,14 +3,6 @@
   padding: 0;
 }
 
-.full-container2 {
-  display: flex;
-
-  border-radius: 1.25rem;
-  padding: 2rem;
-  margin: 2rem;
-}
-
 .edit-box {
   border-radius: 20px;
   height: 90%;
@@ -22,25 +14,24 @@
   align-items: center;
 }
 .edit-box__header {
-  margin-top: 2rem;
   width: 90%;
+  display: flex;
+  justify-content: center; /* ✅ 가운데 정렬 */
+  align-items: center;
   position: relative;
 }
 .edit-box__header__button {
   position: absolute;
   left: 2rem;
   cursor: pointer;
-}
-.edit-box__header__title {
-  font-weight: bold;
-  font-size: larger;
+  position: absolute;
+  left: 0;
 }
 .edit-box__item {
-  text-align: center;
+  background-color: white;
   max-width: 1024px;
   border-radius: 20px;
-  height: 90%;
-  width: 90%;
+  width: 70%;
   margin-top: 3rem;
   margin-bottom: 3rem;
   border: 2px solid rgb(173, 173, 173);
@@ -53,7 +44,7 @@
 .edit-box__item__text {
   width: 80%;
   overflow-y: auto;
-  padding: 3rem 0;
+  padding: 4rem 0 2rem 0;
 }
 
 .info {
@@ -65,14 +56,13 @@
 .info-row {
   display: flex;
   gap: 3rem;
-  justify-content: flex-start;
   flex-wrap: wrap; /*줄바꿈 설정*/
 }
 
 .label {
   width: 12rem;
   font-weight: bold;
-  text-align: left;
+  text-align: center;
 }
 
 .edit-box__form__input {
@@ -80,7 +70,7 @@
   text-align: left;
   padding: 0.8rem 1.2rem;
   font-size: 1.4rem;
-  border-radius: 8px;
+  border-radius: 2.4rem;
   width: 15rem;
 }
 
@@ -90,4 +80,12 @@
   width: 80%;
   display: flex;
   gap: 2rem;
+  justify-content: center;
+}
+
+.edit-box__itemWrapper {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -2,7 +2,7 @@
   <div class="full-container trk-bg-2">
     <div class="detail-box trk-bg-1">
       <div class="detail-box__header">
-        <span @click="gotoExpense()" class="detail-box__header__button">
+        <span @click="gotoExpense()">
           <BackButton />
         </span>
         <span class="detail-box__header__title">세부 지출 내역</span>
