@@ -28,7 +28,8 @@
       <div>총 {{ filteredTransactions.length }}건</div>
       <div>
         {{
-          (totalIncome > totalExpense ? '+' : '') + (totalIncome - totalExpense)
+          (totalIncome > totalExpense ? '+' : '') +
+          (totalIncome - totalExpense).toLocaleString()
         }}
       </div>
     </div>

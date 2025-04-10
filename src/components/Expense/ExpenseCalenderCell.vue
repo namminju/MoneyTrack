@@ -20,7 +20,7 @@
         v-if="income"
         :class="[styles.summary__item, styles.summary__income]"
       >
-        +{{ income }}
+        +{{ income.toLocaleString() }}
       </div>
 
       <!-- outcome -->
@@ -28,7 +28,7 @@
         v-if="expense"
         :class="[styles.summary__item, styles.summary__expense]"
       >
-        -{{ expense }}
+        -{{ expense.toLocaleString() }}
       </div>
     </div>
   </div>
