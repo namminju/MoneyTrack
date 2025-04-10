@@ -46,19 +46,7 @@ watch(user, async (newUser) => {
 
 //db 데이터 fetch
 onMounted(async () => {
-  const mockUser = {
-    id: '1',
-    name: '홍길동',
-    email: 'hong@gmail.com',
-    is_data: true,
-  };
-
   try {
-    // 임시 로그인
-    sessionStorage.setItem('user', JSON.stringify(mockUser));
-
-    user.value = JSON.parse(sessionStorage.getItem('user'));
-
     await categoryStore.fetchcategoryList();
     await expenseStore.fetchExpenseList();
   } catch (e) {
