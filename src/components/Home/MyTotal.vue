@@ -9,7 +9,6 @@
       </div>
     </div>
   </div>
-  {{ isLoggedIn }}
 </template>
 
 <script setup>

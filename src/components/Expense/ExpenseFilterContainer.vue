@@ -45,6 +45,7 @@
     <div class="margin-button" />
 
     <button
+      v-show="plusButtonShow"
       class="plus_button"
       @click="
         () => {
@@ -84,6 +85,10 @@ const props = defineProps({
   selectedDate: {
     type: Date,
     required: true,
+  },
+  plusButtonShow: {
+    type: Boolean,
+    default: true,
   },
 });
 
