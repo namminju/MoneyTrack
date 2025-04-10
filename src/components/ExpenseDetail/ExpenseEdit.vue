@@ -8,84 +8,90 @@
         <span class="edit-box__header__title">지출 내역 수정</span>
       </div>
       <form class="edit-box__item" @submit.prevent="updateExpense">
-        <div class="edit-box__item__text">
-          <div class="info">
-            <div class="info-row">
-              <span class="label">금액</span>
-              <input
-                type="text"
-                class="trk-br-6 edit-box__form__input"
-                v-model.number="Item.amount"
-              />
-            </div>
-            <div class="info-row">
-              <span class="label">제목</span>
-              <input
-                type="text"
-                class="trk-br-6 edit-box__form__input"
-                v-model="Item.name"
-              />
-            </div>
-            <div class="info-row">
-              <span class="label">결제 수단</span>
-              <select
-                class="trk-br-6 edit-box__form__input"
-                v-model="Item.type"
-              >
-                <option
-                  v-for="type in expenseTypes"
-                  :key="type.type_id"
-                  :value="type.type_id"
+        <div class="edit-box__itemWrapper">
+          <div class="edit-box__item__text">
+            <div class="info">
+              <div class="info-row">
+                <span class="label">금액</span>
+                <input
+                  type="text"
+                  class="trk-br-6 edit-box__form__input"
+                  v-model.number="Item.amount"
+                />
+              </div>
+              <div class="info-row">
+                <span class="label">제목</span>
+                <input
+                  type="text"
+                  class="trk-br-6 edit-box__form__input"
+                  v-model="Item.name"
+                />
+              </div>
+              <div class="info-row">
+                <span class="label">결제 수단</span>
+                <select
+                  class="trk-br-6 edit-box__form__input"
+                  v-model="Item.type"
                 >
-                  {{ type.name }}
-                </option>
-              </select>
-            </div>
+                  <option
+                    v-for="type in expenseTypes"
+                    :key="type.type_id"
+                    :value="type.type_id"
+                  >
+                    {{ type.name }}
+                  </option>
+                </select>
+              </div>
 
-            <div class="info-row">
-              <span class="label">카테고리</span>
-              <select
-                class="trk-br-6 edit-box__form__input"
-                v-model="Item.cate_id"
-              >
-                <option
-                  v-for="cate in expenseCategories"
-                  :key="cate.cate_id"
-                  :value="cate.cate_id"
+              <div class="info-row">
+                <span class="label">카테고리</span>
+                <select
+                  class="trk-br-6 edit-box__form__input"
+                  v-model="Item.cate_id"
                 >
-                  {{ cate.name }}
-                </option>
-              </select>
-            </div>
-            <div class="info-row">
-              <span class="label">날짜</span>
-              <input
-                type="date"
-                class="trk-br-6 edit-box__form__input"
-                v-model="Item.date"
-              />
-            </div>
-            <div class="info-row">
-              <span class="label">메모</span>
-              <input
-                type="text"
-                class="trk-br-6 edit-box__form__input"
-                v-model="Item.memo"
-              />
-            </div>
-            <div class="info-row">
-              <span class="label">고정비 여부</span>
-              <input type="checkbox" v-model="Item.is_fixed" />
+                  <option
+                    v-for="cate in expenseCategories"
+                    :key="cate.cate_id"
+                    :value="cate.cate_id"
+                  >
+                    {{ cate.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="info-row">
+                <span class="label">날짜</span>
+                <input
+                  type="date"
+                  class="trk-br-6 edit-box__form__input"
+                  v-model="Item.date"
+                />
+              </div>
+              <div class="info-row">
+                <span class="label">메모</span>
+                <input
+                  type="text"
+                  class="trk-br-6 edit-box__form__input"
+                  v-model="Item.memo"
+                />
+              </div>
+              <div class="info-row">
+                <span class="label">고정비 여부</span>
+                <input type="checkbox" v-model="Item.is_fixed" />
+              </div>
             </div>
           </div>
-        </div>
-        <div class="edit-box__item__button">
-          <button type="submit" class="trk-btn-confirm" @click="updateExpense">
-            저장
-          </button>
-          <button type="button" class="trk-btn-cancel" @click="gotoDetail">
-            취소
-          </button>
+          <div class="edit-box__item__button">
+            <button
+              type="submit"
+              class="trk-btn-confirm"
+              @click="updateExpense"
+            >
+              저장
+            </button>
+            <button type="button" class="trk-btn-cancel" @click="gotoDetail">
+              취소
+            </button>
+          </div>
         </div>
       </form>
     </div>
