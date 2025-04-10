@@ -45,14 +45,14 @@
 </template>
 
 <script setup>
-import "@/css/expenseDetail/expenseDetail.css";
-import { reactive, onMounted, ref, watch, computed } from "vue";
-import { useRoute } from "vue-router";
-import axios from "axios";
-import useRouterUtil from "@/utils/useRouterUtil";
-import ExpenseFilterContainer from "@/components/Expense/ExpenseFilterContainer.vue";
-import { useExpenseStore } from "@/stores/expense";
-import BackButton from "../common/BackButton.vue";
+import '@/css/expenseDetail/expenseDetail.css';
+import { reactive, onMounted, ref, watch, computed, inject } from 'vue';
+import { useRoute } from 'vue-router';
+import axios from 'axios';
+import useRouterUtil from '@/utils/useRouterUtil';
+import ExpenseFilterContainer from '@/components/Expense/ExpenseFilterContainer.vue';
+import { useExpenseStore } from '@/stores/expense';
+import BackButton from '../common/BackButton.vue';
 
 const expenseStore = useExpenseStore();
 const { gotoExpense, gotoExpenseDetail, gotoExpenseEdit } = useRouterUtil();
@@ -62,6 +62,8 @@ const states = reactive({ expense: {} });
 const infoFields = ref({});
 const id = computed(() => route.params.id);
 const selectedDate = ref(new Date());
+const alert = inject('useAlert');
+const confirm = inject('useConfirm');
 
 watch(
   () => route.params.id,
@@ -76,7 +78,7 @@ const fetchExpense = async () => {
     console.log(response);
 
     if (!response.data) {
-      console.log("error");
+      console.log('error');
     }
 
     states.expense = response.data;
@@ -84,15 +86,15 @@ const fetchExpense = async () => {
 
     infoFields.value = {
       제목: states.expense.name,
-      분류: !!states.expense.is_salary ? "수입" : "지출",
-      "결제 수단": states.expense.type_name,
+      분류: !!states.expense.is_salary ? '수입' : '지출',
+      '결제 수단': states.expense.type_name,
       카테고리: states.expense.cate_name,
       날짜: states.expense.date,
-      메모: states.expense.memo || "",
-      "고정비 여부": !!states.expense.is_fixed ? "O" : "X",
+      메모: states.expense.memo || '',
+      '고정비 여부': !!states.expense.is_fixed ? 'O' : 'X',
     };
   } catch (err) {
-    console.log("데이터 조회 실패");
+    console.log('데이터 조회 실패');
   }
 };
 
@@ -102,12 +104,15 @@ const gotoEdit = () => {
   gotoExpenseEdit(id.value);
 };
 
-const handleDelete = async () => {
-  try {
-    await expenseStore.deleteExpense(id.value);
-    gotoExpense();
-  } catch (e) {
-    console.log("삭제 실패");
-  }
+const handleDelete = () => {
+  confirm('정말 삭제하시겠습니까?')
+    .then(() => {
+      expenseStore.deleteExpense(id.value);
+      gotoExpense();
+      alert.success('내역이 삭제되었습니다.');
+    })
+    .catch(() => {
+      console.log('삭제 취소');
+    });
 };
 </script>
