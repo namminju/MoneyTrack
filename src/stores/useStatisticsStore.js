@@ -45,14 +45,17 @@ export const useStatisticsStore = defineStore('statistics', () => {
         selectedPeriod.value.id === 1 &&
         (date.getFullYear() !== selectedYear.value ||
           date.getMonth() + 1 !== selectedMonth.value)
-      )
+      ) {
         return false;
+      }
 
+      // 연간이면 month는 비교 안 함
       if (
         selectedPeriod.value.id === 2 &&
         date.getFullYear() !== selectedYear.value
-      )
+      ) {
         return false;
+      }
       return true;
     });
   });
