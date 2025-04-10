@@ -115,7 +115,7 @@ const route = useRoute();
 
 const { gotoExpense, gotoExpenseDetail } = useRouterUtil();
 
-const id = parseInt(route.params.id);
+const id = route.params.id;
 
 const expenseTypes = expenseData.expenseType;
 const expenseCategories = expenseData.expenseCategory;
