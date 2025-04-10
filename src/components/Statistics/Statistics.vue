@@ -50,9 +50,9 @@ onMounted(() => {
 const onFilterUpdate = ({ type, period, year, month }) => {
   console.log('🔄 필터 업데이트:', type, period, year, month);
 
-  selectedType.value = type;
-  selectedPeriod.value = period;
-  selectedYear.value = year;
-  selectedMonth.value = month;
+  store.selectedType = type;
+  store.selectedPeriod = period;
+  store.selectedYear = year;
+  store.selectedMonth = month;
 };
 </script>
