@@ -3,7 +3,7 @@
     <div class="detail-box trk-bg-1">
       <div class="detail-box__header">
         <span @click="gotoExpense()" class="detail-box__header__button">
-          <i class="fa-solid fa-chevron-left"></i>
+          <BackButton />
         </span>
         <span class="detail-box__header__title">세부 지출 내역</span>
       </div>
@@ -50,6 +50,7 @@ import axios from "axios";
 import useRouterUtil from "@/utils/useRouterUtil";
 import ExpenseFilterContainer from "@/components/Expense/ExpenseFilterContainer.vue";
 import { useExpenseStore } from "@/stores/expense";
+import BackButton from "../common/BackButton.vue";
 
 const expenseStore = useExpenseStore();
 const { gotoExpense, gotoExpenseDetail, gotoExpenseEdit } = useRouterUtil();

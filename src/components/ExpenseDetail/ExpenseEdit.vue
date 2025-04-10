@@ -3,7 +3,7 @@
     <div class="edit-box trk-bg-2">
       <div class="edit-box__header">
         <span class="edit-box__header__button" @click="gotoDetail">
-          <i class="fa-solid fa-chevron-left"></i>
+          <BackButton />
         </span>
         <span class="edit-box__header__title">지출 내역 수정</span>
       </div>
@@ -99,6 +99,7 @@ import axios from "axios";
 import expenseData from "../../../db/expense.json";
 import useRouterUtil from "@/utils/useRouterUtil";
 import { useExpenseStore } from "@/stores/expense";
+import BackButton from "../common/BackButton.vue";
 
 const expenseStore = useExpenseStore();
 const route = useRoute();
