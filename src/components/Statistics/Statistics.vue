@@ -1,5 +1,5 @@
 <template>
-  <div class="statistics-page">
+  <div class="statistics-page m-3">
     <StatisticsFilterBox @updateFilter="onFilterUpdate" />
     <StatisticsGraph
       :categoryRatios="categoryRatios"

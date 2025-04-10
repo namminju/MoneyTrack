@@ -1,27 +1,5 @@
 <template>
   <div class="filter-box">
-    <div class="type__buttons">
-      <button
-        v-for="type in typeOptions"
-        :key="type.id"
-        style="color: white"
-        @click="onTypeSelect(type)"
-        :class="{ active: selectedType.value === type }"
-      >
-        {{ type.name }}
-      </button>
-    </div>
-    <div class="period_buttons" v-if="periodOptions.length > 0">
-      <button
-        v-for="period in periodOptions"
-        :key="period.id"
-        style="color: white"
-        @click="onPeriodSelect(period)"
-        :class="{ active: selectedPeriod.value?.id === period.id }"
-      >
-        {{ period.name }}
-      </button>
-    </div>
     <!-- <DatePicker
       v-model="currentDate"
       :type="selectedPeriod.id === 1 ? 'month' : 'year'"
@@ -33,12 +11,13 @@
       :input-class="'datepicker-input'"
       @change="changeDate"
     /> -->
-    <div class="date_navigation">
-      <button @click="goToPrev" style="color: white">◀</button>
+    <div class="date_navigation date_navigation__header">
+      <!-- <button @click="goToPrev" style="color: white">◀</button> -->
       <!-- <span class="current_date" @click="showDateSelector = true">{{
         formattedDate
       }}</span> -->
       <DatePicker
+        class="datepicker-design"
         v-model="currentDate"
         :type="selectedPeriod.id === 1 ? 'month' : 'year'"
         format="yyyy-MM"
@@ -56,10 +35,23 @@
           }}
         </template>
       </DatePicker>
-      <button @click="goToNext" style="color: white">▶</button>
+      <div v-if="periodOptions.length > 0">
+        <button
+          style="color: white"
+          class="perio-button"
+          @click="onPeriodSelect()"
+        >
+          <i class="fa-solid fa-repeat" />
+          <span class="m-hidden">
+            {{ selectedPeriod.id === 1 ? ' month' : ' year' }}</span
+          >
+        </button>
+      </div>
+      <!-- <button @click="goToNext" style="color: white">▶</button> -->
     </div>
     <div class="statistics_calender_popup" v-if="showDatepicker">
       <DatePicker
+        class="datepicker-design"
         v-model="currentDate"
         :type="selectedPeriod.id === 1 ? 'month' : 'year'"
         format="yyyy-MM"
@@ -78,6 +70,16 @@
           }}
         </template>
       </DatePicker>
+    </div>
+    <div class="filter-icon-container">
+      <div class="">
+        <select v-model="selectedType">
+          <option v-for="type in typeOptions" :key="type.id" :value="type">
+            {{ type.name }}
+          </option>
+        </select>
+      </div>
+      <i class="fa-solid fa-filter" />
     </div>
   </div>
 </template>
@@ -163,13 +165,13 @@ const goToNext = () => {
   currentDate.value = d;
 };
 
-const onTypeSelect = (type) => {
-  selectedType.value = type;
+watch(selectedType, () => {
   applyFilter();
-};
+});
 
 const onPeriodSelect = (period) => {
-  selectedPeriod.value = period;
+  selectedPeriod.value =
+    selectedPeriod.value.id === 1 ? periodOptions[1] : periodOptions[0];
 };
 
 const applyFilter = () => {
@@ -189,3 +191,57 @@ console.log('selectedPeriod:', selectedPeriod.value);
 console.log('periodOptions:', periodOptions);
 console.log('currentDate:', currentDate.value);
 </script>
+<style scoped>
+.filter-box {
+  width: 100%;
+  max-width: 560px;
+}
+.filter-icon-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 0.6rem;
+}
+.filter-icon-container i {
+  font-size: 2.4rem;
+}
+.date_navigation__header {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: var(--trk-dark-green);
+  font-weight: bold;
+  font-size: 2rem;
+  padding: clamp(4px, 1.6rem, 8px);
+}
+/* datepicker style 강제 지정 */
+:deep(.mx-datepicker svg) {
+  width: 2.4rem;
+  height: 2.4rem;
+  fill: var(--trk-dark-green);
+}
+:deep(.mx-datepicker) {
+  text-align: center;
+  cursor: pointer;
+}
+
+@media (max-width: 380px) {
+  :deep(.mx-datepicker) {
+    width: 68%;
+  }
+  .date_navigation__header {
+    padding: 0;
+  }
+  .perio-button {
+    font-size: 1rem;
+  }
+  .m-hidden {
+    display: none;
+  }
+}
+</style>
