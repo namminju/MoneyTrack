@@ -8,7 +8,7 @@
           <MyExpense :thisWeekTotal="thisWeekTotal" :lastWeekTotal="lastWeekTotal"></MyExpense>
         </div>
         <div class="home-box__content max-w-30">
-          <ExchangeRate/>
+          <!-- <ExchangeRate/> -->
         </div>
     </div>
   </div>

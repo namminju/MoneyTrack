@@ -19,7 +19,20 @@ const exchangeRate = {
   /**원달러 환율 */
   async Wondollor(from = 1, to = '') {
     url += '&cur_unit=USD';
+    const response = await axios.get(url);
+    return response.data;
+  },
 
+  /**원옌 환율 */
+  async WonYen(from = 1, to = '') {
+    url += '&cur_unit=JPY(100)';
+    const response = await axios.get(url);
+    return response.data;
+  },
+
+  /**원위안 환율 */
+  async WonYen(from = 1, to = '') {
+    url += '&cur_unit=CNH';
     const response = await axios.get(url);
     return response.data;
   }

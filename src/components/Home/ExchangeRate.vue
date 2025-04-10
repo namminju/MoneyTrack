@@ -3,21 +3,25 @@
     <div class="position-relative w-100">
       <div class="fw-600 fs-20 trk-text-6 text-center">지금 환율은?</div>
       <div class="home-card__income">
-        <div class="d-flex justify-content-around">
-          <div class="text-center nation-flag">
-            <div><img src="@/images/nationFlags/na.png" alt=""></div>
-            <div class="fw-600">{{ dollarRate }} 원</div>
-          </div>
+        <div class="d-flex justify-content-around w-100">
           
-          <div class="text-center nation-flag" style="width:10rem">
-            <div><img src="@/images/nationFlags/jp.png" alt=""></div>
-            <div class="fw-600">{{ dollarRate }} 원</div>
-          </div>
 
-          <div class="text-center nation-flag">
-            <div><img src="@/images/nationFlags/na.png" alt=""></div>
-            <div class="fw-600">{{ dollarRate }} 원</div>
-          </div>
+            <div class="text-center overflow-hidden">
+              <img class="nation-flag" src="@/images/nationFlags/na.png" alt="">
+              <div class="fw-600">{{ dollarRate }} 원</div>
+            </div>
+
+            <div class="text-center nation-flag">
+              <img class="nation-flag" style="width :100%;" src="@/images/nationFlags/jp.png" alt="">
+              <div class="fw-600">{{ yenRate }} 원</div>
+            </div>
+
+            <div class="text-center nation-flag">
+              <img class="nation-flag" src="@/images/nationFlags/china.png" alt="">
+              <div class="fw-600">{{ dollarRate }} 원</div>
+            </div>
+
+
         </div>
       </div>
     </div>
@@ -37,6 +41,14 @@ const getDollar = async () => {
 }
 getDollar();
 
+//현재 옌 구하기
+const yenRate = ref('');
+const getYen = async () => {
+  const result = await exchangeRate.WonYen();
+  yenRate.value = result[0].bkpr;
+}
+getYen();
+
 </script>
 
 <style scoped>
@@ -54,9 +66,11 @@ getDollar();
   .nation-flag {
     /* width: 10rem; */
     max-height: 5rem;
+    max-width: 9rem; 
+    width: 100%;
     /* object-fit: contain; */
-    border: 1px solid;
     border-radius: 10px;
     background-color: #fff;
+    overflow: hidden;
   }
 </style>
