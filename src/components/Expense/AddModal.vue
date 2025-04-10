@@ -100,6 +100,9 @@ import '@/css/expense/expense.css';
 import { ref, watch } from 'vue';
 import { useCategoryStore } from '@/stores/category';
 import { useExpenseStore } from '@/stores/expense';
+import { inject } from 'vue';
+
+const alert = inject('useAlert');
 
 const transactionType = ref(1); // 1: 수입, 0: 지출
 const selectedCategory = ref(''); // 카테고리 전체 객체
@@ -113,19 +116,52 @@ const isFixed = ref(false);
 const categoryStore = useCategoryStore();
 const { AddExpense } = useExpenseStore();
 
+const props = defineProps({
+  selectedDate: {
+    type: Date,
+  },
+});
+
+// 날짜를 YYYY-MM-DD로 변환
+const formatDateToInputString = (dateObj) => {
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+watch(
+  () => props.selectedDate,
+  (newVal) => {
+    if (newVal) {
+      date.value = formatDateToInputString(newVal); // 💡 input에 맞게 포맷팅
+    }
+  },
+  { immediate: true }
+);
+
 watch(
   () => categoryStore.categoryList[0],
   (newVal) => {
-    if (newVal?.length && !selectedCategory.value) {
+    if (newVal) {
       selectedCategory.value = newVal[0];
     }
   },
-  { immediate: true } // 바로 실행되도록 설정
+  { immediate: true }
 );
 
 // Emits
 const emit = defineEmits(['close', 'submit']);
 const close = () => emit('close');
+
+const successPopup = () => {
+  alert.success('내역이 추가되었습니다.');
+  close();
+};
+
+const failPopup = () => {
+  alert.error('내역 추가를 실패했습니다.\n 다시 시도해주세요');
+};
 
 const submitForm = async () => {
   const user = ref(JSON.parse(sessionStorage.getItem('user')));
@@ -147,11 +183,10 @@ const submitForm = async () => {
     is_delete: 0,
   };
   try {
-    await AddExpense(formData);
+    await AddExpense(formData, successPopup, failPopup);
   } catch (e) {}
 
   emit('submit', formData);
-  close();
 };
 </script>
 
@@ -184,7 +219,7 @@ const submitForm = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 20;
   backdrop-filter: blur(1px);
 }
 .modal-content {
