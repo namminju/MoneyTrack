@@ -1,4 +1,4 @@
-import { ref, computed, reactive } from 'vue';
+import { computed, reactive } from 'vue';
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
@@ -12,6 +12,7 @@ export const useExpenseStore = defineStore('expense', () => {
     return user?.id ?? '';
   };
 
+  //내역 가져오기기
   const fetchExpenseList = async () => {
     state.isLoading = true;
     try {
@@ -29,6 +30,7 @@ export const useExpenseStore = defineStore('expense', () => {
     }
   };
 
+  //내역 추가하기기
   const AddExpense = async (expense, successCallBack, failCallBack) => {
     state.isLoading = true;
     try {
