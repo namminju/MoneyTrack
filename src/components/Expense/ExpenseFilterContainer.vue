@@ -1,28 +1,32 @@
 <template>
   <div class="filter-container">
+    <!-- header: 해당 일자 및 필터 패널 버튼 -->
     <div class="filter-container__header">
       <div>
-        {{ selectedDate ? selectedDate.toLocaleDateString() : '없음' }}
+        {{ selectedDate ? selectedDate.toLocaleDateString() : '' }}
       </div>
       <i
         class="fa-solid fa-filter pointer"
         @click="showFilter = !showFilter"
       ></i>
     </div>
+
+    <!-- 내역 추가 모달(provider로 분리 필요) -->
     <Modal
       v-if="showModal"
       @close="showModal = false"
       :selectedDate="props.selectedDate"
-    >
-    </Modal>
-    <!-- 필터 패널 -->
+    />
 
+    <!-- 필터 패널 -->
     <FilterPanel
       v-if="showFilter"
       :allCategories="categoryStore.categoryList[0]"
       v-model:selectedCategories="selectedCategories"
       v-model:selectedType="selectedType"
     />
+
+    <!-- 해당 일자 내역 수 및 필터 패널 버튼 -->
     <div class="summary-box">
       <div>총 {{ filteredTransactions.length }}건</div>
       <div>
@@ -31,12 +35,16 @@
         }}
       </div>
     </div>
+
     <hr class="hidden" />
+
     <ExpenseFilterItem
       v-for="(transaction, index) in filteredTransactions"
       :key="index"
       :transaction="transaction"
     />
+
+    <div class="margin-button" />
 
     <button
       class="plus_button"
@@ -53,14 +61,23 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import '@/css/expense/expense.css';
+
+//components
 import ExpenseFilterItem from './ExpenseFilterItem.vue';
 import FilterPanel from './FilterPanel.vue';
 import Modal from './AddModal.vue';
+
+//store
 import { useCategoryStore } from '@/stores/category';
+
+//variables
 const categoryStore = useCategoryStore();
 const showModal = ref(false);
+const showFilter = ref(false);
+const selectedCategories = ref([]); // 체크된 항목들이 배열로 들어감
+const selectedType = ref('');
 
+//props
 const props = defineProps({
   transactions: {
     type: Array,
@@ -72,19 +89,19 @@ const props = defineProps({
   },
 });
 
-const showFilter = ref(false);
-
-const selectedCategories = ref([]); // 체크된 항목들이 배열로 들어감
-const selectedType = ref('');
+//날짜 형식
 function formatDateToLocalString(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
+
+//filter 적용
 const filteredTransactions = computed(() => {
   const selectedDateStr = formatDateToLocalString(props.selectedDate);
 
+  //선택된 바에 따라 filtering
   return props.transactions.filter((tx) => {
     const matchType =
       selectedType.value === '' || tx.is_salary == selectedType.value;
@@ -99,12 +116,14 @@ const filteredTransactions = computed(() => {
   });
 });
 
+//수익 합계 계산
 const totalIncome = computed(() => {
   return filteredTransactions.value
     .filter((tx) => tx.is_salary === 1)
     .reduce((sum, tx) => sum + tx.amount, 0);
 });
 
+//지출 합계 계산
 const totalExpense = computed(() => {
   return filteredTransactions.value
     .filter((tx) => tx.is_salary === 0)
@@ -113,47 +132,76 @@ const totalExpense = computed(() => {
 </script>
 
 <style scoped>
-.category-button-group {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.filter-panel___label {
-  padding: 1rem 0;
-}
-.category-button {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.1rem;
-  border-radius: 1rem;
-  background-color: white;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+/* 스크롤바 제거 */
+.filter-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.category-button.selected {
-  background-color: black;
-  color: white;
-}
-
-.hidden-checkbox {
+.filter-container::-webkit-scrollbar {
   display: none;
 }
-select {
-  appearance: none; /* 기본 화살표 제거 */
 
+/* header */
+.filter-container__header {
+  font-size: 2rem;
   display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background-color: white;
   font-weight: bold;
-  cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+  justify-content: space-between;
+}
+
+/* 요약(총 개수, 총액) */
+.summary-box {
+  display: flex;
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding-top: 1rem;
+  justify-content: space-between;
+}
+
+.summary-box :nth-child(1) {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* plus button */
+.plus_button {
+  position: fixed;
+  right: 4%;
+  bottom: 10%;
+  width: clamp(10px, 8rem, 70px);
+  height: clamp(10px, 8rem, 70px);
+  border-radius: 50%;
+  border: 0;
+  background-color: var(--trk-green);
+}
+
+.plus_button * {
+  color: var(--trk-yellow);
+  margin: auto;
+  font-size: clamp(5px, 4rem, 35px);
+}
+
+.margin-button {
+  height: calc(clamp(10px, 12rem, 160px));
+}
+
+@media (max-width: 1024px) {
+  /* 모바일 container */
+  .filter-container {
+    width: 94%;
+    height: auto;
+    margin: auto;
+    overflow-y: visible;
+    background-color: transparent;
+  }
+  /* plus button */
+  .plus_button {
+    bottom: 6%;
+    position: fixed;
+  }
+  /* hr 숨기기 */
+  .hidden {
+    display: none;
+  }
 }
 </style>

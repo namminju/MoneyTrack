@@ -46,13 +46,7 @@
         <label>
           <div>카테고리</div>
           <select v-model="selectedCategory" class="input_bg_color input-style">
-            <option
-              v-for="(category, index) in categoryStore.categoryList[0]"
-              :key="index"
-              :value="category"
-            >
-              {{ category.name }}
-            </option>
+            <CategoryOption @init="(first) => (selectedCategory = first)" />
           </select>
         </label>
 
@@ -98,9 +92,11 @@
 <script setup>
 import '@/css/expense/expense.css';
 import { ref, watch } from 'vue';
-import { useCategoryStore } from '@/stores/category';
 import { useExpenseStore } from '@/stores/expense';
 import { inject } from 'vue';
+
+//components
+import CategoryOption from './CategoryOption.vue';
 
 const alert = inject('useAlert');
 
@@ -113,7 +109,7 @@ const today = new Date().toISOString().split('T')[0]; // yyyy-mm-dd 형태
 const date = ref(today);
 const memo = ref('');
 const isFixed = ref(false);
-const categoryStore = useCategoryStore();
+
 const { AddExpense } = useExpenseStore();
 
 const props = defineProps({
@@ -135,16 +131,6 @@ watch(
   (newVal) => {
     if (newVal) {
       date.value = formatDateToInputString(newVal); // 💡 input에 맞게 포맷팅
-    }
-  },
-  { immediate: true }
-);
-
-watch(
-  () => categoryStore.categoryList[0],
-  (newVal) => {
-    if (newVal) {
-      selectedCategory.value = newVal[0];
     }
   },
   { immediate: true }
@@ -194,9 +180,12 @@ const submitForm = async () => {
 .modal-content__header,
 .modal-content__footer {
   font-size: 2rem;
-  height: 8%;
+  height: 10%;
 }
 .input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   font-size: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -222,10 +211,13 @@ const submitForm = async () => {
   z-index: 20;
   backdrop-filter: blur(1px);
 }
+.hidden-checkbox {
+  display: none;
+}
 .modal-content {
   font-weight: bold;
   width: 54%;
-  height: calc(60vh+2vw);
+  height: calc(60vh + 4vw);
   min-height: 380px;
   padding: 2.8rem;
   border-radius: 3rem;
