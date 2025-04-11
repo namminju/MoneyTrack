@@ -188,7 +188,6 @@ select {
     padding: 2rem;
   }
   .category_box > * {
-    margin: auto;
     width: 80%; /* 두 개씩 배치 (6열 느낌) */
   }
 }
