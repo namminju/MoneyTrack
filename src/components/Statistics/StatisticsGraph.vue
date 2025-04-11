@@ -120,7 +120,7 @@ const istoggletype = () => {
   padding: 2rem 4rem 6rem 4rem;
 }
 canvas {
-  width: 80% !important;
+  width: 84% !important;
   height: 100% !important;
 }
 .button-container {
