@@ -12,7 +12,7 @@
         :key="item.category"
         class="category-list_item"
       >
-        <div class="__label">
+        <div class="__label flex-center fs-15">
           {{ item.category }}
         </div>
 
@@ -32,7 +32,7 @@
 
         <div
           :style="{ color: getColor(item.category) }"
-          class="fw-600 text-end"
+          class="fw-600 text-end fs-15"
         >
           {{ parseInt(item.amount).toLocaleString('ko-KR') }} 원
         </div>
@@ -71,6 +71,7 @@ const getColor = (category) => {
   return colors[category] || '#000000'; // 기본 색상
 };
 </script>
+
 <style scoped>
 .category-list {
   display: flex;
@@ -81,10 +82,11 @@ const getColor = (category) => {
   display: grid;
   align-items: center;
 
-  grid-template-columns: 3fr 8fr 3fr 3fr;
+  grid-template-columns: 6fr 6fr 1fr 6fr;
   gap: 2rem;
   max-width: 700px;
-  margin: auto;
+  margin: auto;  
+  font-weight: 600;
   margin-bottom: 10px;
 }
 

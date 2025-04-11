@@ -5,9 +5,9 @@
       <div class="home-card__income">
         <div class="home-card__compare">
           <div class="clear-5"></div>
-          <div>지난주: {{ lastWeekTotal }}</div>
+          <div>지난주: {{ parseInt(lastWeekTotal).toLocaleString('ko-KR') }}</div>
           <div class="clear-5"></div>
-          <div>이번주: {{ thisWeekTotal }}</div>
+          <div>이번주: {{ parseInt(thisWeekTotal).toLocaleString('ko-KR') }}</div>
         </div>
         <div>
           <span class="fs-30 home-card__income__span" :class="parseInt(comparedValue) < 0 ? 'text-danger' : 'text-primary'">
