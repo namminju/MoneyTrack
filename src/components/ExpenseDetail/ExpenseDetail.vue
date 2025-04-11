@@ -1,5 +1,5 @@
 <template>
-  <div class="full-container trk-bg-2">
+  <div class="full-container">
     <div class="detail-box trk-bg-1">
       <div class="detail-box__header">
         <span class="header__button">
