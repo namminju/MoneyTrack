@@ -200,7 +200,7 @@ const submitForm = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 20;
+  z-index: 999;
   backdrop-filter: blur(1px);
 }
 .modal-content {
