@@ -2,7 +2,8 @@
   <div class="full-container trk-bg-2">
     <div class="detail-box trk-bg-1">
       <div class="edit-box__header">
-        <span class="header__button"><BackButton @click="gotoDetail" /></span>
+        <span class="header__button"><BackButton :to="`/expenseDetail/${id}`" />
+        </span>
         <span class="fw-600 fs-20">지출 내역 수정</span>
       </div>
       <form class="edit-box__item" @submit.prevent="updateExpense">
