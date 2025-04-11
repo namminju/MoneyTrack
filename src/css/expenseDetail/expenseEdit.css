@@ -91,3 +91,47 @@
   flex-direction: column;
   align-items: center;
 }
+@media (max-width: 1024px) {
+  .info {
+    width: 90%;
+    margin: auto;
+    gap: 1.6rem;
+  }
+  .detail-box__item {
+    margin: 2rem;
+  }
+  .detail-box {
+    margin-top: 1.5rem;
+  }
+  .label,
+  .value {
+    width: 100%;
+  }
+  .info-row {
+    display: grid;
+    grid-template-columns: 4fr 6fr;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .detail-box__item__button {
+    margin: 1rem auto;
+  }
+  .edit-box__item {
+    width: 100%;
+    min-width: 0;
+  }
+  .edit-box__item {
+    margin: 1.5rem;
+  }
+  .edit-box__item {
+    width: 100%;
+  }
+  .edit-box__item__text {
+    width: 90%;
+    padding: 2.4rem 0 0 0;
+  }
+  .edit-box__form__input {
+    padding: 0.6rem 1.2rem;
+  }
+}

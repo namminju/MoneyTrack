@@ -26,9 +26,9 @@
 
 .detail-box__item {
   background-color: white;
-  min-width: 370px;
+  max-width: 800px;
   border-radius: 20px;
-  width: 70%;
+  width: 100%;
   margin-top: 3rem;
   margin-bottom: 3rem;
   border: 2px solid rgb(173, 173, 173);
@@ -63,24 +63,24 @@
 }
 
 .info-row {
-  display: flex;
-  gap: 3rem;
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  gap: 1rem;
   justify-content: center;
   flex-wrap: wrap; /*줄바꿈 설정*/
 }
 
 .label {
-  width: 12rem;
+  width: 30%;
   font-weight: bold;
   text-align: left;
 }
 .label-amt {
-  width: 12rem;
   text-align: left;
 }
 
 .value {
-  width: 15rem;
+  width: 40%;
   text-align: left;
 }
 
@@ -99,7 +99,11 @@
   padding: 2rem;
   margin: 2rem;
 }
-
+.trk-btn-confirm,
+.trk-btn-cancel {
+  width: 100%;
+  padding: 1rem 0;
+}
 @media (max-width: 1024px) {
   .full-container {
     display: block;
@@ -116,6 +120,8 @@
   .detail-box {
     width: 90%;
     height: auto;
+    max-height: 100vh;
+    padding: 4%;
   }
   .filter-container {
     width: 94%;
@@ -135,5 +141,17 @@
     height: 6rem;
     padding: 2% 4%;
     font-size: 2rem;
+  }
+  .detail-box__item {
+    padding: 0;
+  }
+  .detail-box__item__text {
+    padding: 1rem 0;
+  }
+  .info {
+    gap: 1rem;
+  }
+  .label-amt {
+    width: 200%;
   }
 }
