@@ -79,7 +79,7 @@
           </option>
         </select>
       </div>
-      <i class="fa-solid fa-filter" />
+      <i class="fa-solid fa-filter" style="color: var(--trk-dark-green)" />
     </div>
   </div>
 </template>
@@ -194,7 +194,6 @@ const applyFilter = () => {
 <style scoped>
 .filter-box {
   width: 100%;
-  max-width: 560px;
 }
 .filter-icon-container {
   position: relative;
@@ -218,6 +217,8 @@ const applyFilter = () => {
   font-weight: bold;
   font-size: 2rem;
   padding: clamp(4px, 1.6rem, 8px);
+  background-color: #fffecf;
+  border-radius: 2rem;
 }
 /* datepicker style 강제 지정 */
 :deep(.mx-datepicker svg) {
@@ -246,6 +247,8 @@ const applyFilter = () => {
 }
 /* select style */
 select {
+  background-color: var(--trk-green);
+  color: white;
   border: 0;
   border-radius: 1.2rem;
   font-weight: 600;

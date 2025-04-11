@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   padding: 3rem;
-  background-color: #fce4bc;
   box-sizing: border-box;
   font-family: 'Noto Sans', sans-serif;
   border-radius: 4rem;
@@ -90,7 +89,6 @@
   border-radius: 30px;
   z-index: 30;
 }
-
 
 @media screen and (max-width: 768px) {
   .statistics-page {

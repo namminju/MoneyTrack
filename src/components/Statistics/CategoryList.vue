@@ -1,31 +1,39 @@
 <template>
   <div class="category-list">
-    
     <div class="w-100">
-
       <div class="w-100 text-center">
         <div class="fw-600 fs-20">카테고리별 비율</div>
       </div>
 
       <div class="clear-10"></div>
 
-      <div v-for="item in filteredcategoryRatios" :key="item.category" class="category-list_item">
-        
+      <div
+        v-for="item in filteredcategoryRatios"
+        :key="item.category"
+        class="category-list_item"
+      >
         <div class="__label">
           {{ item.category }}
         </div>
-        
+
         <div class="category-list__container">
           <!-- 가시성을 위한 2배길이 -->
-          <div class="category-list__bar__fill" :style="{ width: `${item.ratio * 2}%`, backgroundColor: getColor(item.category) }">
-            
-          </div>
+          <div
+            class="category-list__bar__fill"
+            :style="{
+              width: `${item.ratio * 2}%`,
+              backgroundColor: getColor(item.category),
+            }"
+          ></div>
         </div>
         <div class="percentage" :style="{ color: getColor(item.category) }">
           {{ item.ratio }}%
         </div>
 
-        <div :style="{ color: getColor(item.category) }" class="fw-600">
+        <div
+          :style="{ color: getColor(item.category) }"
+          class="fw-600 text-end"
+        >
           {{ parseInt(item.amount).toLocaleString('ko-KR') }} 원
         </div>
       </div>
@@ -67,18 +75,17 @@ const getColor = (category) => {
 .category-list {
   display: flex;
   padding: 1rem;
-  width :100%;
+  width: 100%;
 }
 .category-list_item {
-  display: flex;
+  display: grid;
   align-items: center;
-  margin-bottom: 10px;
-  justify-content: space-around;
-  gap: 2rem;
-}
 
-.__label {
-  width: 50px;
+  grid-template-columns: 3fr 8fr 3fr 3fr;
+  gap: 2rem;
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 10px;
 }
 
 .category-list__container {
@@ -99,5 +106,17 @@ const getColor = (category) => {
   width: 40px;
   text-align: right;
   font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .category-list_item {
+    display: grid;
+    align-items: center;
+    margin-bottom: 10px;
+    grid-template-columns: 5fr 7fr 3fr 6fr;
+    gap: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
 }
 </style>
