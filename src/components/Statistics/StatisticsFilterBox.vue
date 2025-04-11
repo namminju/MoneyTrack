@@ -217,7 +217,7 @@ const applyFilter = () => {
   font-weight: bold;
   font-size: 2rem;
   padding: clamp(4px, 1.6rem, 8px);
-  background-color: #fffecf;
+  background-color: var(--trk-ivory);
   border-radius: 2rem;
 }
 /* datepicker style 강제 지정 */
