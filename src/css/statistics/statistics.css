@@ -71,7 +71,7 @@
   max-width: 900px;
   width: 100%;
   padding: 5rem;
-  background-color: #fffecf;
+  background-color: var(--trk-ivory);
   border-radius: 1rem;
   position: relative;
   max-height: 500px;
@@ -79,7 +79,7 @@
 
 .category_box {
   max-width: 300px;
-  background-color: #fffecf;
+  background-color: var(--trk-ivory);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -107,6 +107,6 @@
   margin-bottom: 2rem;
   margin-top: 2rem;
   border-radius: 1rem;
-  background-color: #fffecf;
+  background-color: var(--trk-ivory);
   max-width: 1080px;
 }
