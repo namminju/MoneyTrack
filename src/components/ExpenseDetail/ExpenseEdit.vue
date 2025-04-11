@@ -129,6 +129,7 @@ const Item = reactive({
   type_name: '',
   cate_id: null,
   cate_name: '',
+  cate_icon:'',
   date: '',
   memo: '',
   is_salary: null,
@@ -147,6 +148,7 @@ const fetchExpense = async () => {
     Item.type_name = data.type_name;
     Item.cate_id = data.cate_id;
     Item.cate_name = data.cate_name;
+    Item.cate_icon=data.cate_icon;
     Item.date = data.date;
     Item.memo = data.memo;
     Item.is_salary = !!data.is_salary;
@@ -168,6 +170,7 @@ const updateExpense = async () => {
 
     Item.type_name = selectedType ? selectedType.name : '';
     Item.cate_name = selectedCate ? selectedCate.name : '';
+    Item.cate_icon = selectedCate ? selectedCate.icon : '';
 
     await axios.patch(`/api/Expense/${id}`, {
       name: Item.name,
@@ -176,6 +179,7 @@ const updateExpense = async () => {
       type_name: Item.type_name,
       cate_id: Item.cate_id,
       cate_name: Item.cate_name,
+      cate_icon: Item.cate_icon,
       date: Item.date,
       memo: Item.memo,
       is_salary: Item.is_salary ? 1 : 0,
