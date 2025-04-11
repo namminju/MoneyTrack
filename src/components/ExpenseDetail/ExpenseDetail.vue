@@ -1,9 +1,9 @@
 <template>
-  <div class="full-container trk-bg-2">
+  <div class="full-container">
     <div class="detail-box trk-bg-1">
       <div class="detail-box__header">
         <span class="header__button">
-          <BackButton @click="gotoExpense()" />
+          <BackButton to="/expense" />
         </span>
         <span class="fw-600 fs-20">세부 지출 내역</span>
       </div>
