@@ -1,3 +1,9 @@
+🐰 Money Track
+매일의 수입과 지출을 손쉽게!
+시각화된 통계를 통해 소비 습관을 파악할 수 있는 웹 가계부 서비스
+
+<img src="https://github.com/your-username/your-repo-name/assets/your-image-id" alt="Money Track Cover" style="width:100%; max-width:1000px;"/>
+
 ## Default Settings
 
 2024-04-05
