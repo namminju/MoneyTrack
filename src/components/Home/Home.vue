@@ -2,11 +2,11 @@
   <div class="w-100 min-h-50 p-4">
     <div class="home-box">
 
-        <div class="home-box__content max-w-25" v-show="isUser">
+        <div class="home-box__content max-w-35" v-show="isUser">
           <MyTotal>{{ parseInt(incomeTotal - expenseTotal).toLocaleString('ko-KR') }}</MyTotal>
         </div>
 
-        <div class="home-box__content max-w-50" v-show="isUser">
+        <div class="home-box__content max-w-40" v-show="isUser">
           <MyExpense :thisWeekTotal="thisWeekTotal" :lastWeekTotal="lastWeekTotal"></MyExpense>
         </div>
 
@@ -227,9 +227,8 @@ const toLogin = () => {
 .home-card {
   display: flex;
   padding: 2rem;
-  background-color: var(--trk-light-yellow);
-  border: 1px solid var(--trk-yellow);
-  box-shadow: 3px 5px 3px 1px var(--trk-yellow);
+  background-color: var(--trk-ivory);
+  box-shadow: 2px 3px 3px 1px var(--trk-green);
   border-radius: 2rem;
   min-height: 15rem;
 }
@@ -249,10 +248,13 @@ const toLogin = () => {
 }
 .speech-bubble {
   position: relative;
-  background: var(--trk-ivory);
+  background: var(--trk-light-yellow);
   border-radius: 10px;
   padding: 10px;
   max-width: 200px;
+  box-shadow: 2px 3px 3px 1px var(--trk-yellow);
+  font-weight: 600;
+  color: var(--trk-dark-green);
 }
 
 .speech-bubble::after {
@@ -262,7 +264,7 @@ const toLogin = () => {
   left: -40px;
   border-width: 20px;
   border-style: solid;
-  border-color: transparent var(--trk-ivory) transparent transparent;
+  border-color: transparent var(--trk-light-yellow) transparent transparent;
   transform: translateY(-50%);
   z-index: 1; /* z-index 추가 */
 }
