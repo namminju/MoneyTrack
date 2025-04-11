@@ -40,7 +40,7 @@
 
         
         <div class="home-box__content max-w-35 min-h-40" v-show="isUser">
-          <div class="home-card h-100">
+          <div class="home-card h-100 hover-opacity">
             <ExpenseFilterContainer
             :transactions="expenseStore.expenseList"
             :selectedDate="selectedDate"
@@ -50,7 +50,7 @@
         </div>
 
         <div class="home-box__content max-w-40 min-h-40" v-show="isUser">
-          <div class="home-card h-100" @click="toStatistics">
+          <div class="home-card h-100 hover-opacity" @click="toStatistics">
             <CategoryList :categoryRatios="categoryRatios"></CategoryList>
           </div>
         </div>
@@ -232,10 +232,6 @@ const toLogin = () => {
   box-shadow: 3px 5px 3px 1px var(--trk-yellow);
   border-radius: 2rem;
   min-height: 15rem;
-  cursor: pointer;
-}
-.home-card:hover {
-  opacity: 0.8;
 }
 @media(max-width: 768px) {
   .home-box__content {
@@ -270,12 +266,18 @@ const toLogin = () => {
   transform: translateY(-50%);
   z-index: 1; /* z-index 추가 */
 }
+
+.hover-opacity:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
 </style>
 
 <style scoped>
   .filter-container {
     width: 100%;
     height: auto;
+    padding: 2rem;
   }
   .margin-button {
     height: auto !important;
