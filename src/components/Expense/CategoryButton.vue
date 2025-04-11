@@ -51,7 +51,7 @@ defineProps({
   transition: all 0.2s ease;
 }
 .chcekbox-button.selected {
-  background-color: #000000;
+  background-color: var(--trk-green);
   color: white;
 }
 @media (max-width: 380px) {
