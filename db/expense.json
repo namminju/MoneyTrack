@@ -69,11 +69,6 @@
             "icon": "fa-solid fa-piggy-bank"
         },
         {
-            "cate_id": 10,
-            "name": "수입",
-            "icon": "fa-solid fa-circle-plus"
-        },
-        {
             "cate_id": 11,
             "name": "뷰티",
             "icon": "fa-solid fa-spa"
