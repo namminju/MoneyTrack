@@ -1,7 +1,6 @@
 /* expense Page */
 .expense-full-container {
   display: flex;
-  background-color: var(--trk-light-yellow);
   border-radius: 1.25rem;
   padding: 2rem;
   margin: 2rem;
