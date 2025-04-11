@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="goBack"
+    @click="handleBack"
     class="trk-btn-back trk-bg-5 trk-text-1 my-2 mx-2 cursor-pointer"
   >
     <i class="fa-solid fa-arrow-left"></i>
@@ -12,8 +12,19 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const goBack = () => {
-  router.back();
+const props = defineProps({
+  to: {
+    type: String,
+    default: "",
+  },
+});
+
+const handleBack = () => {
+  if (props.to) {
+    router.push(props.to);
+  } else {
+    router.back();
+  }
 };
 </script>
 
