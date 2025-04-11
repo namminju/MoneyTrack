@@ -50,9 +50,15 @@ defineProps({
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
 }
+.chcekbox-button:hover {
+  background-color: var(--trk-ivory);
+  scale: 1.01;
+  font-weight: 700;
+}
 .chcekbox-button.selected {
   background-color: var(--trk-green);
   color: white;
+  font-weight: 700;
 }
 @media (max-width: 380px) {
   .chcekbox-button,

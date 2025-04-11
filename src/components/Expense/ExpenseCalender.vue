@@ -225,6 +225,9 @@ function selectDate(date) {
 :deep(.mx-datepicker svg) {
   fill: white !important;
 }
+:deep(.mx-datepicker:hover *) {
+  scale: 1.05;
+}
 :deep(.mx-datepicker) {
   cursor: pointer;
 }

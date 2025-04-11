@@ -12,7 +12,8 @@
 }
 
 /* 투명도로 인해 변경 불가(방법 모색 필요) */
-.calendar__grid__cell:active {
+.calendar__grid__cell:active,
+.calendar__grid__cell:hover {
   background-color: #60996626;
 }
 

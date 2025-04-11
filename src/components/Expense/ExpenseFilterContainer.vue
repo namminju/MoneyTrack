@@ -5,7 +5,10 @@
       <div>
         {{ selectedDate ? selectedDate.toLocaleDateString() : '' }}
       </div>
-      <i class="fa-solid fa-filter pointer" @click="showFilter = !showFilter" />
+      <i
+        class="fa-solid fa-filter pointer hover"
+        @click="showFilter = !showFilter"
+      />
     </div>
 
     <!-- 내역 추가 모달(provider로 분리 필요) -->
@@ -187,6 +190,11 @@ const totalExpense = computed(() => {
   background-color: var(--trk-green);
 }
 
+.plus_button:hover {
+  background-color: var(--trk-dark-green);
+  scale: 1.1;
+}
+
 .plus_button * {
   color: var(--trk-yellow);
   margin: auto;
@@ -196,11 +204,16 @@ const totalExpense = computed(() => {
 .margin-button {
   height: calc(clamp(10px, 12rem, 160px));
 }
-
+.pointer {
+  cursor: pointer;
+}
+.hover:hover {
+  scale: 1.1;
+}
 @media (max-width: 1024px) {
   /* 모바일 container */
   .filter-container {
-    width: 94%;
+    width: 100%;
     height: auto;
     margin: auto;
     overflow-y: visible;

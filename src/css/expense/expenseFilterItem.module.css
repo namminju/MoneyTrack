@@ -11,6 +11,9 @@
   border-radius: 1.2rem;
   font-size: 1.6rem;
 }
+.filter-container__box:hover {
+  background-color: #2f8e0026;
+}
 .filter-container__box__left i {
   text-align: center;
   align-content: center;
