@@ -1,27 +1,25 @@
 <template>
-  <div class="clear-30"></div>
-    <div class="statistics-page">
+  <div class=""></div>
+  <div class="statistics-page">
+    <StatisticsFilterBox @updateFilter="onFilterUpdate" />
+    <StatisticsGraph
+      :categoryRatios="categoryRatios"
+      :filteredData="filteredData"
+      :selectedPeriod="selectedPeriod"
+      :monthlyTotal="monthlyTotal"
+      :dailyTotal="dailyTotal"
+    />
 
-          <StatisticsFilterBox @updateFilter="onFilterUpdate" />
-          <StatisticsGraph
-          :categoryRatios="categoryRatios"
-          :filteredData="filteredData"
-          :selectedPeriod="selectedPeriod"
-          :monthlyTotal="monthlyTotal"
-          :dailyTotal="dailyTotal"
-          />
-
-        
-        <div class="category__ratio p-4">
-          <!-- <p>🔹 전체 합계: {{ store.totalAmount }} 원</p> -->
-          <CategoryList :categoryRatios="categoryRatios" />
-          <!-- <ul>
+    <div class="category__ratio p-4">
+      <!-- <p>🔹 전체 합계: {{ store.totalAmount }} 원</p> -->
+      <CategoryList :categoryRatios="categoryRatios" />
+      <!-- <ul>
             <li v-for="item in store.categoryRatios" :key="item.category">
               {{ item.category }}: {{ item.amount }}원 ({{ item.ratio }}%)
             </li>
           </ul> -->
-
     </div>
+    <div class="m-margin"></div>
   </div>
 </template>
 
@@ -62,3 +60,15 @@ const onFilterUpdate = ({ type, period, year, month }) => {
   store.selectedMonth = month;
 };
 </script>
+
+<style scoped>
+.m-margin {
+  margin: 7rem;
+  display: none;
+}
+@media (max-width: 500px) {
+  .m-margin {
+    display: block;
+  }
+}
+</style>

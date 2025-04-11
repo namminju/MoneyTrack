@@ -136,8 +136,9 @@ canvas {
 .category_box {
   height: 100%;
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 1.6rem 6rem;
 }
 button {
   padding: auto 0;
@@ -187,12 +188,13 @@ select {
     padding: 2rem;
   }
   .category_box > * {
-    width: 23%; /* 두 개씩 배치 (6열 느낌) */
+    margin: auto;
+    width: 80%; /* 두 개씩 배치 (6열 느낌) */
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 760px) {
   .category_box > * {
-    width: 30%; /* 두 개씩 배치 (6열 느낌) */
+    width: 24%; /* 두 개씩 배치 (6열 느낌) */
   }
 }
 @media (max-width: 400px) {
